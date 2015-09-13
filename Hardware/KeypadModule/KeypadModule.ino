@@ -2,6 +2,13 @@
 //from http://playground.arduino.cc/Code/Keypad
 #include <Keypad.h>
 
+
+
+/*
+pin 30 - 36
+*/
+
+
 const byte ROWS = 4; //four rows
 const byte COLS = 3; //three columns
 char keys[ROWS][COLS] = {
@@ -12,8 +19,8 @@ char keys[ROWS][COLS] = {
 };
 
 //row and col are adjustable
-byte rowPins[ROWS] = {5, 4, 3, 2}; //connect to the row pinouts of the keypad
-byte colPins[COLS] = {8, 7, 6}; //connect to the column pinouts of the keypad
+byte rowPins[ROWS] = {33, 32, 31, 30}; //connect to the row pinouts of the keypad;
+byte colPins[COLS] = {36, 35, 34}; //connect to the column pinouts of the keypad;
 
 Keypad keypad = Keypad( makeKeymap(keys), rowPins, colPins, ROWS, COLS );
 
@@ -24,6 +31,7 @@ void setup(){
 void loop(){
   char key = keypad.getKey();
 
+  //print out the key that is pressed 
   if (key != NO_KEY){
     Serial.println(key);
   }
