@@ -6,7 +6,7 @@
 
 LSM303 compass;
 LSM303::vector<int16_t> running_min = {32767, 32767, 32767}, running_max = {-32768, -32768, -32768};
-
+//16-bit signed type 
 char report[80];
 
 /*
