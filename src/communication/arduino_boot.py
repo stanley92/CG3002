@@ -17,8 +17,8 @@ class Arduino():
 
   def handshake(self):
     print("Start handshaking with Arduino")
-    isTimedOut = False
-    startMillis = int(round(time.time() * 1000))
+    is_timed_out = False
+    start_millis = int(round(time.time() * 1000))
     ser = serialcomm.SerialCommunication()
     self.resetArduino()
     
@@ -34,16 +34,16 @@ class Arduino():
     while True:
       message = ser.serialRead()
       if (len(message) == 0):
-        currentMillis = int(round(time.time() * 1000))
-        if (currentMillis - startMillis > 10000):   #10 seconds
-          isTimedOut = True
+        current_millis = int(round(time.time() * 1000))
+        if (current_millis - start_millis > 10000):   #10 seconds
+          is_timed_out = True
           break
       elif (message[0] == '0'): #ACK
         break
       else:
         continue
 
-    if isTimedOut:
+    if is_timed_out:
       print("Handshaking failed")
       return False
 
