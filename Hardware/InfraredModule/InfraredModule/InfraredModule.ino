@@ -29,6 +29,7 @@ void loop() {
   delay(100);
   //Serial.print("Inches: ");
   //Serial.println(inches);
-  Serial.print("Cm: ");
-  Serial.println(cm);
+  
+  Serial.print(cm);
+  Serial.println(" Cm");
 }
