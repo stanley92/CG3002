@@ -1,4 +1,4 @@
-from . import serialcomm
+from . import serial_comm
 import RPi.GPIO as GPIO
 import time
 

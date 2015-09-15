@@ -1,1 +1,1 @@
-__all__ = ["ardboot", "serialcomm"]
+__all__ = ["arduino_boot", "serial_comm"]

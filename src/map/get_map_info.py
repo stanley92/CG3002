@@ -74,6 +74,9 @@ class Vertex():
   def addNeighbor(self, node, code):
     self.adjacent[node.id] = _calcDistance(self.x, self.y, node.x, node.y)
 
+  def getConnections(self):
+    return self.adjacent.keys()  
+
 #########################################
 # Graph class
 # + vertices : Dict(Vertex)
@@ -95,6 +98,9 @@ class Graph():
       return self.vertices[n]
     else: 
       return None
+
+  def getVertices(self):
+    return self.vertices.keys()
 
   def addEdge(self, frm, to): # (int, int)
     if frm not in self.vertices:
