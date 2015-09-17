@@ -147,8 +147,8 @@ def parseMapData(data):
 
   return Map(info, location_nodes, wifi_nodes)
 
-def generateGraph(map):
-  location_nodes = map.location_nodes
+def generateGraph(mapData):
+  location_nodes = mapData.location_nodes
   graph = Graph()
   for i in location_nodes:
     graph.addVertex(location_nodes[i])
