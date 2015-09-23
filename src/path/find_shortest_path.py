@@ -1,4 +1,3 @@
-from . import get_map_info
 import heapq
 
 def dijkstra(graph, start, target):
@@ -44,6 +43,16 @@ def shortest(graph, start, target):
   path.reverse()
   return path
 
-g = get_map_info.g
-p = shortest(g,1,28)
-print([g.getVertex(i).name for i in p])
+
+if __name__ == '__main__':
+  import get_map_info
+  building = 'COM1'
+  level = 2
+  start = 1
+  end = 28
+  print('Test for map of ' + building + ' level ' + str(level) +'.')
+  print('Finding path from node ID ' + str(start) + ' to ' + str(end))
+  mapInfo = get_map_info.getMapInfo(building, level)
+  graph = get_map_info.generateGraph(mapInfo)
+  path = shortest(graph, start, end)
+  print([graph.getVertex(i).name for i in path])

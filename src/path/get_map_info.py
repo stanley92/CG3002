@@ -147,6 +147,11 @@ def parseMapData(data):
 
   return Map(info, location_nodes, wifi_nodes)
 
+def getMapInfo(building, level):
+  jsonObject = downloadMap(dict(Building=building, Level=level))
+  mapInfo = parseMapData(jsonObject)
+  return mapInfo
+
 def generateGraph(mapData):
   location_nodes = mapData.location_nodes
   graph = Graph()
@@ -156,16 +161,5 @@ def generateGraph(mapData):
     for link in location_nodes[i].link_to:
       graph.addEdge(location_nodes[i].id, link)
   return graph
-
-
-def getMapInfo(building, level):
-  jsonObject = downloadMap(dict(Building=building, Level=level))
-  mapData = parseMapData(jsonObject)
-  graph = generateGraph(mapData)
-  return graph
-
-g = getMapInfo('COM1',2)
-print(g)
-
 
 

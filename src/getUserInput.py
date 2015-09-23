@@ -1,5 +1,5 @@
-import get_map_info
-import find_shortest_path
+from path import get_map_info					# change your import also
+from path import find_shortest_path
 
 class getUserInput():
 	
@@ -29,10 +29,11 @@ class getUserInput():
 		dest = dest_str.replace("#", "")
 		return dest
 
+mapInfo = get_map_info.getMapInfo(getBuildingName(btn),getBuildingLevel(btn)) # how can u call getBuildingName like this :v it's in a class
+graph = get_map_info.generateGraph(mapInfo)
+s_path = find_shortest_path.shortest(graph,0,getDestination(dest))	# u didn't include the module names
 
-graph = getMapInfo(getBuildingName(btn),getBuildingLevel(btn))
-s_path = shortest(graph,0,getDestination(dest))
-
+north_at = mapInfo.info.north_at
 lastKnownNode = graph.getVertex(i).id
 
 
