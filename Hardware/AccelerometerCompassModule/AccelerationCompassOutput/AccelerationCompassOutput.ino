@@ -30,6 +30,8 @@ at this FS setting, so the value of -1009 corresponds to -1009 * 1 =
 1009 mg = 1.009 g.
 */
 
+
+
 #include <Wire.h>
 #include <LSM303.h>
 
@@ -48,11 +50,14 @@ void setup()
 void loop()
 {
   compass.read();
+float Xa_print, Ya_print, Za_print;
+Xa_print = compass.a.x/16.0; //Acceleration data registers contain a left-aligned 12-bit number, so values should be shifted right by 4 bits (divided by 16)
+Ya_print = compass.a.y/16.0; //unit is in cm/s2
+Za_print = compass.a.z/16.0;
 
-  snprintf(report, sizeof(report), "A: %6d %6d %6d    M: %6d %6d %6d",
-    compass.a.x, compass.a.y, compass.a.z,
-    compass.m.x, compass.m.y, compass.m.z);
-  Serial.println(report);
+//to determine a step, the +zAccel should be -800  and -zAccel should be -1300 
 
+Serial.print(Xa_print); Serial.print(" "); Serial.print(Ya_print); Serial.print(" "); Serial.println(Za_print);
+delay(125);
   delay(100);
 }

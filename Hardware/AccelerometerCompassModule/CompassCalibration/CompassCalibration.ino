@@ -6,6 +6,8 @@
 
 LSM303 compass;
 LSM303::vector<int16_t> running_min = {32767, 32767, 32767}, running_max = {-32768, -32768, -32768};
+//LSM303::vector<int16_t> running_min = {-2872, -3215, -1742}, running_max = {+3019, +3108, +3570}; //calibration init data for compass 
+
 //16-bit signed type 
 char report[80];
 
