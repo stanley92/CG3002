@@ -35,8 +35,8 @@
 // Arduino versioning.
 #if defined(ARDUINO) && ARDUINO >= 100
 #include "Arduino.h"	// for digitalRead, digitalWrite, etc
-#else
-#include "WProgram.h"
+//#else
+//#include "WProgram.h"
 #endif
 
 #define OPEN LOW
@@ -53,12 +53,12 @@ public:
 	char kchar;
 	int kcode;
 	KeyState kstate;
-	boolean stateChanged;
+	bool stateChanged;
 
 	// methods
 	Key();
 	Key(char userKeyChar);
-	void key_update(char userKeyChar, KeyState userState, boolean userStatus);
+	void key_update(char userKeyChar, KeyState userState, bool userStatus);
 
 private:
 

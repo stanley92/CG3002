@@ -50,8 +50,8 @@ void loop()
   compass.read();
 
   snprintf(report, sizeof(report), "A: %6d %6d %6d    M: %6d %6d %6d",
-    compass.a.x, compass.a.y, compass.a.z,
-    compass.m.x, compass.m.y, compass.m.z);
+           compass.a.x, compass.a.y, compass.a.z,
+           compass.m.x, compass.m.y, compass.m.z);
   Serial.println(report);
 
   delay(100);

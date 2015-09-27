@@ -37,6 +37,12 @@ extern "C"{
 
 void yield(void);
 
+//mch
+#ifndef F_CPU
+	#define F_CPU 16000000UL
+#endif
+
+
 #define HIGH 0x1
 #define LOW  0x0
 
@@ -80,11 +86,6 @@ void yield(void);
 #ifdef abs
 #undef abs
 #endif
-
-#ifndef F_CPU
-	#define F_CPU 16000000
-#endif
-
 
 #define min(a,b) ((a)<(b)?(a):(b))
 #define max(a,b) ((a)>(b)?(a):(b))

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Atmel Studio Solution File, Format Version 11.00
-Project("{E66E83B9-2572-4076-B26E-6BE79FF3018A}") = "FreeRTOS2560", "FreeRTOS2560\FreeRTOS2560.cppproj", "{18924D13-041F-46D0-B06C-7CC8049F861A}"
+Project("{E66E83B9-2572-4076-B26E-6BE79FF3018A}") = "FreeRTOS2560", "FreeRTOS2560\FreeRTOS2560.cppproj", "{1F71482F-BAEE-448B-AE64-0421735E1369}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -9,10 +9,10 @@ Global
 		Release|AVR = Release|AVR
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{18924D13-041F-46D0-B06C-7CC8049F861A}.Debug|AVR.ActiveCfg = Debug|AVR
-		{18924D13-041F-46D0-B06C-7CC8049F861A}.Debug|AVR.Build.0 = Debug|AVR
-		{18924D13-041F-46D0-B06C-7CC8049F861A}.Release|AVR.ActiveCfg = Release|AVR
-		{18924D13-041F-46D0-B06C-7CC8049F861A}.Release|AVR.Build.0 = Release|AVR
+		{1F71482F-BAEE-448B-AE64-0421735E1369}.Debug|AVR.ActiveCfg = Debug|AVR
+		{1F71482F-BAEE-448B-AE64-0421735E1369}.Debug|AVR.Build.0 = Debug|AVR
+		{1F71482F-BAEE-448B-AE64-0421735E1369}.Release|AVR.ActiveCfg = Release|AVR
+		{1F71482F-BAEE-448B-AE64-0421735E1369}.Release|AVR.Build.0 = Release|AVR
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

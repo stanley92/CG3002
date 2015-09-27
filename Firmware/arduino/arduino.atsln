@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Atmel Studio Solution File, Format Version 11.00
-Project("{E66E83B9-2572-4076-B26E-6BE79FF3018A}") = "arduino", "arduino\arduino.cppproj", "{78148DEF-08C9-4DE5-AB81-19469C52C700}"
+Project("{E66E83B9-2572-4076-B26E-6BE79FF3018A}") = "arduino", "arduino\arduino.cppproj", "{CAC2FE80-ED57-4C65-A88B-489D120D3EA2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -9,10 +9,10 @@ Global
 		Release|AVR = Release|AVR
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{78148DEF-08C9-4DE5-AB81-19469C52C700}.Debug|AVR.ActiveCfg = Debug|AVR
-		{78148DEF-08C9-4DE5-AB81-19469C52C700}.Debug|AVR.Build.0 = Debug|AVR
-		{78148DEF-08C9-4DE5-AB81-19469C52C700}.Release|AVR.ActiveCfg = Release|AVR
-		{78148DEF-08C9-4DE5-AB81-19469C52C700}.Release|AVR.Build.0 = Release|AVR
+		{CAC2FE80-ED57-4C65-A88B-489D120D3EA2}.Debug|AVR.ActiveCfg = Debug|AVR
+		{CAC2FE80-ED57-4C65-A88B-489D120D3EA2}.Debug|AVR.Build.0 = Debug|AVR
+		{CAC2FE80-ED57-4C65-A88B-489D120D3EA2}.Release|AVR.ActiveCfg = Release|AVR
+		{CAC2FE80-ED57-4C65-A88B-489D120D3EA2}.Release|AVR.Build.0 = Release|AVR
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

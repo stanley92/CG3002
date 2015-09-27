@@ -105,9 +105,9 @@
 
 #if defined(ARDUINO) && ARDUINO >= 100
 	#include <Arduino.h>
-#else
+/*#else
 	#include <WProgram.h>
-	#include <pins_arduino.h>
+	#include <pins_arduino.h>*/
 #endif
 
 #include <avr/io.h>
@@ -139,14 +139,14 @@ class NewPing {
 		unsigned int convert_in(unsigned int echoTime);
 		unsigned int convert_cm(unsigned int echoTime);
 		void ping_timer(void (*userFunc)(void));
-		boolean check_timer();
+		bool check_timer();
 		unsigned long ping_result;
 		static void timer_us(unsigned int frequency, void (*userFunc)(void));
 		static void timer_ms(unsigned long frequency, void (*userFunc)(void));
 		static void timer_stop();
 	private:
-		boolean ping_trigger();
-		boolean ping_wait_timer();
+		bool ping_trigger();
+		bool ping_wait_timer();
 		uint8_t _triggerBit;
 		uint8_t _echoBit;
 		volatile uint8_t *_triggerOutput;

@@ -121,10 +121,10 @@ extern volatile TCB_t * volatile pxCurrentTCB;
 					"in		r0, __SREG__			\n\t"	\
 					"cli							\n\t"	\
 					"push	r0						\n\t"	\
-					"in r0, 0x3b					\n\t"	\
-					"push r0						\n\t"	\
-					"in r0, 0x3c					\n\t"	\
-					"push r0						\n\t"	\
+					"in		r0, 0x3b				\n\t"	\
+					"push	r0						\n\t"	\
+					"in		r0, 0x3c				\n\t"	\
+					"push	r0						\n\t"	\
 					"push	r1						\n\t"	\
 					"clr	r1						\n\t"	\
 					"push	r2						\n\t"	\
@@ -257,10 +257,9 @@ uint16_t usAddress;
 	*pxTopOfStack = ( StackType_t ) ( usAddress & ( uint16_t ) 0x00ff );
 	pxTopOfStack--;
 	
-	*pxTopOfStack=0;
+	*pxTopOfStack = 0;
 	pxTopOfStack--;
-	
-	
+
 	/* Next simulate the stack as if after a call to portSAVE_CONTEXT().  
 	portSAVE_CONTEXT places the flags on the stack immediately after r0
 	to ensure the interrupts get disabled as soon as possible, and so ensuring
@@ -270,11 +269,11 @@ uint16_t usAddress;
 	*pxTopOfStack = portFLAGS_INT_ENABLED;
 	pxTopOfStack--;
 	
-	*pxTopOfStack=(StackType_t) 0x00;/*EIND*/
+	
+	*pxTopOfStack= (StackType_t) 0x00;/*EIND*/
 	pxTopOfStack--;
-	*pxTopOfStack=(StackType_t) 0x00;/*RAMPZ*/
+	*pxTopOfStack= (StackType_t ) 0x00; /*RAMPZ*/
 	pxTopOfStack--;
-
 
 	/* Now the remaining registers.   The compiler expects R1 to be 0. */
 	*pxTopOfStack = ( StackType_t ) 0x00;	/* R1 */
@@ -411,7 +410,7 @@ void vPortYieldFromTick( void )
 }
 /*-----------------------------------------------------------*/
 
-/*
+/* mch
  * Setup timer 1 compare match A to generate a tick interrupt.
  */
 /*static void prvSetupTimerInterrupt( void )
@@ -447,32 +446,35 @@ uint8_t ucHighByte, ucLowByte;
 	/*ucLowByte = TIMSK;
 	ucLowByte |= portCOMPARE_MATCH_A_INTERRUPT_ENABLE;
 	TIMSK = ucLowByte;
-}*/
+}
 /*-----------------------------------------------------------*/
-
-static void prvSetupTimerInterrupt(void)
+//comeback timer2
+static void prvSetupTimerInterrupt( void )
 {
-	TCCR0A = 0b00000010;
+/*	TCCR0A= 0b00000010;
 	TCNT0 = 0;
-	OCR0A = configTICK_RATE_HZ * configCPU_CLOCK_HZ/ 64000000;
-	TIMSK0|=0b10;
+	OCR0A = (configTICK_RATE_HZ*configCPU_CLOCK_HZ)/64000000;
+	TIMSK0|= 0b10;
 	TCCR0B = 0b00000011;
+	*/
+	TCCR2A= 0b00000010;
+	TCNT2 = 0;
+	OCR2A = configTICK_RATE_HZ*configCPU_CLOCK_HZ/64000000;
+	TIMSK2|= 0b10;
+	TCCR2B = 0b00000011;//*/
 }
 
 
-
-
-
-/*#if configUSE_PREEMPTION == 1
+//#if configUSE_PREEMPTION == 1
 
 	/*
 	 * Tick ISR for preemptive scheduler.  We can use a naked attribute as
 	 * the context is saved at the start of vPortYieldFromTick().  The tick
 	 * count is incremented after the context is saved.
 	 */
-/*	void SIG_OUTPUT_COMPARE1A( void ) __attribute__ ( ( signal, naked ) );
-	void SIG_OUTPUT_COMPARE1A( void )
-	{
+	//void SIG_OUTPUT_COMPARE1A( void ) __attribute__ ( ( signal, naked ) );
+	//void SIG_OUTPUT_COMPARE1A( void )
+/*	{
 		vPortYieldFromTick();
 		asm volatile ( "reti" );
 	}
@@ -491,7 +493,6 @@ static void prvSetupTimerInterrupt(void)
 #endif*/
 
 
-	
 #if configUSE_PREEMPTION == 1
 
 	/*
@@ -499,10 +500,12 @@ static void prvSetupTimerInterrupt(void)
 	 * the context is saved at the start of vPortYieldFromTick().  The tick
 	 * count is incremented after the context is saved.
 	 */
-	ISR(TIMER0_COMPA_vect, ISR_NAKED)
+	
+	//ISR(TIMER0_COMPA_vect,ISR_NAKED) //comeback timer2
+	ISR(TIMER2_COMPA_vect,ISR_NAKED)
 	{
 		vPortYieldFromTick();
-		asm volatile ("reti");
+		asm volatile ( "reti" );
 	}
 #else
 
@@ -511,8 +514,11 @@ static void prvSetupTimerInterrupt(void)
 	 * tick count.  We don't need to switch context, this can only be done by
 	 * manual calls to taskYIELD();
 	 */
-	ISR(TIMER0_COMPA_vect)
+	//ISR(TIMER0_COMPA_vect) //comeback timer2
+	ISR(TIMER2_COMPA_vect)
 	{
 		xTaskIncrementTick();
 	}
 #endif
+
+	
