@@ -1,0 +1,2 @@
+undefined reference means ->add existing items>add the .c or .cpp file
+there is no byte or boolean in C++ so add <stdint.h> and use uint_8 and bool instead of boolean

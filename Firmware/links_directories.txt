@@ -1,0 +1,12 @@
+https://github.com/stanley92/CG3002.git
+
+C:\Program Files (x86)\Arduino\hardware\arduino\avr\cores\arduino
+C:\Program Files (x86)\Arduino\hardware\arduino\avr\variants\standard
+
+
+
+C:\Program Files (x86)\Arduino\hardware\arduino\avr\cores\arduino
+C:\Program Files (x86)\Arduino\hardware\arduino\avr\variants\mega
+
+C:\Users\Laksh\Desktop\SEM_5\CG3002\Latest_git\CG3002\Firmware\FreeRTOSV8.1.2\FreeRTOS\Demo\Common\include
+C:\Users\Laksh\Desktop\SEM_5\CG3002\Latest_git\CG3002\Firmware\FreeRTOSV8.1.2\FreeRTOS\Source\portable\GCC\ATMega2560
