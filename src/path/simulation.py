@@ -8,8 +8,8 @@ print('Welcome To FindMyWay15\n')
 
 while(1):
   
-  building = input('Building Name: ')
-  level = input('Building Level: ')
+  building = 'com1'#input('Building Name: ')
+  level = '2'#input('Building Level: ')
   start = int(input('Start: '))
   end = int(input('End: '))
 
@@ -30,10 +30,10 @@ while(1):
         print('[Step ' + str(i) + ']')
         print(graph.getVertex(path[i]).name + ' -> ' + graph.getVertex(path[i+1]).name)
         print('User angle = ' + str(orient.getCompassValue()))
-        orient.setNorthToNodes(graph,path[i],path[i+1])
-        print('Node angle = ' + str(orient.getNorthToNodes()))
+        orient.setAngleOfNodes(graph,path[i],path[i+1])
+        print('Node angle = ' + str(orient.getAngleOfNodes()))
         print(orient.userOffset())
-        orient.setCompassValue(orient.getNorthToNodes())
+        orient.setCompassValue(orient.getAngleOfNodes())
 
     else:
       if not 0<start<=len(graph.getVertices()):
