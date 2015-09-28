@@ -55,11 +55,11 @@ class Compass():
     else:
       return 'no turn'#0 # No turn
     
-x = Compass()
-g = get_map_info.generateGraph(get_map_info.getMapInfo('COM1',2))
+##x = Compass()
+##g = get_map_info.generateGraph(get_map_info.getMapInfo('COM1',2))
 
-x.setCompassValue(0)
-print('User angle = ' + str(x.getCompassValue()))
-x.setNorthToNodes(g,5,4)
-print('Node angle = ' + str(x.getNorthToNodes()))
-print(x.userOffset())
+##x.setCompassValue(0)
+##print('User angle = ' + str(x.getCompassValue()))
+##x.setNorthToNodes(g,5,4)
+##print('Node angle = ' + str(x.getNorthToNodes()))
+##print(x.userOffset())
