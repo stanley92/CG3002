@@ -56,35 +56,40 @@ while(1):
       orient.setCompassValue(heading)
       print('')
       
+      found = False
       for i in range (length):
         total_dist = graph.getVertex(path[i]).adjacent[path[i+1]]
         dist_1 = get_map_info._calcDistance(x_coord,y_coord,graph.getVertex(path[i]).x, graph.getVertex(path[i]).y)
         dist_2 = get_map_info._calcDistance(x_coord,y_coord,graph.getVertex(path[i+1]).x, graph.getVertex(path[i+1]).y)
-        if total_dist == dist_1 + dist_2:
+        if  dist_1 + dist_2 - 200 < total_dist < dist_1 + dist_2 + 200:
+          found = True
           distToNearestNode = dist_2
           print('Nearest Node: ' + graph.getVertex(path[i+1]).name)
           prevNode = i
           nearestNode = i+1
           break
 
-      print('Current location -> ' + graph.getVertex(path[nearestNode]).name)
-      print('Distance to nearest node -> ' + str( int (distToNearestNode) / 2) + 'cm')
-      print('User angle = ' + str(orient.getCompassValue()))
-      orient.setAngleOfNodes(graph,path[prevNode],path[nearestNode])
-      print('Node angle = ' + str(orient.getAngleOfNodes()))
-      print(orient.userOffset())
-      orient.setCompassValue(orient.getAngleOfNodes())
-      print('')
-      
-      for i in range (nearestNode,length):
-        print('[Step ' + str(i) + ']')
-        print(graph.getVertex(path[i]).name + ' -> ' + graph.getVertex(path[i+1]).name)
+      if found :
+        print('Current location -> ' + graph.getVertex(path[nearestNode]).name)
+        print('Distance to nearest node -> ' + str( int (distToNearestNode) / 2) + 'cm')
         print('User angle = ' + str(orient.getCompassValue()))
-        orient.setAngleOfNodes(graph,path[i],path[i+1])
+        orient.setAngleOfNodes(graph,path[prevNode],path[nearestNode])
         print('Node angle = ' + str(orient.getAngleOfNodes()))
         print(orient.userOffset())
         orient.setCompassValue(orient.getAngleOfNodes())
         print('')
+        
+        for i in range (nearestNode,length):
+          print('[Step ' + str(i) + ']')
+          print(graph.getVertex(path[i]).name + ' -> ' + graph.getVertex(path[i+1]).name)
+          print('User angle = ' + str(orient.getCompassValue()))
+          orient.setAngleOfNodes(graph,path[i],path[i+1])
+          print('Node angle = ' + str(orient.getAngleOfNodes()))
+          print(orient.userOffset())
+          orient.setCompassValue(orient.getAngleOfNodes())
+          print('')
+      else:
+        print("Starting Position is invalid")
 
   except TypeError:
     print('No such location')
