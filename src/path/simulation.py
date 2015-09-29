@@ -16,7 +16,6 @@ while(1):
 
   try:
     mapInfo = get_map_info.getMapInfo(building, level)
-    northAt = int(mapInfo.info.north_at)
     graph = get_map_info.generateGraph(mapInfo)
     # print(graph.getVertices())
 
@@ -32,6 +31,7 @@ while(1):
     print([graph.getVertex(i).name for i in path])
     print('')
     orient = user_orientation.Compass()
+    orient.setNorthAt(int(mapInfo.info.north_at))
     length = (len(path)) - 1
     position = str(input('Are you at the start point: Y/N: '))
     print('')
@@ -43,7 +43,7 @@ while(1):
         print('[Step ' + str(i) + ']')
         print(graph.getVertex(path[i]).name + ' -> ' + graph.getVertex(path[i+1]).name)
         print('User angle = ' + str(orient.getCompassValue()))
-        orient.setAngleOfNodes(graph,path[i],path[i+1],northAt)
+        orient.setAngleOfNodes(graph,path[i],path[i+1])
         print('Node angle = ' + str(orient.getAngleOfNodes()))
         print(orient.userOffset())
         orient.setCompassValue(orient.getAngleOfNodes())
@@ -73,7 +73,7 @@ while(1):
         print('Current location -> ' + graph.getVertex(path[nearestNode]).name)
         print('Distance to nearest node -> ' + str( int (distToNearestNode) / 2) + 'cm')
         print('User angle = ' + str(orient.getCompassValue()))
-        orient.setAngleOfNodeXY(graph,x_coord,y_coord,path[nearestNode],northAt)
+        orient.setAngleOfNodeXY(graph,x_coord,y_coord,path[nearestNode])
         print('Node angle = ' + str(orient.getAngleOfNodes()))
         print(orient.userOffset())
         orient.setCompassValue(orient.getAngleOfNodes())
@@ -83,7 +83,7 @@ while(1):
           print('[Step ' + str(i) + ']')
           print(graph.getVertex(path[i]).name + ' -> ' + graph.getVertex(path[i+1]).name)
           print('User angle = ' + str(orient.getCompassValue()))
-          orient.setAngleOfNodes(graph,path[i],path[i+1],northAt)
+          orient.setAngleOfNodes(graph,path[i],path[i+1])
           print('Node angle = ' + str(orient.getAngleOfNodes()))
           print(orient.userOffset())
           orient.setCompassValue(orient.getAngleOfNodes())

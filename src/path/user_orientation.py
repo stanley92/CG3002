@@ -1,20 +1,36 @@
 import math
 import get_map_info
 
+########################################
+# Compass Class
+# + compass_value : int
+# + angleOfNodes : int
+# + northAt : int
+########################################
 class Compass():
   def __init__(self):
     # User's Offset in Degrees
     self.compass_value = 0
     # Fixed angle btw North to curr n next node
     self.angleOfNodes = 0
+    # North angle of map
+    self.northAt = 0
 
+  def setNorthAt(self,v):
+    self.northAt = v
+
+  def getNorthAt(self):
+    return self.northAt
+
+  # Retrieves the value from compass sensor
   def setCompassValue(self, v):
-    self.compass_value = v #arduino_compass_value()
+    self.compass_value = v 
 
   def getCompassValue(self):
     return self.compass_value
 
-  def setAngleOfNodes(self,graph,currNodeId,nextNodeId,northAt):
+  # Sets the angle between two nodes
+  def setAngleOfNodes(self,graph,currNodeId,nextNodeId):
     x_curr = graph.getVertex(currNodeId).x
     y_curr = graph.getVertex(currNodeId).y
     x_next = graph.getVertex(nextNodeId).x
@@ -22,20 +38,22 @@ class Compass():
     x_hori = math.fabs(x_curr - x_next)
     y_vert = math.fabs(y_curr - y_next)
 
-    self.angleOfNodes = cal_angle(x_next,x_curr,y_next,y_curr,x_hori,y_vert,northAt)
-   
-  def setAngleOfNodeXY(self,graph,x_new,y_new,nextNodeId,northAt):
+    self.angleOfNodes = cal_angle(x_next,x_curr,y_next,y_curr,x_hori,y_vert,self.northAt)
+
+  # Sets the angle between a node and the current coordinates
+  def setAngleOfNodeXY(self,graph,x_new,y_new,nextNodeId):
     x_next = graph.getVertex(nextNodeId).x
     y_next = graph.getVertex(nextNodeId).y
     x_hori = math.fabs(x_new - x_next)
     y_vert = math.fabs(y_new - y_next)
 
-    self.angleOfNodes = cal_angle(x_next,x_new,y_next,y_new,x_hori,y_vert,northAt)
+    self.angleOfNodes = cal_angle(x_next,x_new,y_next,y_new,x_hori,y_vert,self.northAt)
     
   def getAngleOfNodes(self):
     return self.angleOfNodes
-    
-  def userOffset(self): # - angle , get -ve gives , +ve give
+
+  # Tells the user the shortest rotation to the next node
+  def userOffset(self):
     offset = self.angleOfNodes - self.compass_value
     offset_abs = math.fabs(offset)
     if offset < 0:
