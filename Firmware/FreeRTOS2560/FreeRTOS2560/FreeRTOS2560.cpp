@@ -88,8 +88,6 @@ int main(void)
 #include <FreeRTOS.h>
 #include <task.h>
 #include <Arduino.h>
-//need to install keypad library
-//from http://playground.arduino.cc/Code/Keypad
 #include <Keypad.h>
 #include <serial.h>
 #include <NewPing.h>
@@ -236,8 +234,8 @@ void task_baro(void* p){
 		//dprintf(" m\tt: ");
 		//dprintf("%d",temperature);
 		//dprintf(" deg C");
-		//dprintf("%d is pressure, %d is altitude, %d is temperature",(int) pressure,(int)  altitude,(int) temperature);
-		dprintf("%d alt",(int)altitude);
+		dprintf("%d is pressure, %d is altitude, %d is temperature",(int) pressure,(int)  altitude,(int) temperature);
+		//dprintf("%d alt",(int)altitude);
 		/*
 		Serial.print("p: ");
 		Serial.print(pressure);
@@ -345,10 +343,8 @@ void task_sonar1(void* p){
 		delay(50);                      // Wait 50ms between pings (about 20 pings/sec). 29ms should be the shortest delay between pings.
 		unsigned int uS = sonar.ping(); // Send ping, get ping time in microseconds (uS).
 		//Serial.print("Ping: ");
-		//dprintf("%d",(int)sonar.convert_cm(uS));
+		dprintf("%d",(int)sonar.convert_cm(uS));
 		//sonar.convert_cm(uS);
-		data[1] = 100;
-		data[2] = 2;
 		vTaskDelay(500);
 	}
 	/*sonar code*/
@@ -360,7 +356,7 @@ void task_gyro(void* p){
 	/*gyro code*/
 	while(1){
 		
-		//gyro.read();// once gyro read is inside, code stops output. without gyro.read(), output is 0
+		gyro.read();// once gyro read is inside, code stops output. without gyro.read(), output is 0
 		//dprintf("hello");
 		// dprintf("G ");
 		//dprintf("X: ");
@@ -372,7 +368,7 @@ void task_gyro(void* p){
 		//dprintf("%d",(int)gyro.g.x);
 		//dprintf("%d",gyro.g.x);
 		//delay(1000);
-	//	dprintf("X is %d, Y is %d, Z is %d", (int)gyro.g.x,(int)gyro.g.y,(int)gyro.g.z);
+		dprintf("X is %d, Y is %d, Z is %d", (int)gyro.g.x,(int)gyro.g.y,(int)gyro.g.z);
 		//delay(1000);
 		vTaskDelay(2000);
 		
@@ -444,7 +440,7 @@ void task2(void* p){
 		
 	}
 }*/
-#define STACK_DEPTH 64
+#define STACK_DEPTH 128//64
 
 void vApplicationIdleHook()
 {
@@ -459,12 +455,50 @@ int main(void)
 	pinMode(13,OUTPUT);
 	TaskHandle_t t1,t2;
 	
+	
+	/*while(1){
+		//gyro
+		gyro.read();
+		//acc
+		compass.read();
+		//sonar
+		unsigned int uS = sonar.ping(); // Send ping, get ping time in microseconds (uS).
+		int sonar_reading = (int)sonar.convert_cm(uS);
+		//baro
+		float pressure = ps.readPressureMillibars();
+		//dprintf("raw pressure is %d",(int) ((float)ps.readPressureRaw()/ 4096));
+		float altitude = ps.pressureToAltitudeMeters(pressure);
+		float temperature = ps.readTemperatureC();
+		
+		
+		//ir
+		sensorValue = analogRead(sensorIR);
+		//inches = 4192.936 * pow(sensorValue,-0.935) - 3.937;
+		cm = 10650.08 * pow(sensorValue,-0.935) - 10;
+		
+		char key = keypad.getKey();
+
+		//print out the key that is pressed
+		if (key != NO_KEY){
+			dprintf("%c",key);
+		}
+	}*/
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	//Create tasks
 	//xTaskCreate(task1, "Task 1", STACK_DEPTH, NULL, 6, &t1);
 	//xTaskCreate(task2, "Task 2", STACK_DEPTH, NULL, 5, &t2);
-	xTaskCreate(printArray, "Task Gyro", STACK_DEPTH,NULL,0,&t1);
+//	xTaskCreate(printArray, "Task Gyro", STACK_DEPTH,NULL,0,&t1);
 	//xTaskCreate(task_sonar1,"task sornar",STACK_DEPTH,NULL,5,&t2);
-	//xTaskCreate(task_sonar1, "Task Gyro", STACK_DEPTH,NULL,5,&t1);
+	xTaskCreate(task_baro, "Task Gyro", STACK_DEPTH,NULL,5,&t1);
 	//xTaskCreate(task_ir,"Task Accelerometer", STACK_DEPTH, NULL,6,&t2);
 	
 	vTaskStartScheduler();
