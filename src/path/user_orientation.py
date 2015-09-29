@@ -14,7 +14,7 @@ class Compass():
   def getCompassValue(self):
     return self.compass_value
 
-  def setAngleOfNodes(self,graph,currNodeId,nextNodeId):
+  def setAngleOfNodes(self,graph,currNodeId,nextNodeId,northAt):
     x_curr = graph.getVertex(currNodeId).x
     y_curr = graph.getVertex(currNodeId).y
     x_next = graph.getVertex(nextNodeId).x
@@ -42,6 +42,10 @@ class Compass():
       self.angleOfNodes = 90
     elif x_next < x_curr and y_next == y_curr:
       self.angleOfNodes = 270
+
+    self.angleOfNodes = self.angleOfNodes + northAt
+    if self.angleOfNodes >= 360:
+      self.angleOfNodes -= 360
       
   def getAngleOfNodes(self):
     return self.angleOfNodes
