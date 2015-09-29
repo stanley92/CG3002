@@ -162,4 +162,18 @@ def generateGraph(mapData):
       graph.addEdge(location_nodes[i].id, link)
   return graph
 
+def getNearestVertex(x_curr, y_curr, graph):
+  nearestDist = -1;
+  
+  for i in graph.getVertices():
+    dist = int (_calcDistance(x_curr,y_curr,graph.getVertex(i).x, graph.getVertex(i).y))
+    
+    if nearestDist == -1:
+      nearestDist = dist
+      nearestVertex = str (graph.getVertex(i).name)
+    elif dist < nearestDist:
+      nearestDist = dist
+      nearestVertex = str (graph.getVertex(i).name)
+
+  return nearestVertex
 
