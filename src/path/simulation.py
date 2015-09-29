@@ -8,7 +8,7 @@ print('Welcome To FindMyWay15\n')
 
 while(1):
   
-  building = input('Building Name: ')
+  building = str(raw_input('Building Name: '))
   level = input('Building Level: ')
   start = int(input('Start: '))
   end = int(input('End: '))
@@ -32,7 +32,7 @@ while(1):
     print('')
     orient = user_orientation.Compass()
     length = (len(path)) - 1
-    position = input('Are you at the start point: Y/N: ')
+    position = str(raw_input('Are you at the start point: Y/N: '))
     print('')
 
     if position == 'Y' or position == 'y':
@@ -61,12 +61,14 @@ while(1):
         dist_1 = get_map_info._calcDistance(x_coord,y_coord,graph.getVertex(path[i]).x, graph.getVertex(path[i]).y)
         dist_2 = get_map_info._calcDistance(x_coord,y_coord,graph.getVertex(path[i+1]).x, graph.getVertex(path[i+1]).y)
         if total_dist == dist_1 + dist_2:
+          distToNearestNode = dist_2
           print('Nearest Node: ' + graph.getVertex(path[i+1]).name)
           prevNode = i
           nearestNode = i+1
           break
 
       print('Current location -> ' + graph.getVertex(path[nearestNode]).name)
+      print('Distance to nearest node -> ' + str( int (distToNearestNode) / 2) + 'cm')
       print('User angle = ' + str(orient.getCompassValue()))
       orient.setAngleOfNodes(graph,path[prevNode],path[nearestNode])
       print('Node angle = ' + str(orient.getAngleOfNodes()))
