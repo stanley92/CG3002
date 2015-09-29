@@ -440,6 +440,10 @@ void task2(void* p){
 		
 	}
 }*/
+void task_poll_sensor(void* p){
+	
+	
+}
 #define STACK_DEPTH 128//64
 
 void vApplicationIdleHook()
@@ -498,8 +502,9 @@ int main(void)
 	//xTaskCreate(task2, "Task 2", STACK_DEPTH, NULL, 5, &t2);
 //	xTaskCreate(printArray, "Task Gyro", STACK_DEPTH,NULL,0,&t1);
 	//xTaskCreate(task_sonar1,"task sornar",STACK_DEPTH,NULL,5,&t2);
-	xTaskCreate(task_baro, "Task Gyro", STACK_DEPTH,NULL,5,&t1);
+	//xTaskCreate(task_baro, "Task Gyro", STACK_DEPTH,NULL,5,&t1);
 	//xTaskCreate(task_ir,"Task Accelerometer", STACK_DEPTH, NULL,6,&t2);
+	xTaskCreate(task_poll_sensor,"Task_sensor",STACK_DEPTH,NULL,5,&t1);
 	
 	vTaskStartScheduler();
 }
