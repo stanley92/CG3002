@@ -16,7 +16,7 @@ while(1):
 
   try:
     mapInfo = get_map_info.getMapInfo(building, level)
-    northAt = mapInfo.info.north_at
+    northAt = int(mapInfo.info.north_at)
     graph = get_map_info.generateGraph(mapInfo)
     # print(graph.getVertices())
 
@@ -72,7 +72,7 @@ while(1):
 
       if found :
         print('Current location -> ' + graph.getVertex(path[nearestNode]).name)
-        print('Distance to nearest node -> ' + str( int (distToNearestNode)) + 'cm')
+        print('Distance to nearest node -> ' + str( int (distToNearestNode) / 2) + 'cm')
         print('User angle = ' + str(orient.getCompassValue()))
         orient.setAngleOfNodes(graph,path[prevNode],path[nearestNode],northAt)
         print('Node angle = ' + str(orient.getAngleOfNodes()))

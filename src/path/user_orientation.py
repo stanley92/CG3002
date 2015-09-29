@@ -43,7 +43,7 @@ class Compass():
     elif x_next < x_curr and y_next == y_curr:
       self.angleOfNodes = 270
 
-    self.angleOfNodes = self.angleOfNodes + northAt
+    self.angleOfNodes -= northAt
     if self.angleOfNodes >= 360:
       self.angleOfNodes -= 360
       
