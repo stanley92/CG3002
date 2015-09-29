@@ -21,35 +21,20 @@ class Compass():
     y_next = graph.getVertex(nextNodeId).y
     x_hori = math.fabs(x_curr - x_next)
     y_vert = math.fabs(y_curr - y_next)
-    
-    # 1st Quadrant
-    if x_next > x_curr and y_next > y_curr:
-      self.angleOfNodes = 90 - math.degrees(math.atan(y_vert/x_hori))
-    # 2nd Quadrant
-    elif x_next > x_curr and y_next < y_curr:
-      self.angleOfNodes = math.degrees(math.atan(y_vert/x_hori)) + 90
-    # 3rd Quadrant
-    elif x_next < x_curr and y_next < y_curr:
-      self.angleOfNodes = 270 - math.degrees(math.atan(y_vert/x_hori))
-    # 4th Quadrant
-    elif x_next < x_curr and y_next > y_curr:
-      self.angleOfNodes = math.degrees(math.atan(y_vert/x_hori)) + 270
-    elif x_next == x_curr and y_next > y_curr:
-      self.angleOfNodes = 0
-    elif x_next == x_curr and y_next < y_curr:
-      self.angleOfNodes = 180
-    elif x_next > x_curr and y_next == y_curr:
-      self.angleOfNodes = 90
-    elif x_next < x_curr and y_next == y_curr:
-      self.angleOfNodes = 270
 
-    self.angleOfNodes -= northAt
-    if self.angleOfNodes >= 360:
-      self.angleOfNodes -= 360
-      
+    self.angleOfNodes = cal_angle(x_next,x_curr,y_next,y_curr,x_hori,y_vert,northAt)
+   
+  def setAngleOfNodeXY(self,graph,x_new,y_new,nextNodeId,northAt):
+    x_next = graph.getVertex(nextNodeId).x
+    y_next = graph.getVertex(nextNodeId).y
+    x_hori = math.fabs(x_new - x_next)
+    y_vert = math.fabs(y_new - y_next)
+
+    self.angleOfNodes = cal_angle(x_next,x_new,y_next,y_new,x_hori,y_vert,northAt)
+    
   def getAngleOfNodes(self):
     return self.angleOfNodes
-
+    
   def userOffset(self): # - angle , get -ve gives , +ve give
     offset = self.angleOfNodes - self.compass_value
     offset_abs = math.fabs(offset)
@@ -65,7 +50,39 @@ class Compass():
         return 'turn left'
     else:
       return 'no turn'
-    
+
+def cal_angle(x_next,x_curr,y_next,y_curr,x_hori,y_vert,northAt):
+  # 1st Quadrant
+  if x_next > x_curr and y_next > y_curr:
+    angle = (90 - math.degrees(math.atan(y_vert/x_hori)))
+  # 2nd Quadrant
+  elif x_next > x_curr and y_next < y_curr:
+    angle = math.degrees(math.atan(y_vert/x_hori)) + 90
+  # 3rd Quadrant
+  elif x_next < x_curr and y_next < y_curr:
+    angle = 270 - math.degrees(math.atan(y_vert/x_hori))
+  # 4th Quadrant
+  elif x_next < x_curr and y_next > y_curr:
+    angle = math.degrees(math.atan(y_vert/x_hori)) + 270
+  elif x_next == x_curr and y_next > y_curr:
+    angle = 0
+  elif x_next == x_curr and y_next < y_curr:
+    angle = 180
+  elif x_next > x_curr and y_next == y_curr:
+    angle = 90
+  elif x_next < x_curr and y_next == y_curr:
+    angle = 270    
+
+  angle -= northAt
+  
+  if angle >= 360:
+      angle -= 360
+  elif angle < 0:
+    angle += 360
+
+  return angle    
+
+
 ##x = Compass()
 ##g = get_map_info.generateGraph(get_map_info.getMapInfo('COM1',2))
 ##

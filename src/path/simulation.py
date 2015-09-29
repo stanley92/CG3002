@@ -66,15 +66,14 @@ while(1):
           found = True
           distToNearestNode = dist_2
           print('Nearest Node: ' + graph.getVertex(path[i+1]).name)
-          prevNode = i
           nearestNode = i+1
           break
 
       if found :
         print('Current location -> ' + graph.getVertex(path[nearestNode]).name)
-        print('Distance to nearest node -> ' + str( int (distToNearestNode)) + 'cm')
+        print('Distance to nearest node -> ' + str( int (distToNearestNode) / 2) + 'cm')
         print('User angle = ' + str(orient.getCompassValue()))
-        orient.setAngleOfNodes(graph,path[prevNode],path[nearestNode],northAt)
+        orient.setAngleOfNodeXY(graph,x_coord,y_coord,path[nearestNode],northAt)
         print('Node angle = ' + str(orient.getAngleOfNodes()))
         print(orient.userOffset())
         orient.setCompassValue(orient.getAngleOfNodes())
