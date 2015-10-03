@@ -170,10 +170,10 @@ def getNearestVertex(x_curr, y_curr, graph):
     
     if nearestDist == -1:
       nearestDist = dist
-      nearestVertex = str (graph.getVertex(i).name)
+      nearestVertex = graph.getVertex(i)
     elif dist < nearestDist:
       nearestDist = dist
-      nearestVertex = str (graph.getVertex(i).name)
+      nearestVertex = graph.getVertex(i)
 
   return nearestVertex
 
