@@ -1,3 +1,10 @@
+import find_shortest_path
+import get_map_info
+import obstacle_detector
+import user_displacement
+import user_orientation
+import math
+
 #########################################
 # simulation class
 # + building : str
@@ -5,12 +12,6 @@
 # + start : int
 # + end : int
 #########################################
-import find_shortest_path
-import get_map_info
-import obstacle_detector
-import user_displacement
-import user_orientation
-import math
 
 ANGLE_MARGIN = 5
 
@@ -53,9 +54,7 @@ class Simulation():
   def getEnd (self): 
     return self.end
 
-
   def _checkValidPath (self,graph):
-
     if not 0<self.start<=len(self.graph.getVertices()):
       print('No such start point')
       return False
@@ -74,35 +73,38 @@ class Simulation():
   def start_nav(self):
     if self.x!=None and self.y!= None:
       closestVertex = get_map_info.getNearestVertex(self.x, self.y, self.graph)
-      self.path = find_shortest_path.shortest(self.graph, closestVertex, self.end)     
+      self.path = find_shortest_path.shortest(self.graph, closestVertex.id, self.end)
+      
     self.navigate()
+
+    print('You have reached your destination')
 
   def navigate(self):
     if self.x!=None and self.y!= None:
-      self.orient.setAngleOfNodeXY(graph,self.x,self.y,self.path[0])
+      self.orient.setAngleOfNodeXY(self.graph,self.x,self.y,self.path[0])      
       
     length = (len(self.path)) - 1
-    self.displace.setDistTra(0)
+    #self.displace.setDistTra(0)
 
     for i in range(length):
-
+      
       self.orient.setAngleOfNodes(self.graph,self.path[i],self.path[i+1])
       old_dist = self.displace.getDistCal()
-      
       new_dist = (get_map_info._calcDistance(self.graph.getVertex(self.path[i]).x, self.graph.getVertex(self.path[i]).y, self.graph.getVertex(self.path[i+1]).x, self.graph.getVertex(self.path[i+1]).y))
-      print('new distance: ' + str(new_dist))
+      #print('new distance: ' + str(new_dist))
       total_dist = old_dist + new_dist
       self.displace.setDistCal(total_dist)
 
       while(self.displace.getDistTra() < self.displace.getDistCal()):
         # turning into correct direction
         self.turn()
+        # distance to next node
         print('Distance total: ' + str(self.displace.getDistCal()))
         print('Distance travelled: ' + str(self.displace.getDistTra()))
+        print('Distance to next node: ' + str(self.displace.getDistCal()-self.displace.getDistTra()))
         newDistTra = int(input('Enter extra distance travelled: '))
-        self.displace.setDistTra(self.displace.getDistTra()+newDistTra)
+        self.displace.setDistTra(self.displace.getDistTra() + newDistTra)
         
-
 
   def turn(self):
     while not(self.orient.getAngleOfNodes() - ANGLE_MARGIN <= self.orient.getCompassValue() <= self.orient.getAngleOfNodes() + ANGLE_MARGIN):
@@ -138,7 +140,6 @@ while(1):
     heading = int (input ('Input heading: '))
     end = int(input('End: '))
     run = Simulation(building, level, x=x_coord, y=y_coord, end=end, heading = heading)
-    print(type(run))
     run.start_nav()
   
   print("")
