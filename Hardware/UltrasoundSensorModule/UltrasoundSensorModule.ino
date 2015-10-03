@@ -18,7 +18,7 @@ NewPing sonar(TRIGGER_PIN, ECHO_PIN, MAX_DISTANCE); // NewPing setup of pins and
 NewPing sonar2(TRIGGER_PIN2, ECHO_PIN2,MAX_DISTANCE); //sensor2 
 
 
-#define MOTOR 40
+#define MOTOR 52
 
 
 void setup() {
@@ -29,16 +29,17 @@ void setup() {
 void loop() {
   delay(50);                      // Wait 50ms between pings (about 20 pings/sec). 29ms should be the shortest delay between pings.
   //digitalWrite(MOTOR, HIGH);
-  unsigned int uS = sonar.ping(); // Send ping, get ping time in microseconds (uS).
+  //unsigned int uS = sonar.ping(); // Send ping, get ping time in microseconds (uS).
   unsigned int uS2 = sonar2.ping();
-  Serial.print("Sonar 1: ");
-  Serial.print(sonar.convert_cm(uS)); // Convert ping time to distance and print result (0 = outside set distance range, no ping echo)
-  Serial.println("cm");
+  //Serial.print("Sonar 1: ");
+  //Serial.print(sonar.convert_cm(uS)); // Convert ping time to distance and print result (0 = outside set distance range, no ping echo)
+  //Serial.println("cm");
   
   Serial.print("Sonar 2: ");
   Serial.print(sonar2.convert_cm(uS2));
   Serial.println("cm");
 
+/*
   if(sonar.convert_cm(uS)<50){
     digitalWrite(MOTOR, HIGH);   // sets the LED on
     delay(100);                  // waits for a second
@@ -48,7 +49,7 @@ void loop() {
     digitalWrite(MOTOR, LOW);
     delay(100);
   }
-
+*/
     if(sonar2.convert_cm(uS2)<50){
     digitalWrite(MOTOR, HIGH);   // sets the LED on
     delay(100);                  // waits for a second

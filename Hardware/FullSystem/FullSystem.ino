@@ -12,14 +12,17 @@ LSM303 compass;
 LPS ps;
 L3G gyro;
 
-#define MOTOR 40
+#define MOTOR 52
 #define TRIGGER_PIN  22  // Arduino pin tied to trigger pin on the ultrasonic sensor.
 #define ECHO_PIN     24  // Arduino pin tied to echo pin on the ultrasonic sensor.
 #define MAX_DISTANCE 200 // Maximum distance we want to ping for (in centimeters). Maximum sensor distance is rated at 400-500cm.
-#define ECHO_PIN2 38
-#define TRIGGER_PIN2 39
-NewPing sonar(TRIGGER_PIN, ECHO_PIN, MAX_DISTANCE); // NewPing setup of pins and maximum distance.
-NewPing sonar2(TRIGGER_PIN2, ECHO_PIN2,MAX_DISTANCE); //sensor2 
+//#define ECHO_PIN2 38
+//#define TRIGGER_PIN2 39
+//NewPing sonar(TRIGGER_PIN, ECHO_PIN, MAX_DISTANCE); // NewPing setup of pins and maximum distance.
+//NewPing sonar2(TRIGGER_PIN2, ECHO_PIN2,MAX_DISTANCE); //sensor2 
+int maximumRange = 200; // Maximum range needed
+int minimumRange = 0; // Minimum range needed
+long duration, distance; // Duration used to calculate distance
 
 
 #define sensorIR 15  //Must be an analog pin A15
@@ -54,6 +57,8 @@ Keypad keypad = Keypad( makeKeymap(keys), rowPins, colPins, ROWS, COLS );
 
 
 
+
+
 void setup() {
   Serial.begin(9600);
   Wire.begin();
@@ -63,6 +68,8 @@ void setup() {
   gyro.init();
   gyro.enableDefault();
   pinMode(MOTOR, OUTPUT);
+   pinMode(TRIGGER_PIN, OUTPUT);
+ pinMode(ECHO_PIN, INPUT);
   /*
   Calibration values; the default values of +/-32767 for each axis
   lead to an assumed magnetometer bias of 0. Use the ACCalibrate 
@@ -78,38 +85,7 @@ void setup() {
 }
 
 void loop() {
-  /***********************************
-  **        reading sensors
-  ************************************/
-  unsigned int uS = sonar.ping(); // Send ping, get ping time in microseconds (uS).
-  unsigned int uS2 = sonar2.ping();
-  Serial.print("Sonar 1: ");
-  Serial.print(sonar.convert_cm(uS)); // Convert ping time to distance and print result (0 = outside set distance range, no ping echo)
-  Serial.println("cm");
-  
-  Serial.print("Sonar 2: ");
-  Serial.print(sonar2.convert_cm(uS2));
-  Serial.println("cm");
 
-  if(sonar.convert_cm(uS)<50){
-    digitalWrite(MOTOR, HIGH);   // sets the LED on
-    delay(100);                  // waits for a second
-    //digitalWrite(MOTOR, LOW);    // sets the LED off
-    //delay(1000);                  // waits for a second
-  }else{
-    digitalWrite(MOTOR, LOW);
-    delay(100);
-  }
-
-    if(sonar2.convert_cm(uS2)<50){
-    digitalWrite(MOTOR, HIGH);   // sets the LED on
-    delay(100);                  // waits for a second
-    //digitalWrite(MOTOR, LOW);    // sets the LED off
-    //delay(1000);                  // waits for a second
-  }else{
-    digitalWrite(MOTOR, LOW);
-    delay(100);
-  }
   
   
   /***********************************
@@ -221,7 +197,7 @@ void loop() {
   ******************************************************/
  
   // a step and  distance using Z-ACCELERATION
-  if(ZaVal<-950){
+  if(ZaVal<-965){
     distFromStart+=33;  //1 step is 33 cm
     step++; 
   } 
@@ -315,5 +291,60 @@ void loop() {
   Serial.print(cm);
   Serial.println(" Cm");
   
-  delay(100);
+  
+  
+    /***********************************
+  **        reading sensors
+  ************************************/
+  /*
+  //digitalWrite(ECHO_PIN2 ,LOW);
+  unsigned int uS2 = sonar2.ping();
+
+  
+  Serial.print("Sonar 2: ");
+  Serial.print(sonar2.convert_cm(uS2));
+  Serial.println("cm");
+
+    if(sonar2.convert_cm(uS2)<50){
+    digitalWrite(MOTOR, HIGH);     // waits for a second
+        // sets the LED off
+    //delay(1000);                  // waits for a second
+  }
+  else{
+   digitalWrite(MOTOR, LOW);
+  }
+  //delay(100);
+*/
+/* The following trigPin/echoPin cycle is used to determine the
+ distance of the nearest object by bouncing soundwaves off of it. */ 
+ digitalWrite(TRIGGER_PIN, LOW); 
+ delayMicroseconds(2); 
+
+ digitalWrite(TRIGGER_PIN, HIGH);
+ delayMicroseconds(10); 
+ 
+ digitalWrite(TRIGGER_PIN, LOW);
+ duration = pulseIn(ECHO_PIN, HIGH);
+ 
+ //Calculate the distance (in cm) based on the speed of sound.
+ distance = duration/58.2;
+ Serial.print("sonar distance is ");
+ Serial.println(distance);
+ Serial.println();
+ if (distance >= 10 && distance <= 70){
+ /* Send a negative number to computer and Turn LED ON 
+ to indicate "out of range" */
+ //Serial.println("-1");
+ digitalWrite(MOTOR, HIGH); 
+ }
+ else {
+ /* Send the distance to the computer using Serial protocol, and
+ turn LED OFF to indicate successful reading. */
+ //Serial.println(distance);
+ digitalWrite(MOTOR, LOW); 
+ }
+ 
+ //Delay 50ms before next reading.
+ delay(50);
+
 }
