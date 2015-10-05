@@ -136,7 +136,9 @@ class Simulation():
     while not(self.orient.getAngleOfNodes() - ANGLE_MARGIN <= self.orient.getCompassValue() <= self.orient.getAngleOfNodes() + ANGLE_MARGIN):
       #### TODO: handledata compassValue (keep reading)
       #### DUMMY: compass Value
-      newCompassData = float(input('compassData is (should turn to '+ str(self.orient.getAngleOfNodes()) +'): '))
+      print('Next node angle: ' + str(self.orient.getAngleOfNodes()))
+      print('Current direction: ' + str(self.orient.getCompassValue()))
+      newCompassData = float(input('compassData is (you should turn to '+ str(self.orient.getAngleOfNodes()) +'): '))
       self.orient.setCompassValue(newCompassData)
       ####
       #### TODO: motor buzz
@@ -148,6 +150,7 @@ class Simulation():
     #print(self.orient.userOffset())
 
     #### TODO: motor
+      print('')
 
      
 ################################################
