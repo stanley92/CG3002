@@ -24,25 +24,20 @@ class Arduino():
     self._resetArduino()
     
 
-    ###########################
-    # SENDING HELLO
-    ###########################
-    self.ser.serialWrite('2HELO') #hello
 
     ###########################
-    # RECEIVING ACK
+    # SENDING HELLO & RECEIVING ACK
     ###########################
     while True:
+      self.ser.serialWrite(chr(2)) #hello
       message = self.ser.serialRead()
-      if (len(message) == 0):
+      if (message == chr(0)):
+        break
+      else:
         current_millis = int(round(time.time() * 1000))
         if (current_millis - start_millis > 10000):   #10 seconds
           is_timed_out = True
           break
-      elif (message[0] == '0'): #ACK
-        break
-      else:
-        continue
 
     if is_timed_out:
       print("Handshaking failed")
@@ -51,24 +46,27 @@ class Arduino():
     ###########################
     # SENDING ACK
     ###########################
-    self.ser.serialWrite('0ACK'); #ACK
+    self.ser.serialWrite(chr(0)); #ACK
 
     return True
 
-  def getData(self, callback):
+  def get_data(self, callback):
     print("Start getting data")
     is_timed_out = False
     start_millis = int(round(time.time() * 1000))
     while True:
       message = self.ser.serialRead()
-      if (len(message) == 0):
-        continue
-      elif (message[0] == '4'): #Write
-        self.ser.serialWrite('0ACK')
+      if (message[0] == chr(4)): #Write
+        self.ser.serialWrite(chr(0))
         break
+      else: 
+        current_millis = int(round(time.time() * 1000))
+        if (current_millis - start_millis > 10000):   #10 seconds
+          is_timed_out = True
+          break
     if is_timed_out:
       print("Get data Timed Out")
-      callback('9TIMEOUT')
+      callback('TIMEOUT')
     print("Data got: "+str(message))
     callback(message)
 

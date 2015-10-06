@@ -1,15 +1,17 @@
 import queue
 
-class DataBuffer()
+class DataBuffer():
   def __init__(self, ard):
     self.mQueue = queue.Queue()
     self.ard = ard
 
-  def buffer():
-    ard.get_data(push)
+  def push(self, m):
+    self.mQueue.put(m)
+  
+  def buffer(self):
+    self.ard.get_data(self.push)
 
-  def push(m):
-    mQueue.put(m)
+  
 
-  def poll():
-    mQueue.get()
+  def poll(self):
+    self.mQueue.get()
