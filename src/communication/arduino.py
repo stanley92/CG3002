@@ -3,18 +3,19 @@ import RPi.GPIO as GPIO
 import time
 
 class Arduino():
-  PIN_TXD = 14
-  PIN_RXD = 15
   
   def __init__(self, ser):
     self.ser = ser
+    self.PIN_TXD = 14
+    self.PIN_RXD = 15
+  
 
   def _resetArduino(self):
-    GPIO.setMode(GPIO.BOARD);
-    GPIO.setup(PIN_RXD, GPIO.out);
-    GPIO.output(PIN_RXD, false);
+    # GPIO.setMode(GPIO.BOARD);
+    # GPIO.setup(self.PIN_RXD, GPIO.out);
+    # GPIO.output(self.PIN_RXD, false);
     time.sleep(1);
-    GPIO.output(PIN_RXD, true);
+    # GPIO.output(self.PIN_RXD, true);
 
 
   def handshake(self):
