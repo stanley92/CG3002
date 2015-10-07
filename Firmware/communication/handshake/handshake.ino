@@ -3,14 +3,19 @@ int handshaken;
 void setup() {
   Serial.begin(115200);
   Serial1.begin(115200);
+  Serial.flush();
+  Serial1.flush();
   handshaken = 0;
 }
 //afdwd
-void debugPrint(const char *str) {
+void debugPrint(int chr) {
+  Serial.println(chr);
+  Serial.flush();
+}
+void debugPrintStr(const char* str) {
   Serial.println(str);
   Serial.flush();
 }
-
 void loop() {
   if (!handshaken) {
     handshakenUntilFinish();
@@ -30,20 +35,20 @@ void handshakenUntilFinish() {
   while (1) {
     if (Serial1.available()){
       inByte = Serial1.read();
+      debugPrint(inByte);
       if (inByte == 2) { // receive 2HELO
-        debugPrint("!");
-        Serial1.write(0); // answer 0ACK
-        debugPrint("@");
+        debugPrintStr("!");
         break;
       }
     } 
   }
-  debugPrint("^");
+  debugPrintStr("^");
   while (1) {
     inByte = Serial1.read();
+    Serial1.write(3); // answer 3HELLOACK
     if (inByte == 0) { //receive 0ACK
-      debugPrint("#");
-      handshaken = 1;
+      debugPrintStr("#");
+      handshaken = 1;sudo
       break;
     }
   }
@@ -51,13 +56,15 @@ void handshakenUntilFinish() {
 
 int sendSimpleData() {
   int inByte;
+  debugPrintStr("write");
   while(1) {
     Serial1.write(4);
     Serial1.write(0);
     Serial1.write("data");
+    Serial1.flush();
     inByte = Serial1.read();
-    if (inByte == '0') { //receive 0ACK
-      debugPrint("$");
+    if (inByte == 0) { //receive 0ACK
+      debugPrintStr("$");
       break;
     }
   }

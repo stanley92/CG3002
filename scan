@@ -1,0 +1,65 @@
+     agrCtlRSSI: -57
+     agrExtRSSI: 0
+    agrCtlNoise: -101
+    agrExtNoise: 0
+          state: running
+        op mode: station 
+     lastTxRate: 130
+        maxRate: 289
+lastAssocStatus: 0
+    802.11 auth: open
+      link auth: wpa2
+          BSSID: a8:9d:21:f3:6f:ff
+           SSID: NUS
+            MCS: 7
+        channel: 40
+                            SSID BSSID             RSSI CHANNEL HT CC SECURITY (auth/unicast/group)
+                             NUS a8:9d:21:f3:84:9f -87  157     Y  SG WPA2(802.1x,Unrecognized(0)/AES/AES) 
+                             NUS 84:b8:02:00:3c:60 -78  1       Y  SG WPA2(802.1x,Unrecognized(0)/AES/AES) 
+                         eduroam a8:9d:21:d0:54:81 -79  5       Y  SG WPA(802.1x/TKIP/TKIP) WPA2(802.1x/AES/TKIP) 
+                             NUS a8:9d:21:d0:54:80 -80  5       Y  SG WPA2(802.1x,Unrecognized(0)/AES/AES) 
+                         eduroam a8:9d:21:f3:6f:f1 -72  13      Y  SG WPA(802.1x/TKIP/TKIP) WPA2(802.1x/AES/TKIP) 
+                         eduroam a8:9d:21:f3:87:d1 -88  13      Y  SG WPA(802.1x/TKIP/TKIP) WPA2(802.1x/AES/TKIP) 
+                          NUSSOC a8:9d:21:c4:0e:f9 -69  60      Y  SG WPA2(802.1x,Unrecognized(0)/AES/AES) 
+                          NUSSOC b0:aa:77:42:e3:c9 -87  60      Y  SG WPA2(802.1x,Unrecognized(0)/AES/AES) 
+                         eduroam 84:b8:02:00:3c:6e -85  60      Y  SG WPA(802.1x/TKIP/TKIP) WPA2(802.1x/AES/TKIP) 
+                         eduroam b0:aa:77:42:e3:ce -86  60      Y  SG WPA(802.1x/TKIP/TKIP) WPA2(802.1x/AES/TKIP) 
+                             NUS b0:aa:77:42:e3:cf -84  60      Y  SG WPA2(802.1x,Unrecognized(0)/AES/AES) 
+                         eduroam a8:9d:21:c4:0e:fe -72  60      Y  SG WPA(802.1x/TKIP/TKIP) WPA2(802.1x/AES/TKIP) 
+                             NUS a8:9d:21:c4:0e:ff -72  60      Y  SG WPA2(802.1x,Unrecognized(0)/AES/AES) 
+                         eduroam a8:9d:21:d0:54:8e -85  52      Y  SG WPA(802.1x/TKIP/TKIP) WPA2(802.1x/AES/TKIP) 
+                          NUSSOC a8:9d:21:d0:54:89 -85  52      Y  SG WPA2(802.1x,Unrecognized(0)/AES/AES) 
+                             NUS a8:9d:21:d0:54:8f -86  52      Y  SG WPA2(802.1x,Unrecognized(0)/AES/AES) 
+                             NUS a8:9d:21:f3:6f:f0 -69  13      Y  SG WPA2(802.1x,Unrecognized(0)/AES/AES) 
+                         eduroam a8:9d:21:c4:0d:51 -87  13      Y  SG WPA(802.1x/TKIP/TKIP) WPA2(802.1x/AES/TKIP) 
+                             NUS a8:9d:21:c4:0d:50 -86  13      Y  SG WPA2(802.1x,Unrecognized(0)/AES/AES) 
+                     NUS Comp AV 28:cf:e9:83:0d:a4 -85  11      Y  SG WPA2(PSK/AES/AES) 
+                             NUS a8:9d:21:f3:86:a0 -71  8       Y  SG WPA2(802.1x,Unrecognized(0)/AES/AES) 
+                         eduroam 84:b8:02:10:c7:71 -67  8       Y  SG WPA(802.1x/TKIP/TKIP) WPA2(802.1x/AES/TKIP) 
+                         eduroam a8:9d:21:f3:86:a1 -71  8       Y  SG WPA(802.1x/TKIP/TKIP) WPA2(802.1x/AES/TKIP) 
+                             NUS 84:b8:02:10:c7:70 -67  8       Y  SG WPA2(802.1x,Unrecognized(0)/AES/AES) 
+                         eduroam a8:9d:21:c4:0e:f1 -78  8       Y  SG WPA(802.1x/TKIP/TKIP) WPA2(802.1x/AES/TKIP) 
+                             NUS a8:9d:21:c4:0e:f0 -77  8       Y  SG WPA2(802.1x,Unrecognized(0)/AES/AES) 
+                         eduroam a8:9d:21:c4:14:01 -77  4       Y  SG WPA(802.1x/TKIP/TKIP) WPA2(802.1x/AES/TKIP) 
+                             NUS a8:9d:21:c4:14:00 -77  4       Y  SG WPA2(802.1x,Unrecognized(0)/AES/AES) 
+                         eduroam 84:b8:02:00:3c:61 -86  1       Y  SG WPA(802.1x/TKIP/TKIP) WPA2(802.1x/AES/TKIP) 
+                         eduroam b0:aa:77:42:e3:c1 -70  1       Y  SG WPA(802.1x/TKIP/TKIP) WPA2(802.1x/AES/TKIP) 
+                             NUS b0:aa:77:42:e3:c0 -71  1       Y  SG WPA2(802.1x,Unrecognized(0)/AES/AES) 
+                             NUS a8:9d:21:e4:6f:ff -84  36      Y  SG WPA2(802.1x,Unrecognized(0)/AES/AES) 
+                          NUSSOC a8:9d:21:f3:6f:b9 -83  36      Y  SG WPA2(802.1x,Unrecognized(0)/AES/AES) 
+                          NUSSOC a8:9d:21:c4:0d:59 -88  36      Y  SG WPA2(802.1x,Unrecognized(0)/AES/AES) 
+                         eduroam 84:b8:02:10:cf:ee -89  153     Y  SG WPA(802.1x/TKIP/TKIP) WPA2(802.1x/AES/TKIP) 
+                         eduroam a8:9d:21:f3:86:ae -62  149     Y  SG WPA(802.1x/TKIP/TKIP) WPA2(802.1x/AES/TKIP) 
+                          NUSSOC a8:9d:21:f3:86:a9 -62  149     Y  SG WPA2(802.1x,Unrecognized(0)/AES/AES) 
+                             NUS a8:9d:21:f3:86:af -62  149     Y  SG WPA2(802.1x,Unrecognized(0)/AES/AES) 
+                         eduroam a8:9d:21:c4:14:0e -79  44      Y  SG WPA(802.1x/TKIP/TKIP) WPA2(802.1x/AES/TKIP) 
+                          NUSSOC a8:9d:21:c4:14:09 -75  44      Y  SG WPA2(802.1x,Unrecognized(0)/AES/AES) 
+                         eduroam 84:b8:02:10:c7:7e -62  44      Y  SG WPA(802.1x/TKIP/TKIP) WPA2(802.1x/AES/TKIP) 
+                             NUS a8:9d:21:c4:14:0f -79  44      Y  SG WPA2(802.1x,Unrecognized(0)/AES/AES) 
+                          NUSSOC 84:b8:02:10:c7:79 -64  44      Y  SG WPA2(802.1x,Unrecognized(0)/AES/AES) 
+                             NUS 84:b8:02:10:c7:7f -63  44      Y  SG WPA2(802.1x,Unrecognized(0)/AES/AES) 
+                         eduroam a8:9d:21:ee:0e:de -89  40      Y  SG WPA(802.1x/TKIP/TKIP) WPA2(802.1x/AES/TKIP) 
+                          NUSSOC a8:9d:21:ee:0e:d9 -88  40      Y  SG WPA2(802.1x,Unrecognized(0)/AES/AES) 
+                         eduroam a8:9d:21:f3:6f:fe -57  40      Y  SG WPA(802.1x/TKIP/TKIP) WPA2(802.1x/AES/TKIP) 
+                          NUSSOC a8:9d:21:f3:6f:f9 -57  40      Y  SG WPA2(802.1x,Unrecognized(0)/AES/AES) 
+                             NUS a8:9d:21:f3:6f:ff -57  40      Y  SG WPA2(802.1x,Unrecognized(0)/AES/AES) 

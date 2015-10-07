@@ -9,10 +9,10 @@ def read_from_port(buf):
 def main():
   ser = serial_comm.SerialCommunication()
   ard = arduino.Arduino(ser)
-  ard.handshake()
-  buf = data_buffer.DataBuffer(ard)
-  thread = threading.Thread(target=read_from_port,args=[buf])
-  thread.start()
+  if ard.handshake():
+    buf = data_buffer.DataBuffer(ard)
+    thread = threading.Thread(target=read_from_port,args=[buf])
+    thread.start()
   
 if __name__ == '__main__':
   main()

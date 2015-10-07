@@ -1,8 +1,8 @@
-import queue
+import Queue
 
 class DataBuffer():
   def __init__(self, ard):
-    self.mQueue = queue.Queue()
+    self.mQueue = Queue.Queue()
     self.ard = ard
 
   def push(self, m):
@@ -10,8 +10,6 @@ class DataBuffer():
   
   def buffer(self):
     self.ard.get_data(self.push)
-
-  
 
   def poll(self):
     self.mQueue.get()
