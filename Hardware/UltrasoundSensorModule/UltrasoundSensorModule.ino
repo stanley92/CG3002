@@ -5,17 +5,11 @@ Echo to Arduino pin 10 Trig to Arduino pin 9
 */
 
 #include <NewPing.h>
-#define TRIGGER_PIN  22  // Arduino pin tied to trigger pin on the ultrasonic sensor.
-#define ECHO_PIN     24  // Arduino pin tied to echo pin on the ultrasonic sensor.
+#define TRIGGER_PIN  43  // Arduino pin tied to trigger pin on the ultrasonic sensor.
+#define ECHO_PIN     44  // Arduino pin tied to echo pin on the ultrasonic sensor.
 #define MAX_DISTANCE 200 // Maximum distance we want to ping for (in centimeters). Maximum sensor distance is rated at 400-500cm.
 
-
-
-
-#define ECHO_PIN2 38
-#define TRIGGER_PIN2 39
-NewPing sonar(TRIGGER_PIN, ECHO_PIN, MAX_DISTANCE); // NewPing setup of pins and maximum distance.
-NewPing sonar2(TRIGGER_PIN2, ECHO_PIN2,MAX_DISTANCE); //sensor2 
+NewPing sonar2(TRIGGER_PIN, ECHO_PIN,MAX_DISTANCE); //sensor2 
 
 
 #define MOTOR 52
@@ -23,7 +17,7 @@ NewPing sonar2(TRIGGER_PIN2, ECHO_PIN2,MAX_DISTANCE); //sensor2
 
 void setup() {
   Serial.begin(9600); // Open serial monitor at 9600 baud to see ping results.
-  pinMode(MOTOR, OUTPUT);
+//  pinMode(MOTOR, OUTPUT);
 }
 
 void loop() {
@@ -50,6 +44,7 @@ void loop() {
     delay(100);
   }
 */
+ /*
     if(sonar2.convert_cm(uS2)<50){
     digitalWrite(MOTOR, HIGH);   // sets the LED on
     delay(100);                  // waits for a second
@@ -59,7 +54,7 @@ void loop() {
     digitalWrite(MOTOR, LOW);
     delay(100);
   }
-  
+  */
   
 
 }

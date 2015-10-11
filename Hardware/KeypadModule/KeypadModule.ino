@@ -19,8 +19,8 @@ char keys[ROWS][COLS] = {
 };
 
 //row and col are adjustable
-byte rowPins[ROWS] = {33, 32, 31, 30}; //connect to the row pinouts of the keypad;
-byte colPins[COLS] = {36, 35, 34}; //connect to the column pinouts of the keypad;
+byte rowPins[ROWS] = {45,46,47,48}; //connect to the row pinouts of the keypad;
+byte colPins[COLS] = {50,49,51}; //connect to the column pinouts of the keypad;
 
 Keypad keypad = Keypad( makeKeymap(keys), rowPins, colPins, ROWS, COLS );
 
@@ -36,3 +36,4 @@ void loop(){
     Serial.println(key);
   }
 }
+

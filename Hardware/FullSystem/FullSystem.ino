@@ -13,8 +13,8 @@ LPS ps;
 L3G gyro;
 
 #define MOTOR 52
-#define TRIGGER_PIN  22  // Arduino pin tied to trigger pin on the ultrasonic sensor.
-#define ECHO_PIN     24  // Arduino pin tied to echo pin on the ultrasonic sensor.
+#define TRIGGER_PIN  39  // Arduino pin tied to trigger pin on the ultrasonic sensor.
+#define ECHO_PIN     38  // Arduino pin tied to echo pin on the ultrasonic sensor.
 #define MAX_DISTANCE 200 // Maximum distance we want to ping for (in centimeters). Maximum sensor distance is rated at 400-500cm.
 //#define ECHO_PIN2 38
 //#define TRIGGER_PIN2 39
@@ -50,8 +50,8 @@ char keys[ROWS][COLS] = {
 };
 
 //row and col are adjustable
-byte rowPins[ROWS] = {33, 32, 31, 30}; //connect to the row pinouts of the keypad;
-byte colPins[COLS] = {36, 35, 34}; //connect to the column pinouts of the keypad;
+byte rowPins[ROWS] = {45,46,47,48}; //connect to the row pinouts of the keypad;
+byte colPins[COLS] = {50,49,51}; //connect to the column pinouts of the keypad;
 
 Keypad keypad = Keypad( makeKeymap(keys), rowPins, colPins, ROWS, COLS );
 
