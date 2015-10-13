@@ -449,14 +449,31 @@ PCB, in the direction of the top of the text on the silkscreen.
 This is the +X axis on the Pololu LSM303D carrier and the -Y axis on
 the Pololu LSM303DLHC, LSM303DLM, and LSM303DLH carriers.
 */
+/*char debugBuffer1[1024];
+//char debugBuffer[2048];
+void debugPrint1(const char *str)
+{
+	Serial.println(str);
+	Serial.flush();
+}
+void dprintf1(const char *fmt, ...)
+{
+	va_list argptr;
+	va_start(argptr, fmt);
+	vsprintf(debugBuffer1, fmt, argptr);
+	va_end(argptr);
+	debugPrint1(debugBuffer1);
+}*/
 float LSM303::heading(void)
 {
   if (_device == device_D)
   {
+	 // dprintf1("%d",heading((vector<int>){1, 0, 0}));
     return heading((vector<int>){1, 0, 0});
   }
   else
   {
+	 //  dprintf1("%d",heading((vector<int>){0, -1, 0}));
     return heading((vector<int>){0, -1, 0});
   }
 }

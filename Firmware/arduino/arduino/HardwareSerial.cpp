@@ -50,14 +50,14 @@
   bool Serial1_available() __attribute__((weak));
 #endif
 
-#if defined(HAVE_HWSERIAL2)
+/*#if defined(HAVE_HWSERIAL2)
   void serialEvent2() __attribute__((weak));
   bool Serial2_available() __attribute__((weak));
 #endif
 
 #if defined(HAVE_HWSERIAL3)
   void serialEvent3() __attribute__((weak));
-  bool Serial3_available() __attribute__((weak));
+  bool Serial3_available() __attribute__((weak));*/
 #endif
 
 void serialEventRun(void)
@@ -68,11 +68,11 @@ void serialEventRun(void)
 #if defined(HAVE_HWSERIAL1)
   if (Serial1_available && serialEvent1 && Serial1_available()) serialEvent1();
 #endif
-#if defined(HAVE_HWSERIAL2)
+/*#if defined(HAVE_HWSERIAL2)
   if (Serial2_available && serialEvent2 && Serial2_available()) serialEvent2();
 #endif
 #if defined(HAVE_HWSERIAL3)
-  if (Serial3_available && serialEvent3 && Serial3_available()) serialEvent3();
+  if (Serial3_available && serialEvent3 && Serial3_available()) serialEvent3();*/
 #endif
 }
 

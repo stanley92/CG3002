@@ -46,7 +46,6 @@ FreeRTOS2560.d FreeRTOS2560.o: .././FreeRTOS2560.cpp \
  C:\Users\Laksh\Desktop\SEM_5\CG3002\Latest_git\CG3002\Hardware\Libraries\Keypad/Keypad.h \
  C:\Users\Laksh\Desktop\SEM_5\CG3002\Latest_git\CG3002\Hardware\Libraries\Keypad/utility/Key.h \
  C:\Users\Laksh\Desktop\SEM_5\CG3002\LATEST~1\CG3002\Firmware\FREERT~1.2\FreeRTOS\Demo\Common\include/serial.h \
- C:\Users\Laksh\Desktop\SEM_5\CG3002\Latest_git\CG3002\Hardware\Libraries\NewPing/NewPing.h \
  C:\Users\Laksh\Desktop\SEM_5\CG3002\Latest_git\CG3002\Hardware\Libraries\LPS/LPS.h \
  C:\Users\Laksh\Desktop\SEM_5\CG3002\Latest_git\CG3002\Hardware\Libraries\LSM303/LSM303.h \
  C:\Users\Laksh\Desktop\SEM_5\CG3002\LATEST~1\CG3002\Firmware\HARDWA~1\Wire/Wire.h \
@@ -146,8 +145,6 @@ C:\Users\Laksh\Desktop\SEM_5\CG3002\Latest_git\CG3002\Hardware\Libraries\Keypad/
 C:\Users\Laksh\Desktop\SEM_5\CG3002\Latest_git\CG3002\Hardware\Libraries\Keypad/utility/Key.h:
 
 C:\Users\Laksh\Desktop\SEM_5\CG3002\LATEST~1\CG3002\Firmware\FREERT~1.2\FreeRTOS\Demo\Common\include/serial.h:
-
-C:\Users\Laksh\Desktop\SEM_5\CG3002\Latest_git\CG3002\Hardware\Libraries\NewPing/NewPing.h:
 
 C:\Users\Laksh\Desktop\SEM_5\CG3002\Latest_git\CG3002\Hardware\Libraries\LPS/LPS.h:
 
