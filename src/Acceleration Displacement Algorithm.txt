@@ -1,0 +1,24 @@
+
+unsigned long newTime = millis();
+unsigned long deltaTime = newTime - time;
+
+...
+
+// estimate the average acceleration since the previous sample, by averaging the two samples
+long avgAccel = (accel + newAccel) / 2;
+
+// integrate the average accel and add it to the previous speed to calculate the new speed
+long newSpeed = speed + (avgAccel  * deltaTime);
+
+estimate the average speed since the previous sample, by averaging the two speeds
+long avgSpeed = (speed + newSpeed) / 2;
+
+// integrate the average speed and add it to the previous displacement to get the new displacement
+long newDisplacement = displacement + (avgSpeed * deltaTime);
+
+time = newTime;
+speed = newSpeed ;
+displacement = newDisplacement;
+
+
+reference:http://forum.arduino.cc/index.php?topic=162080.0
