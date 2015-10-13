@@ -4,7 +4,7 @@ from . import data_buffer
 import threading
 
 class Communication():
-  def __init__():
+  def __init__(self):
     self.ser = serial_comm.SerialCommunication()
     self.ard = arduino.Arduino(ser)
     self.handshaken = False
@@ -18,7 +18,7 @@ class Communication():
     self.handshaken = ard.handshake()
     if self.handshaken:
       self.buffer = data_buffer.DataBuffer(ard, num_queue)
-      self.thread = threading.Thread(target=read_from_port,args=[buf])
+      self.thread = threading.Thread(target=read_from_port,args=[self.buffer])
       self.thread.start()
     return self.handshaken # False means failed
     
