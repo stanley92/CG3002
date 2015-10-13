@@ -1397,12 +1397,12 @@ int sendSimpleData() {
 	}
 }
 
-int sendData(const char *fmt, ...){
+int sendData(int channel, const char *fmt, ...){
 	int inByte;
 	char dataBuffer[1024];
 	va_list argptr;
 		va_start(argptr, fmt);
-		vsprintf(debugBuffer, fmt, argptr);
+		vsprintf(dataBuffer, fmt, argptr);
 		va_end(argptr);		
 		/*vsprintf(dataBuffer,"0 %d 1 %d 2 %d 3 %d 4 %d 5 %d 6 %d 7 %d", data[ID_DATA_KEYPAD],
 		data[ID_DATA_HEADING],
@@ -1415,12 +1415,12 @@ int sendData(const char *fmt, ...){
 	
 	while(1) {
 		Serial1.write(4);
-		Serial1.write(0);
+		Serial1.write(channel);
 		Serial1.write(dataBuffer,sizeof(dataBuffer));
 			
 	//	Serial1.write("data");
 		inByte = Serial1.read();
-		if (inByte == '0') { //receive 0ACK
+		if (inByte == 0) { //receive 0ACK
 			//debugPrint("$");
 			dprintf("$");
 			break;
