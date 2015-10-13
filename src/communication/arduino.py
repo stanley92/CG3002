@@ -75,9 +75,10 @@ class Arduino():
       # print("Got write request")
       while True:
         message = self.ser.serialRead()
-        if (message == chr(0)): #Write
+        if (message): #Write
+          channel = message
           break
-      # print("Got channel 0")
+      # print("Got channel X")
       while True:
         # print("read")
         message = self.ser.serialReadLine()
@@ -91,10 +92,10 @@ class Arduino():
             break
         if is_timed_out:
           # print("Get data Timed Out")
-          callback('TIMEOUT')
+          callback(None, None)
       # print("Data got: "+str(message))
       self.ser.serialWrite(chr(0))
-      callback(message)
+      callback(channel, message)
 
 
 
