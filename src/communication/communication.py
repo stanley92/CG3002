@@ -4,21 +4,21 @@ from . import data_buffer
 import threading
 
 class Communication():
-  def __init__():
+  def __init__(self):
     self.ser = serial_comm.SerialCommunication()
-    self.ard = arduino.Arduino(ser)
+    self.ard = arduino.Arduino(self.ser)
     self.handshaken = False
     self.buffer = None
     self.thread = None
 
-  def read_from_port(buf):
-    buf.buffer()
+  def read_from_port(self):
+    self.buffer.buffer()
 
   def initialise(self, num_queue=5):
-    self.handshaken = ard.handshake()
+    self.handshaken = self.ard.handshake()
     if self.handshaken:
-      self.buffer = data_buffer.DataBuffer(ard, num_queue)
-      self.thread = threading.Thread(target=read_from_port,args=[buf])
+      self.buffer = data_buffer.DataBuffer(self.ard, num_queue)
+      self.thread = threading.Thread(target=read_from_port,args=[self])
       self.thread.start()
     return self.handshaken # False means failed
     
