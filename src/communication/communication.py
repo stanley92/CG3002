@@ -18,7 +18,7 @@ class Communication():
     self.handshaken = self.ard.handshake()
     if self.handshaken:
       self.buffer = data_buffer.DataBuffer(num_queue, self.ard)
-      self.thread = threading.Thread(target=read_from_port,args=[self])
+      self.thread = threading.Thread(target=self.read_from_port,args=[self])
       self.thread.start()
     return self.handshaken # False means failed
     
@@ -26,7 +26,7 @@ class Communication():
     return self.buffer.pop(queue_number)
 
   def pop_latest(self, queue_number):
-    return self.buffer.last(queue_number)
+    return self.buffer.last(  queue_number)
 
   def flush(self, queue_number):
     return self.buffer.clear(queue_number)
