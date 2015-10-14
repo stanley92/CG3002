@@ -17,7 +17,7 @@ class Communication():
   def initialise(self, num_queue=8):
     self.handshaken = self.ard.handshake()
     if self.handshaken:
-      self.buffer = data_buffer.DataBuffer(self.ard, num_queue)
+      self.buffer = data_buffer.DataBuffer(num_queue, self.ard)
       self.thread = threading.Thread(target=read_from_port,args=[self])
       self.thread.start()
     return self.handshaken # False means failed
