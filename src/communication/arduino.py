@@ -34,14 +34,16 @@ class Arduino():
     while True:
       self.ser.serialWrite(chr(2)) #hello
       message = self.ser.serialRead()
+      print(chr(ord(message)+48))
       if (message == chr(3)):
         self.ser.serialWrite(chr(0));
+
         # print("Break")
         break
       else:
         # print("cont")
         current_millis = int(round(time.time() * 1000))
-        print(current_millis)
+        # print(current_millis)
         if (current_millis - start_millis > 10000):   #10 seconds
           is_timed_out = True
           break
