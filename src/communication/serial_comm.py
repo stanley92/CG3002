@@ -19,6 +19,7 @@ class SerialCommunication():
     rv=""
     while True:
       ch=self.port.read()
-      rv+=ch
       if ch=='\r' or ch=='\0':
         return rv
+      else 
+        rv+=ch
