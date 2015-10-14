@@ -78,7 +78,7 @@ class Arduino():
         if (len(message)!=0): #Write
           channel = ord(message)
           break
-      print("Got channel "+channel)
+      print("Got channel "+str(channel))
       while True:
         print("read")
         message = self.ser.serialReadLine()
