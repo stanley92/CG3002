@@ -62,7 +62,7 @@ class Arduino():
       # print("Start getting data")
       is_timed_out = False
       start_millis = int(round(time.time() * 1000))
-      print(start_millis)
+      # print(start_millis)
       while True:
         message = self.ser.serialRead()
 
