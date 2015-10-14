@@ -10,7 +10,7 @@ def main():
   ser = serial_comm.SerialCommunication()
   ard = arduino.Arduino(ser)
   if ard.handshake():
-    buf = data_buffer.DataBuffer(ard)
+    buf = data_buffer.DataBuffer(5, ard)
     thread = threading.Thread(target=read_from_port,args=[buf])
     thread.start()
   

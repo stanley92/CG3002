@@ -2,7 +2,7 @@ from collections import deque
 
 class DataBuffer():
   def __init__(self, num_queue, ard):
-    self.queues = []
+    self.queues = num_queue*[0]
     for i in range(num_queue):
       self.queues[i] = deque()
     self.ard = ard
