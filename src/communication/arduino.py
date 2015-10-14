@@ -75,7 +75,7 @@ class Arduino():
       print("Got write request")
       while True:
         message = self.ser.serialRead()
-        if (message!=''): #Write
+        if (len(message)!=0): #Write
           channel = message
           break
       print("Got channel "+message)
