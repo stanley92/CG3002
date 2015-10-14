@@ -95,7 +95,7 @@ class Arduino():
           callback(None, None)
       print("Data got: "+str(message))
       self.ser.serialWrite(chr(0))
-      callback(channel, message)
+      callback(int(channel), message)
 
 
 
