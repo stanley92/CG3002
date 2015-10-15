@@ -10,7 +10,9 @@ class SerialCommunication():
     return
 
   def serialRead(self):
-    return self.port.read()
+    m = self.port.read()
+    print(m)
+    return m
 
   def serialFlush(self):
     return self.port.flush()
@@ -20,6 +22,7 @@ class SerialCommunication():
     while True:
       ch=self.port.read()
       if ch=='\r' or ch=='\0':
+        print(rv)
         return rv
       else:
         rv+=ch
