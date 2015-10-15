@@ -6,12 +6,12 @@ if __name__ == '__main__':
 ################################################
   while(1):
     print("Welcome")
-    building = 'com1' #str(input('Building Name: '))
-    level = 2 #input('Building Level: ')
-    point = 'y' #input('Are you on a starting point? ')
+    building = str(input('Building Name: '))
+    level = input('Building Level: ')
+    point = input('Are you on a starting point? ')
     if point == 'y':
-      start = 10 #int(input('Start: '))
-      end = 16 #int(input('End: '))
+      start = int(input('Start: '))
+      end = int(input('End: '))
       run = run_simulation.Simulation(building, level, start=start, end=end)
       run.start_nav()
     elif point == 'n':

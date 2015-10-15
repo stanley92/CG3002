@@ -1,8 +1,5 @@
 import find_shortest_path
 import get_map_info
-import obstacle_detector
-import user_displacement
-import user_orientation
 import math
 import os
 
@@ -17,7 +14,7 @@ import os
 ANGLE_MARGIN = 5
 
 class Simulation():
-  def __init__ (self, building, level, start=None, x=None, y=None, end=None, heading=0):
+  def __init__ (self, orient, displace, building, level, start=None, x=None, y=None, end=None, heading=0):
     self.building = building
     self.level = level
     self.start = start
@@ -26,9 +23,9 @@ class Simulation():
     self.end = end
     self.graph = get_map_info.generateGraph(get_map_info.getMapInfo(building, level))
     self.path = self._generatePath()
-    self.orient = user_orientation.Compass()
+    self.orient = orient
     self.orient.setNorthAt(heading)
-    self.displace = user_displacement.Displacement()
+    self.displace = displace
 
   def setBuilding (self, building): 
     self.building = building
@@ -127,7 +124,7 @@ class Simulation():
       print('Distance total: ' + str(self.displace.getDistCal()))
       print('Distance travelled: ' + str(self.displace.getDistTra()))
       print('Distance to next node: ' + str(self.displace.getDistCal()-self.displace.getDistTra()))
-      newDistTra = float(input('Enter extra distance travelled: '))
+      newDistTra = self.displace.get_new_dist_tra_from_step()
       newDistTra = math.cos( math.radians( math.fabs (self.orient.getAngleOfNodes()-self.orient.getCompassValue() ) ) ) * newDistTra
       print('Angle: ' + str((self.orient.getCompassValue())))
       print('Actual Dist: ' + str(newDistTra))
@@ -141,8 +138,7 @@ class Simulation():
   # Turning algorithim
   ################################################
   def turn(self):
-    newCompassData = float(input('compassData is (you should turn to '+ str(self.orient.getAngleOfNodes()) +'): '))
-    self.orient.setCompassValue(newCompassData)
+
     #### TODO: handledata compassValue (keep reading)
     #### DUMMY: compass Value
     print('Next node angle: ' + str(self.orient.getAngleOfNodes()))
