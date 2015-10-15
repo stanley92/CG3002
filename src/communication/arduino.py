@@ -65,7 +65,7 @@ class Arduino():
       is_timed_out = False
       start_millis = int(round(time.time() * 1000))
       # print(start_millis)
-      while True:/
+      while True:
         message = self.ser.serialRead()
 
         if (message == chr(6)):
