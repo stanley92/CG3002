@@ -57,13 +57,15 @@ class Compass():
   def userOffset(self):
     offset = self.angleOfNodes - self.compass_value
     offset_abs = math.fabs(offset)
-    if offset < -5:
+    #Angle Margin
+    if offset < -5: 
       if offset_abs < 180:
         os.system ("say turn left")
         return 'turn left'
       else:
         os.system ("say turn right")
         return 'turn right'
+    #Angle Margin
     elif offset > 5:
       if offset_abs < 180:
         os.system ("say turn right")
