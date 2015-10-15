@@ -23,4 +23,4 @@ class SerialCommunication():
       if ch=='\r' or ch=='\0':
         return rv
       else:
-        rv+=chx
+        rv+=ch
