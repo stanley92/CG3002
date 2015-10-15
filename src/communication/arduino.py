@@ -65,26 +65,26 @@ class Arduino():
       is_timed_out = False
       start_millis = int(round(time.time() * 1000))
       # print(start_millis)
-      while True:
+      while True:/
         message = self.ser.serialRead()
 
         if (message == chr(6)):
           self.ser.serialWrite(chr(0)); #ACK
-          # print("Handshaking done")
+          print("Handshaking done")
 
         if (message == chr(4)): #Write
           break
-      # print("Got write request")
+      print("Got write request")
       while True:
         message = self.ser.serialRead()
         if (message): #Write
           channel = ord(message)
           break
-      # print("Got channel "+str(channel))
+      print("Got channel "+str(channel))
       while True:
-        # print("read")
+        print("read")
         message = self.ser.serialReadLine()
-        # print("finish reading") 
+        print("finish reading") 
         if (len(message) != 0): #Write
           break
         else: 
@@ -93,9 +93,9 @@ class Arduino():
             is_timed_out = True
             break
         if is_timed_out:
-          # print("Get data Timed Out")
+          print("Get data Timed Out")
           callback(None, None)
-      # print("Data got: "+str(message))
+      print("Data got: "+str(message))
       self.ser.serialWrite(chr(0))
       callback(int(channel), message)
 
