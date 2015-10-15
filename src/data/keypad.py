@@ -1,5 +1,5 @@
 class KeypadData():
-  def __init__():
+  def __init__(self):
     self.building = None
     self.level = None
     self.start_node = None
@@ -22,19 +22,19 @@ class KeypadData():
       if self.current_change == 0:
         self.building = self.current_input
         self.current_input = 0
-        self.current_change++;
+        self.current_change=self.current_change+1
       elif self.current_change == 1:
         self.level = self.current_input
         self.current_input = 0
-        self.current_change++;
+        self.current_change=self.current_change+1
       elif self.current_change == 2:
         self.start_node = self.current_input
         self.current_input = 0
-        self.current_change++;
+        self.current_change=self.current_change+1
       elif self.current_change == 4:  
         self.end_node = self.current_input
         self.current_input = 0
-        self.current_change++;
+        self.current_change=self.current_change+1
         self.ready = True
       
 

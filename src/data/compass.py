@@ -1,5 +1,4 @@
 import math
-import get_map_info
 import os
 
 ########################################
