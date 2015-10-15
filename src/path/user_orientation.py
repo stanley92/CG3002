@@ -1,5 +1,6 @@
 import math
 import get_map_info
+import os
 
 ########################################
 # Compass Class
@@ -56,18 +57,23 @@ class Compass():
   def userOffset(self):
     offset = self.angleOfNodes - self.compass_value
     offset_abs = math.fabs(offset)
-    if offset < 0:
+    if offset < -5:
       if offset_abs < 180:
+        os.system ("say turn left")
         return 'turn left'
       else:
+        os.system ("say turn right")
         return 'turn right'
-    elif offset > 0:
+    elif offset > 5:
       if offset_abs < 180:
+        os.system ("say turn right")
         return 'turn right'
       else:
+        os.system ("say turn left")
         return 'turn left'
     else:
-      return 'no turn'
+      os.system ("say walk straight")
+      return 'walk straight'
 
 def cal_angle(x_next,x_curr,y_next,y_curr,x_hori,y_vert,northAt):
   # 1st Quadrant

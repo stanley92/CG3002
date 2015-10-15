@@ -4,6 +4,7 @@ import obstacle_detector
 import user_displacement
 import user_orientation
 import math
+import os
 
 #########################################
 # simulation class
@@ -130,7 +131,11 @@ class Simulation():
       newDistTra = math.cos( math.radians( math.fabs (self.orient.getAngleOfNodes()-self.orient.getCompassValue() ) ) ) * newDistTra
       print('Angle: ' + str((self.orient.getCompassValue())))
       print('Actual Dist: ' + str(newDistTra))
+
+      os.system ("say You have walked" + str(int(newDistTra)) + 'cm')
       self.displace.setDistTra(self.displace.getDistTra() + newDistTra)
+      print('Remaining Dist: ' + str (self.displace.getDistCal()-self.displace.getDistTra()))
+      os.system ("say You have a remaining of" + str(int(self.displace.getDistCal()-self.displace.getDistTra())) + 'cm')
 
   ################################################
   # Turning algorithim
@@ -138,19 +143,16 @@ class Simulation():
   def turn(self):
     newCompassData = float(input('compassData is (you should turn to '+ str(self.orient.getAngleOfNodes()) +'): '))
     self.orient.setCompassValue(newCompassData)
-    #while not(self.orient.getAngleOfNodes() - ANGLE_MARGIN <= self.orient.getCompassValue() <= self.orient.getAngleOfNodes() + ANGLE_MARGIN):
-      #### TODO: handledata compassValue (keep reading)
-      #### DUMMY: compass Value
+    #### TODO: handledata compassValue (keep reading)
+    #### DUMMY: compass Value
     print('Next node angle: ' + str(self.orient.getAngleOfNodes()))
     print('Current direction: ' + str(self.orient.getCompassValue()))
-    #newCompassData = float(input('compassData is (you should turn to '+ str(self.orient.getAngleOfNodes()) +'): '))
-    #self.orient.setCompassValue(newCompassData)
-      ####
-      #### TODO: motor buzz
-      #### DUMMY:
+    ####
+    #### TODO: motor buzz
+    #### DUMMY:
     direction = self.orient.userOffset()
-    print(direction);
-      ####
+    print(direction)
+    ####
     #print('Node angle = ' + str(self.orient.getAngleOfNodes()))
     #print(self.orient.userOffset())
 
@@ -163,12 +165,12 @@ class Simulation():
 ################################################
 while(1):
   print("Welcome")
-  building = str(input('Building Name: '))
-  level = input('Building Level: ')
-  point = input('Are you on a starting point? ')
+  building = 'com1' #str(input('Building Name: '))
+  level = 2 #input('Building Level: ')
+  point = 'y' #input('Are you on a starting point? ')
   if point == 'y':
-    start = int(input('Start: '))
-    end = int(input('End: '))
+    start = 1 #int(input('Start: '))
+    end = 4 #int(input('End: '))
     run = Simulation(building, level, start=start, end=end)
     run.start_nav()
   elif point == 'n':
