@@ -11,13 +11,7 @@ class KeypadData():
   def key_in(self, key):
     print(key);
     if key == '*':
-      self.building = None
-      self.level = None
-      self.startNode = None
-      self.endNode = None
-      self.current_change = 0
-      self.ready = False
-      self.current_input = 0
+      self.clear()
       
     elif key == '#':
       if self.current_change == 0:
@@ -58,3 +52,11 @@ class KeypadData():
   def data_ready(self):
     return self.ready
 
+  def clear(self):
+    self.building = None
+    self.level = None
+    self.start_node = None
+    self.end_node = None
+    self.current_change = 0
+    self.ready = False
+    self.current_input = 0

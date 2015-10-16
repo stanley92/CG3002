@@ -66,6 +66,9 @@ if __name__ == '__main__':
         run = run_simulation.Simulation(orient, displace, building, level, start=start, end=end)
         run_simulation_thread = threading.Thread(target = run.start_nav, args = [])
         run_simulation_thread.start()
+        keypad_data.clear()
+        break
+
         # run.start_nav()
       elif point == 'n':
         x_coord = int (input ('Input x-coordinate: '))
@@ -74,6 +77,9 @@ if __name__ == '__main__':
         end = int(input('End: '))
         run = run_simulation.Simulation(orient, displace, building, level, x=x_coord, y=y_coord, end=end, heading = heading)
         run.start_nav()
+    else:
+      print('WAITING KeypadData')
+      time.sleep(1)
 
   # print("Welcome")
   # building = 'COM1'
