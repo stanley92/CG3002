@@ -34,7 +34,7 @@ class Arduino():
     while True:
       self.ser.serialWrite(chr(2)) #hello
       message = self.ser.serialRead()
-      #print(chr(ord(message)+48))
+      # print(chr(ord(message)+48))
       if (message == chr(3)):
         self.ser.serialWrite(chr(0));
 

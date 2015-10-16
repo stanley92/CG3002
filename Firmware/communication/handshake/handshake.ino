@@ -48,7 +48,7 @@ void handshakenUntilFinish() {
     Serial1.write(3); // answer 3HELLOACK
     if (inByte == 0) { //receive 0ACK
       debugPrintStr("#");
-      handshaken = 1;sudo
+      handshaken = 1;
       break;
     }
   }
