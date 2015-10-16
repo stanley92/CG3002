@@ -50,8 +50,6 @@ if __name__ == '__main__':
     end = int(input('End: '))
     run = run_simulation.Simulation(orient, displace, building, level, x=x_coord, y=y_coord, end=end, heading = heading)
     run.start_nav()
-<<<<<<< HEAD
-=======
   
   print("")
   # c = communication.Communication()
@@ -83,4 +81,3 @@ if __name__ == '__main__':
   #   end = int(input('End: '))
   #   run = run_simulation.Simulation(orient, displace, building, level, x=x_coord, y=y_coord, end=end, heading = heading)
   #   run.start_nav()
->>>>>>> a0a7d1d104a6a3a18dc67ed7433f4f9557f68159
