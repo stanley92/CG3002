@@ -129,10 +129,10 @@ class Simulation():
       print('Angle: ' + str((self.orient.getCompassValue())))
       print('Actual Dist: ' + str(newDistTra))
 
-      os.system ("say You have walked" + str(int(newDistTra)) + 'cm')
+      #os.system ("say You have walked" + str(int(newDistTra)) + 'cm')
       self.displace.setDistTra(self.displace.getDistTra() + newDistTra)
       print('Remaining Dist: ' + str (self.displace.getDistCal()-self.displace.getDistTra()))
-      os.system ("say You have a remaining of" + str(int(self.displace.getDistCal()-self.displace.getDistTra())) + 'cm')
+      #os.system ("say You have a remaining of" + str(int(self.displace.getDistCal()-self.displace.getDistTra())) + 'cm')
 
   ################################################
   # Turning algorithim
@@ -146,10 +146,10 @@ class Simulation():
     ####
     #### TODO: motor buzz
     #### DUMMY:
-    direction = self.orient.userOffset()
-    print(direction)
+    #direction = self.orient.userOffset()
+    #print(direction)
     ####
-    #print('Node angle = ' + str(self.orient.getAngleOfNodes()))
+    print('Node angle = ' + str(self.orient.getAngleOfNodes()))
     #print(self.orient.userOffset())
 
     #### TODO: motor

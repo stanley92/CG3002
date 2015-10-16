@@ -1,12 +1,12 @@
 import threading
 
-# from . import communication
+from . import communication
 from . import control
-# from . import data
+from . import data
 
-# from .communication import communication
-# from .data import sensors
-# from .data import keypad
+from .communication import communication
+from .data import sensors
+from .data import keypad
 from .data import compass
 from .data import displacement
 from .control import obstacle_detector
@@ -19,7 +19,10 @@ def data_poll(comm_data_buffer, keypad_data, compass_data, displacement_data, se
     if (latest_keypad_data!= None):
       keypad_data.key_in(latest_keypad_data)
     compass_data.setCompassValue(comm_data_buffer.buffer.last(1))
-    displacement_data.set_current_step(comm_data_buffer.buffer.last(2))
+    latest_step = comm_data_buffer.buffer.last(2)
+    #print("last steps:" + str(latest_step))
+    if (latest_step!=None):
+      displacement_data.set_current_step(latest_step)
 
     sensors_data.set_sensor_left(comm_data_buffer.buffer.last(3))
     sensors_data.set_sensor_down(comm_data_buffer.buffer.last(4))
@@ -32,15 +35,20 @@ if __name__ == '__main__':
 
   orient = compass.Compass()
   displace = displacement.Displacement()
-  # sensors_data = sensors.Sensors()
-  # keypad_data = keypad.KeypadData()
+  sensors_data = sensors.Sensors()
+  keypad_data = keypad.KeypadData()
+  c = communication.Communication()
+  while not c.handshaken:
+    c.initialise()
+  data_poll_thread = threading.Thread(target = data_poll, args = [c, keypad_data, orient, displace, sensors_data])
+  data_poll_thread.start() 
   print("Welcome")
-  building = str(input('Building Name: '))
-  level = input('Building Level: ')
-  point = input('Are you on a starting point? ')
+  building = 'COM1'
+  level = 2
+  point = 'y'
   if point == 'y':
-    start = int(input('Start: '))
-    end = int(input('End: '))
+    start = 1
+    end = 28
     run = run_simulation.Simulation(orient, displace, building, level, start=start, end=end)
     run.start_nav()
   elif point == 'n':
@@ -52,12 +60,8 @@ if __name__ == '__main__':
     run.start_nav()
   
   print("")
-  # c = communication.Communication()
-  # while not c.handshaken:
-  #   c.initialise()
-
+  
   #handshaken
-  # data_poll_thread = threading.Thread(target = data_poll, args = [c, keypad_data, orient, displace, sensors_data])
 
   # building = keypad_data.building #str(input('Building Name: '))
   # if building == 1:

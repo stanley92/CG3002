@@ -11,7 +11,8 @@ def ObstacleDetector():
 
   def collisionWarningDown(self):
     if self.sensors.sensorDown < 30 and self.sensors.sensorDown != 0:
-  	  os.system("say Stairs in front")
+      print("stairs in fron")
+#  	  os.system("say Stairs in front")
 
   def collisionWarningLeft(self): #1
   	if self.sensors.sensorLeft < 30 and self.sensors.sensorLeft != 0:
