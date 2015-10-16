@@ -70,6 +70,6 @@ class KeypadData():
     self.level = None
     self.start_node = None
     self.end_node = None
-    self.current_change = 0
+    self.current_change = -1
     self.ready = False
-    self.current_input = -1
+    self.current_input = 0

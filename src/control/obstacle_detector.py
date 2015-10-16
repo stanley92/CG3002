@@ -7,7 +7,7 @@ import RPi.GPIO as GPIO
 
 # def poll_data_from_queue():
 # 	#poll data
-def ObstacleDetector():
+class ObstacleDetector():
   def __init__(self, sensorData):
     self.sensors = sensorData
 
@@ -72,7 +72,7 @@ def ObstacleDetector():
   		print('')
   
   def say(self, message):
-    subprocess.call('espeak -v%s+%s -s 170 "%s" 2>/dev/null' % ('en-us', 'f4', message), shell=True) 
+    subprocess.call('espeak -v%s+%s "%s" 2>/dev/null' % ('en-us', 'f4', message), shell=True) 
 
   def run(self):
   	#print("hi")
@@ -80,8 +80,3 @@ def ObstacleDetector():
   	t.start()
   	#t.delay(100)
 
-GPIO.setmode(GPIO.BCM)
-GPIO.setup(23, GPIO.OUT, pull_up_down = GPIO.PUD_DOWN)
-GPIO.setup(24, GPIO.OUT, pull_up_down = GPIO.PUD_DOWN)
-GPIO.setup(27, GPIO.OUT, pull_up_down = GPIO.PUD_DOWN)
-GPIO.setup(22, GPIO.OUT, pull_up_down = GPIO.PUD_DOWN)
