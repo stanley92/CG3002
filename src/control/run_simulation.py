@@ -135,7 +135,7 @@ class Simulation():
       print('Remaining Dist: ' + str (self.displace.getDistCal()-self.displace.getDistTra()))
       #os.system ("say You have a remaining of" + str(int(self.displace.getDistCal()-self.displace.getDistTra())) + 'cm')
 
-    time.delay(1)
+      time.sleep(1)
   ################################################
   # Turning algorithim
   ################################################
