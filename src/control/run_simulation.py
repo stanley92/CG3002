@@ -167,7 +167,7 @@ class Simulation():
     # direction = self.orient.userOffset()
     #print(direction)
 
-    if not (-5 < self.orient.getAngleOfNodes() - self.orient.getCompassValue() < 5):
+    if not (-10 < self.orient.getAngleOfNodes() - self.orient.getCompassValue() < 10):
       print ('Wrong direction. ' + self.orient.userOffset())
       self.say(self.orient.userOffset())
 
