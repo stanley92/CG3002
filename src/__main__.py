@@ -1,4 +1,5 @@
 import threading
+import time
 
 from . import communication
 from . import control
@@ -17,7 +18,6 @@ def data_poll(comm_data_buffer, keypad_data, compass_data, displacement_data, se
   while (1):
     latest_key = comm_data_buffer.buffer.last(0)
     if latest_key!= None:
-      print('key in')
       keypad_data.key_in(latest_key)
     if comm_data_buffer.buffer.have_data(1):
       compass_data.setCompassValue(int(comm_data_buffer.buffer.last(1)))
@@ -49,7 +49,8 @@ if __name__ == '__main__':
 
   while True:
     if keypad_data.data_ready():
-      print('START THE THING!')
+      print('ALL DATA READY START THE THING!')
+      time.sleep(3)
       building = keypad_data.building #str(input('Building Name: '))
       if building == 1:
         building = 'COM1'
@@ -63,7 +64,9 @@ if __name__ == '__main__':
         start = keypad_data.start_node #int(input('Start: '))
         end = keypad_data.end_node #int(input('End: '))
         run = run_simulation.Simulation(orient, displace, building, level, start=start, end=end)
-        run.start_nav()
+        run_simulation_thread = threading.Thread(target = run.start_nav, args = [])
+        run_simulation_thread.start()
+        # run.start_nav()
       elif point == 'n':
         x_coord = int (input ('Input x-coordinate: '))
         y_coord = int (input ('Input y-coordinate: '))

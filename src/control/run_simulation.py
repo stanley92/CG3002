@@ -2,6 +2,7 @@ from . import find_shortest_path
 from . import get_map_info
 import math
 import os
+import time
 
 #########################################
 # simulation class
@@ -134,6 +135,7 @@ class Simulation():
       print('Remaining Dist: ' + str (self.displace.getDistCal()-self.displace.getDistTra()))
       #os.system ("say You have a remaining of" + str(int(self.displace.getDistCal()-self.displace.getDistTra())) + 'cm')
 
+    time.delay(1)
   ################################################
   # Turning algorithim
   ################################################

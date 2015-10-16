@@ -35,7 +35,7 @@ class KeypadData():
         print('start_node: '+ str(self.start_node))
         self.current_input = 0
         self.current_change=self.current_change+1
-      elif self.current_change == 4:  
+      elif self.current_change == 3:  
         self.end_node = self.current_input
         print('end_node: '+ str(self.end_node))
         self.current_input = 0
