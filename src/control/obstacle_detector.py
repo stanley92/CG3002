@@ -62,11 +62,11 @@ class ObstacleDetector():
   		# s.setSensorLeg(valueLeg)
   		
   		#print ("Value: " + str (value))
-  		collisionWarningDown(s)
-  		collisionWarningRight(s)
-  		collisionWarningFront(s)
-  		collisionWarningLeg(s)
-  		collisionWarningLeft(s)
+  		self.collisionWarningDown()
+  		self.collisionWarningRight()
+  		self.collisionWarningFront()
+  		self.collisionWarningLeg()
+  		self.collisionWarningLeft()
 
   		time.sleep(1)
   		print('')
