@@ -68,6 +68,9 @@ if __name__ == '__main__':
         run = run_simulation.Simulation(orient, displace, building, level, start=start, end=end)
         run_simulation_thread = threading.Thread(target = run.start_nav, args = [])
         run_simulation_thread.start()
+        obstacle_detect = obstacle_detector.ObstacleDetector(sensors_data)
+        obstacle_detect_thread = threading.Thread(target = obstacle_detect.inf_loop, args = [])
+        obstacle_detect_thread.start()
         keypad_data.clear()
         
 

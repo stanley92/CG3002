@@ -16,28 +16,28 @@ def ObstacleDetector():
   	  say("Stairs in front")
 
   def collisionWarningLeft(self): #1
-  	if self.sensors.sensorLeft < 30 and self.sensors.sensorLeft != 0:
+  	if self.sensors.sensorLeft < 70 and self.sensors.sensorLeft != 0:
   		print ("There is obstacle on the left.")
   		GPIO.output(23, True)
   	else: 
       GPIO.output(23, False)
 
   def collisionWarningRight(self):
-    if self.sensors.sensorRight < 30 and self.sensors.sensorRight != 0:
+    if self.sensors.sensorRight < 70 and self.sensors.sensorRight != 0:
       print ("There is obstacle on the Right.")
       GPIO.output(24, True)
     else: 
       GPIO.output(24, False)
 
   def collisionWarningFront(self): #3
-    if self.sensors.sensorFront < 30 and self.sensors.sensorFront != 0:
+    if self.sensors.sensorFront < 70 and self.sensors.sensorFront != 0:
       print ("There is obstacle in front.")
       GPIO.output(22, True)
     else: 
       GPIO.output(22, False)
 
   def collisionWarningLeg(self): #4
-    if self.sensors.sensorLeg < 30 and self.sensors.sensorLeg != 0:
+    if self.sensors.sensorLeg < 70 and self.sensors.sensorLeg != 0:
       print ("Low lying obstacle.")
       GPIO.output(27, True)
     else: 
