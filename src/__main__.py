@@ -36,7 +36,7 @@ def data_poll(comm_data_buffer, keypad_data, compass_data, displacement_data, se
 
 def say(message):
   subprocess.call('espeak -v%s+%s -s 170 "%s" 2>/dev/null' % ('en-us', 'f4', message), shell=True) 
-  
+
 if __name__ == '__main__':
 
   orient = compass.Compass()
@@ -79,7 +79,7 @@ if __name__ == '__main__':
         end = int(input('End: '))
         run = run_simulation.Simulation(orient, displace, building, level, x=x_coord, y=y_coord, end=end, heading = heading)
         run.start_nav()
-    elsif keypad_data.function_query_dist():
+    elif keypad_data.function_query_dist():
       remainingDist = displace.getDistCal()-displace.getDistTra()
       print('Remaining Dist: ' + str (remainingDist))
       say('Remaining distance.')
