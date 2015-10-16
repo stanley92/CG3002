@@ -7,7 +7,7 @@ class KeypadData():
     self.current_change = -1
     self.ready = False
     self.current_input = 0
-    self.function_query_dist = False
+    self.request_query_dist = False
 
   def key_in(self, key):
     print(key);
@@ -43,7 +43,7 @@ class KeypadData():
     elif ord(key) in range(ord('0'),ord('9')+1):
       if self.current_change == -1:
         if ord(key) == ord('9'):
-          self.function_query_dist = True
+          self.request_query_dist = True
       else:
         self.current_input = self.current_input * 10 + (ord(key)-48)
 
@@ -60,10 +60,10 @@ class KeypadData():
     return self.ready
 
   def function_query_dist(self):
-    if self.function_query_dist:
-      self.function_query_dist = False
+    if self.request_query_dist:
+      self.request_query_dist = False
       return True
-    return self.function_query_dist
+    return self.request_query_dist
 
   def clear(self):
     self.building = None
