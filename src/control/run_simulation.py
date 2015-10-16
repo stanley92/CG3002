@@ -123,24 +123,28 @@ class Simulation():
     while(self.displace.getDistTra() < self.displace.getDistCal()): #havent travel enuf distance
       # turning into correct direction
       self.turn()
-      # distance to next node
-      print('Distance total: ' + str(self.displace.getDistCal()))
-      print('Distance travelled: ' + str(self.displace.getDistTra()))
-      print('Distance to next node: ' + str(self.displace.getDistCal()-self.displace.getDistTra()))
-      #newDistTra = int (input ('Distance Travelled:'))
-      newDistTra = self.displace.get_new_dist_tra_from_step()
-      newDistTra = math.cos( math.radians( math.fabs (self.orient.getAngleOfNodes()-self.orient.getCompassValue() ) ) ) * newDistTra
-      print('Angle: ' + str((self.orient.getCompassValue())))
-      print('Actual Dist: ' + str(newDistTra))
+      newSteps = self.displace.get_new_dist_tra_from_step()
+      if newSteps != 0:
+        newDistTra = math.cos( math.radians( math.fabs (self.orient.getAngleOfNodes()-self.orient.getCompassValue() ) ) ) * newSteps
+        # distance to next node
+        print('Distance total: ' + str(self.displace.getDistCal()))
+        print('Distance travelled: ' + str(self.displace.getDistTra()))
+        print('Distance to next node: ' + str(self.displace.getDistCal()-self.displace.getDistTra()))
+        #newDistTra = int (input ('Distance Travelled:'))
 
-      #self.say("You have walked" + str(int(newDistTra)) + 'cm')
-      #os.system ("say You have walked" + str(int(newDistTra)) + 'cm')
-      self.displace.setDistTra(self.displace.getDistTra() + newDistTra)
-      print('Remaining Dist: ' + str (self.displace.getDistCal()-self.displace.getDistTra()))
-      
-      #self.say("You have a remaining of" + str(int(self.displace.getDistCal()-self.displace.getDistTra())) + 'cm')
-      #os.system ("say You have a remaining of" + str(int(self.displace.getDistCal()-self.displace.getDistTra())) + 'cm')
-      time.sleep(1)
+        print('Angle: ' + str((self.orient.getCompassValue())))
+        print('Actual Dist: ' + str(newDistTra))
+
+        #self.say("You have walked" + str(int(newDistTra)) + 'cm')
+        #os.system ("say You have walked" + str(int(newDistTra)) + 'cm')
+
+        self.displace.setDistTra(self.displace.getDistTra() + newDistTra)
+        remainingDist = self.displace.getDistCal()-self.displace.getDistTra()
+        print('Remaining Dist: ' + str (remainingDist))
+        
+        #self.say("You have a remaining of" + str(int(self.displace.getDistCal()-self.displace.getDistTra())) + 'cm')
+        #os.system ("say You have a remaining of" + str(int(self.displace.getDistCal()-self.displace.getDistTra())) + 'cm')
+        time.sleep(1)
     # print(len(self.path))
     # print(self.graph.getVertex(self.path[len(self.path)-1]).id)
     if i!=-1 and i<len(self.path)-2 :
@@ -164,8 +168,8 @@ class Simulation():
     #print(direction)
 
     if not (-5 < self.orient.getAngleOfNodes() - self.orient.getCompassValue() < 5):
-      print ('Off margin. ' + self.orient.userOffset())
-      self.say('Off margin.')
+      print ('Wrong direction. ' + self.orient.userOffset())
+      self.say('Wrong direction.')
       self.say(self.orient.userOffset())
 
   #os.system ("say " + direction)

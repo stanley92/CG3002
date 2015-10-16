@@ -34,7 +34,9 @@ def data_poll(comm_data_buffer, keypad_data, compass_data, displacement_data, se
     if comm_data_buffer.buffer.have_data(7):
       sensors_data.set_sensor_leg(int(comm_data_buffer.buffer.last(7)))
 
-
+def say(message):
+  subprocess.call('espeak -v%s+%s -s 170 "%s" 2>/dev/null' % ('en-us', 'f4', message), shell=True) 
+  
 if __name__ == '__main__':
 
   orient = compass.Compass()
@@ -50,7 +52,7 @@ if __name__ == '__main__':
   while True:
     if keypad_data.data_ready():
       print('ALL DATA READY START THE THING!')
-      time.sleep(3)
+      time.sleep(1)
       building = keypad_data.building #str(input('Building Name: '))
       if building == 1:
         building = 'COM1'
@@ -67,7 +69,7 @@ if __name__ == '__main__':
         run_simulation_thread = threading.Thread(target = run.start_nav, args = [])
         run_simulation_thread.start()
         keypad_data.clear()
-        break
+        
 
         # run.start_nav()
       elif point == 'n':
@@ -77,9 +79,11 @@ if __name__ == '__main__':
         end = int(input('End: '))
         run = run_simulation.Simulation(orient, displace, building, level, x=x_coord, y=y_coord, end=end, heading = heading)
         run.start_nav()
-    else:
-      print('WAITING KeypadData')
-      time.sleep(1)
+    elsif keypad_data.function_query_dist():
+      remainingDist = displace.getDistCal()-displace.getDistTra()
+      print('Remaining Dist: ' + str (remainingDist))
+      say('Remaining distance.')
+      say(str(remainingDist))
 
 
   # print("Welcome")

@@ -4,9 +4,10 @@ class KeypadData():
     self.level = None
     self.start_node = None
     self.end_node = None
-    self.current_change = 0
+    self.current_change = -1
     self.ready = False
     self.current_input = 0
+    self.function_query_dist = False
 
   def key_in(self, key):
     print(key);
@@ -14,7 +15,9 @@ class KeypadData():
       self.clear()
       
     elif key == '#':
-      if self.current_change == 0:
+      if self.current_change == -1:
+        self.current_change =self.current_change+1
+      elif self.current_change == 0:
         self.building = self.current_input
         print('building: '+ str(self.building))
         self.current_input = 0
@@ -38,7 +41,11 @@ class KeypadData():
       
 
     elif ord(key) in range(ord('0'),ord('9')+1):
-      self.current_input = self.current_input * 10 + (ord(key)-48)
+      if self.current_change == -1:
+        if ord(key) == ord('9'):
+          self.function_query_dist = True
+      else:
+        self.current_input = self.current_input * 10 + (ord(key)-48)
 
   def get_building(self):
     return self.building
@@ -52,6 +59,12 @@ class KeypadData():
   def data_ready(self):
     return self.ready
 
+  def function_query_dist(self):
+    if self.function_query_dist:
+      self.function_query_dist = False
+      return True
+    return self.function_query_dist
+
   def clear(self):
     self.building = None
     self.level = None
@@ -59,4 +72,4 @@ class KeypadData():
     self.end_node = None
     self.current_change = 0
     self.ready = False
-    self.current_input = 0
+    self.current_input = -1
