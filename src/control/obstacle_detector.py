@@ -71,7 +71,7 @@ def ObstacleDetector():
   		print('')
   
   def say(self, message):
-    subprocess.call('espeak -v%s+%s -s70 -k5 %s 2>/dev/null' % ('en', 'f3', message), shell=True) 
+    subprocess.call('espeak -v%s+%s -k2 %s 2>/dev/null' % ('en', 'f3', message), shell=True) 
 
   def run(self):
   	#print("hi")
