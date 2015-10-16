@@ -164,8 +164,9 @@ class Simulation():
     #print(direction)
 
     if not (-5 < self.orient.getAngleOfNodes() - self.orient.getCompassValue() < 5):
-      print ('You are currently off margin. ' + self.orient.userOffset())
-      self.say('You are currently off margin. ' + self.orient.userOffset())
+      print ('Off margin. ' + self.orient.userOffset())
+      self.say('Off margin.')
+      self.say(self.orient.userOffset())
 
   #os.system ("say " + direction)
   #self.say(direction)
