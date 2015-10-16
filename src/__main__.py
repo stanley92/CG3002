@@ -38,8 +38,15 @@ def data_poll(comm_data_buffer, keypad_data, compass_data, displacement_data, se
 def say(message):
   subprocess.call('espeak -v%s+%s -s 170 "%s" 2>/dev/null' % ('en-us', 'f4', message), shell=True) 
 
-if __name__ == '__main__':
+def setup():
+  GPIO.setmode(GPIO.BCM)
+  GPIO.setup(23, GPIO.OUT, pull_up_down = GPIO.PUD_DOWN)
+  GPIO.setup(24, GPIO.OUT, pull_up_down = GPIO.PUD_DOWN)
+  GPIO.setup(27, GPIO.OUT, pull_up_down = GPIO.PUD_DOWN)
+  GPIO.setup(22, GPIO.OUT, pull_up_down = GPIO.PUD_DOWN)
 
+if __name__ == '__main__':
+  setup()
   orient = compass.Compass()
   displace = displacement.Displacement()
   sensors_data = sensors.Sensors()

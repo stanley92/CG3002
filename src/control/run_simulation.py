@@ -169,7 +169,6 @@ class Simulation():
 
     if not (-5 < self.orient.getAngleOfNodes() - self.orient.getCompassValue() < 5):
       print ('Wrong direction. ' + self.orient.userOffset())
-      self.say('Wrong direction.')
       self.say(self.orient.userOffset())
 
   #os.system ("say " + direction)
@@ -182,7 +181,7 @@ class Simulation():
   #print('')
 
   def say(self, message):
-    subprocess.call('espeak -v%s+%s -s 170 "%s" 2>/dev/null' % ('en-us', 'f4', message), shell=True) 
+    subprocess.call('espeak -v%s+%s "%s" 2>/dev/null' % ('en-us', 'f3', message), shell=True) 
 
   
 # Simulation(building, level, start=3, end=6)
