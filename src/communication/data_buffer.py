@@ -36,3 +36,6 @@ class DataBuffer():
         all_data.append(self.queues[channel].pop());
       except IndexError:
         return all_data
+
+  def have_data(self, channel):
+    return bool(self.queues[channel])

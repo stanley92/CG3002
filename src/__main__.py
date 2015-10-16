@@ -15,20 +15,22 @@ from .control import run_simulation
 
 def data_poll(comm_data_buffer, keypad_data, compass_data, displacement_data, sensors_data):
   while (1):
-    latest_keypad_data = comm_data_buffer.buffer.last(0)
-    if (latest_keypad_data!= None):
-      keypad_data.key_in(latest_keypad_data)
-    compass_data.setCompassValue(comm_data_buffer.buffer.last(1))
-    latest_step = comm_data_buffer.buffer.last(2)
-    #print("last steps:" + str(latest_step))
-    if (latest_step!=None):
-      displacement_data.set_current_step(latest_step)
-
-    sensors_data.set_sensor_left(comm_data_buffer.buffer.last(3))
-    sensors_data.set_sensor_down(comm_data_buffer.buffer.last(4))
-    sensors_data.set_sensor_front(comm_data_buffer.buffer.last(5))
-    sensors_data.set_sensor_right(comm_data_buffer.buffer.last(6))
-    sensors_data.set_sensor_leg(comm_data_buffer.buffer.last(7))
+    if comm_data_buffer.buffer.have_data(0):
+      keypad_data.key_in(comm_data_buffer.buffer.last(0))
+    if comm_data_buffer.buffer.have_data(1):
+      compass_data.setCompassValue(comm_data_buffer.buffer.last(1))
+    if comm_data_buffer.buffer.have_data(2):
+      displacement_data.set_current_step(comm_data_buffer.buffer.last(2))
+    if comm_data_buffer.buffer.have_data(3):
+      sensors_data.set_sensor_left(comm_data_buffer.buffer.last(3))
+    if comm_data_buffer.buffer.have_data(4):
+      sensors_data.set_sensor_down(comm_data_buffer.buffer.last(4))
+    if comm_data_buffer.buffer.have_data(5):
+      sensors_data.set_sensor_front(comm_data_buffer.buffer.last(5))
+    if comm_data_buffer.buffer.have_data(6):
+      sensors_data.set_sensor_right(comm_data_buffer.buffer.last(6))
+    if comm_data_buffer.buffer.have_data(7):
+      sensors_data.set_sensor_leg(comm_data_buffer.buffer.last(7))
 
 
 if __name__ == '__main__':
