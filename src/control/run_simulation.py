@@ -1,5 +1,5 @@
-import find_shortest_path
-import get_map_info
+from . import find_shortest_path
+from . import get_map_info
 import math
 import os
 

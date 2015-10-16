@@ -36,6 +36,7 @@ if __name__ == '__main__':
   keypad_data = keypad.KeypadData()
 
   c = communication.Communication()
+  c.handshaken = True
   while not c.handshaken:
     c.initialise()
 

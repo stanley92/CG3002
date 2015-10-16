@@ -118,9 +118,13 @@ def _calcDistance(x1, y1, x2, y2):
   return math.sqrt((x1-x2)**2+ (y1-y2)**2)
 
 def downloadMap(params):
+  print('download map!')
   url = "http://showmyway.comp.nus.edu.sg/getMapInfo.php"
+  print(params)
   resp = requests.get(url=url, params=params)
-  return resp.json()
+  print(resp)
+  print(resp.json)
+  return resp.json
 
 def parseMapData(data):
   info = Info(data['info']['northAt'])
