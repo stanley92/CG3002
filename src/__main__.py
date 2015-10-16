@@ -1,5 +1,7 @@
 import threading
 import time
+import subprocess
+import RPi.GPIO as GPIO
 
 from . import communication
 from . import control
