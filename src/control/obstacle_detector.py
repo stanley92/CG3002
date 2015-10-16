@@ -26,9 +26,9 @@ class ObstacleDetector():
   def collisionWarningRight(self):
     if self.sensors.sensor_right < 70 and self.sensors.sensor_right != 0:
       print ("There is obstacle on the Right.")
-      GPIO.output(24, True)
+      GPIO.output(25, True)
     else: 
-      GPIO.output(24, False)
+      GPIO.output(25, False)
 
   def collisionWarningFront(self): #3
     if self.sensors.sensor_front < 70 and self.sensors.sensor_front != 0:
