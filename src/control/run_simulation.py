@@ -1,9 +1,7 @@
-import find_shortest_path
-import get_map_info
-import obstacle_detector
-import user_displacement
-import user_orientation
+from . import find_shortest_path
+from . import get_map_info
 import math
+import os
 
 #########################################
 # simulation class
@@ -16,7 +14,7 @@ import math
 ANGLE_MARGIN = 5
 
 class Simulation():
-  def __init__ (self, building, level, start=None, x=None, y=None, end=None, heading=0):
+  def __init__ (self, orient, displace, building, level, start=None, x=None, y=None, end=None, heading=0):
     self.building = building
     self.level = level
     self.start = start
@@ -25,9 +23,9 @@ class Simulation():
     self.end = end
     self.graph = get_map_info.generateGraph(get_map_info.getMapInfo(building, level))
     self.path = self._generatePath()
-    self.orient = user_orientation.Compass()
+    self.orient = orient
     self.orient.setNorthAt(heading)
-    self.displace = user_displacement.Displacement()
+    self.displace = displace
 
   def setBuilding (self, building): 
     self.building = building
@@ -119,62 +117,46 @@ class Simulation():
       total_dist = old_dist + new_dist
       self.displace.setDistCal(total_dist)
 
-    while(self.displace.getDistTra() < self.displace.getDistCal()):
+    while(self.displace.getDistTra() < self.displace.getDistCal()): #havent travel enuf distance
       # turning into correct direction
       self.turn()
       # distance to next node
       print('Distance total: ' + str(self.displace.getDistCal()))
       print('Distance travelled: ' + str(self.displace.getDistTra()))
       print('Distance to next node: ' + str(self.displace.getDistCal()-self.displace.getDistTra()))
-      newDistTra = float(input('Enter extra distance travelled: '))
+      newDistTra = self.displace.get_new_dist_tra_from_step()
+      newDistTra = math.cos( math.radians( math.fabs (self.orient.getAngleOfNodes()-self.orient.getCompassValue() ) ) ) * newDistTra
+      print('Angle: ' + str((self.orient.getCompassValue())))
+      print('Actual Dist: ' + str(newDistTra))
+
+      os.system ("say You have walked" + str(int(newDistTra)) + 'cm')
       self.displace.setDistTra(self.displace.getDistTra() + newDistTra)
+      print('Remaining Dist: ' + str (self.displace.getDistCal()-self.displace.getDistTra()))
+      os.system ("say You have a remaining of" + str(int(self.displace.getDistCal()-self.displace.getDistTra())) + 'cm')
 
   ################################################
   # Turning algorithim
   ################################################
   def turn(self):
-    while not(self.orient.getAngleOfNodes() - ANGLE_MARGIN <= self.orient.getCompassValue() <= self.orient.getAngleOfNodes() + ANGLE_MARGIN):
-      #### TODO: handledata compassValue (keep reading)
-      #### DUMMY: compass Value
-      print('Next node angle: ' + str(self.orient.getAngleOfNodes()))
-      print('Current direction: ' + str(self.orient.getCompassValue()))
-      newCompassData = float(input('compassData is (you should turn to '+ str(self.orient.getAngleOfNodes()) +'): '))
-      self.orient.setCompassValue(newCompassData)
-      ####
-      #### TODO: motor buzz
-      #### DUMMY:
-      direction = self.orient.userOffset()
-      print(direction);
-      ####
+
+    #### TODO: handledata compassValue (keep reading)
+    #### DUMMY: compass Value
+    print('Next node angle: ' + str(self.orient.getAngleOfNodes()))
+    print('Current direction: ' + str(self.orient.getCompassValue()))
+    ####
+    #### TODO: motor buzz
+    #### DUMMY:
+    direction = self.orient.userOffset()
+    print(direction)
+    ####
     #print('Node angle = ' + str(self.orient.getAngleOfNodes()))
     #print(self.orient.userOffset())
 
     #### TODO: motor
-      print('')
+    print('')
 
      
-################################################
-# Simulated Event
-################################################
-while(1):
-  print("Welcome")
-  building = str(input('Building Name: '))
-  level = input('Building Level: ')
-  point = input('Are you on a starting point? ')
-  if point == 'y':
-    start = int(input('Start: '))
-    end = int(input('End: '))
-    run = Simulation(building, level, start=start, end=end)
-    run.start_nav()
-  elif point == 'n':
-    x_coord = int (input ('Input x-coordinate: '))
-    y_coord = int (input ('Input y-coordinate: '))
-    heading = float (input ('Input heading: '))
-    end = int(input('End: '))
-    run = Simulation(building, level, x=x_coord, y=y_coord, end=end, heading = heading)
-    run.start_nav()
-  
-  print("")
+
   
 # Simulation(building, level, start=3, end=6)
 # Simulation(building, level, x=200, y=600, end=6)

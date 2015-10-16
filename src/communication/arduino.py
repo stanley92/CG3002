@@ -20,7 +20,7 @@ class Arduino():
 
   def handshake(self):
     self.ser.serialFlush();
-    # print("Start handshaking with Arduino")
+    print("Start handshaking with Arduino")
     is_timed_out = False
     start_millis = int(round(time.time() * 1000))
     self._resetArduino()
@@ -34,8 +34,10 @@ class Arduino():
     while True:
       self.ser.serialWrite(chr(2)) #hello
       message = self.ser.serialRead()
+      # print(chr(ord(message)+48))
       if (message == chr(3)):
         self.ser.serialWrite(chr(0));
+
         # print("Break")
         break
       else:
@@ -68,7 +70,7 @@ class Arduino():
 
         if (message == chr(6)):
           self.ser.serialWrite(chr(0)); #ACK
-          print("Handshaking done")
+          # print("Handshaking done")
 
         if (message == chr(4)): #Write
           break
@@ -76,9 +78,9 @@ class Arduino():
       while True:
         message = self.ser.serialRead()
         if (message): #Write
-          channel = message
+          channel = ord(message)
           break
-      # print("Got channel X")
+      # print("Got channel "+str(channel))
       while True:
         # print("read")
         message = self.ser.serialReadLine()
@@ -95,7 +97,7 @@ class Arduino():
           callback(None, None)
       # print("Data got: "+str(message))
       self.ser.serialWrite(chr(0))
-      callback(channel, message)
+      callback(int(channel), message)
 
 
 
