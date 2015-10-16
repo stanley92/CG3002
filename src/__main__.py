@@ -18,6 +18,7 @@ def data_poll(comm_data_buffer, keypad_data, compass_data, displacement_data, se
   while (1):
     latest_key = comm_data_buffer.buffer.last(0)
     if latest_key!= None:
+      print("key in")
       keypad_data.key_in(latest_key)
     if comm_data_buffer.buffer.have_data(1):
       compass_data.setCompassValue(int(comm_data_buffer.buffer.last(1)))
