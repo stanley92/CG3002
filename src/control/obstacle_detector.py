@@ -13,14 +13,15 @@ class ObstacleDetector():
 
   def collisionWarningDown(self):
     if self.sensors.sensor_down > 2000 or self.sensors.sensor_down != 0:
+      print("Stairs in front")
   	  self.say("Stairs in front")
 
   def collisionWarningLeft(self): #1
   	if self.sensors.sensor_left < 70 and self.sensors.sensor_left != 0:
   		print ("There is obstacle on the left.")
   		GPIO.output(23, True)
-  	else: 
-      		GPIO.output(23, False)
+  	else:
+      GPIO.output(23, False)
 
   def collisionWarningRight(self):
     if self.sensors.sensor_right < 70 and self.sensors.sensor_right != 0:
@@ -67,8 +68,6 @@ class ObstacleDetector():
   		self.collisionWarningFront()
   		self.collisionWarningLeg()
   		self.collisionWarningLeft()
-
-  		time.sleep(1)
   		print('')
   
   def say(self, message):
