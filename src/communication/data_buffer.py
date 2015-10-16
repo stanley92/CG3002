@@ -8,8 +8,13 @@ class DataBuffer():
     self.ard = ard
 
   def push(self, channel, m):
-    if (channel != None and m != None):
-      self.queues[channel].append(m)
+    try:
+      if (channel != None and m != None):
+        self.queues[channel].append(m)
+    except IndexError:
+      print("Index Error")
+      print("channel = " + str(channel))
+      print("message = " + m)
   
   def buffer(self):
     self.ard.get_data(self.push)
