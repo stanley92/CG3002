@@ -177,7 +177,7 @@ class Simulation():
   #print('')
 
   def say(self, message):
-    subprocess.call(['espeak', '-v%s+%s' % ('en', 'f3'), '-s100', message, '2>/dev/null']) 
+    subprocess.call(['espeak -v%s+%s -s70 %s 2>/dev/null' % ('en', 'f3', message)) 
 
   
 # Simulation(building, level, start=3, end=6)

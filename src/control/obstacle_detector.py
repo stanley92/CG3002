@@ -70,8 +70,8 @@ def ObstacleDetector():
   		time.sleep(1)
   		print('')
   
-  def say(message):
-    subprocess.call(['espeak', '-v%s+%s' % ('en', 'f3'), message, '2>/dev/null']) # espeak 
+  def say(self, message):
+    subprocess.call(['espeak -v%s+%s -s70 %s 2>/dev/null' % ('en', 'f3', message)) 
 
   def run(self):
   	#print("hi")
