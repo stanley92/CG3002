@@ -67,7 +67,6 @@ class ObstacleDetector():
   		self.collisionWarningFront()
   		self.collisionWarningLeg()
   		self.collisionWarningLeft()
-  		print('')
   
   def say(self, message):
     subprocess.call('espeak -v%s+%s "%s" 2>/dev/null' % ('en-us', 'f4', message), shell=True) 
