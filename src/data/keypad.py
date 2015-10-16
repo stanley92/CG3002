@@ -9,6 +9,7 @@ class KeypadData():
     self.current_input = 0
 
   def key_in(self, key):
+    print(key);
     if key == '*':
       self.building = None
       self.level = None
@@ -21,18 +22,22 @@ class KeypadData():
     elif key == '#':
       if self.current_change == 0:
         self.building = self.current_input
+        print('building: '+ str(self.building))
         self.current_input = 0
         self.current_change=self.current_change+1
       elif self.current_change == 1:
         self.level = self.current_input
+        print('level: '+ str(self.level))
         self.current_input = 0
         self.current_change=self.current_change+1
       elif self.current_change == 2:
         self.start_node = self.current_input
+        print('start_node: '+ str(self.start_node))
         self.current_input = 0
         self.current_change=self.current_change+1
       elif self.current_change == 4:  
         self.end_node = self.current_input
+        print('end_node: '+ str(self.end_node))
         self.current_input = 0
         self.current_change=self.current_change+1
         self.ready = True
@@ -49,4 +54,7 @@ class KeypadData():
     return self.start_node
   def get_end_node(self):
     return self.end_node
+
+  def data_ready(self):
+    return self.ready
 
