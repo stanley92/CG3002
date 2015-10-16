@@ -59,21 +59,21 @@ class Compass():
     #Angle Margin
     if offset < -5: 
       if offset_abs < 180:
-        os.system ("say turn left")
+        #os.system ("say turn left")
         return 'turn left'
       else:
-        os.system ("say turn right")
+        #os.system ("say turn right")
         return 'turn right'
     #Angle Margin
     elif offset > 5:
       if offset_abs < 180:
-        os.system ("say turn right")
+        #os.system ("say turn right")
         return 'turn right'
       else:
-        os.system ("say turn left")
+        #os.system ("say turn left")
         return 'turn left'
     else:
-      os.system ("say walk straight")
+      #os.system ("say walk straight")
       return 'walk straight'
 
 def cal_angle(x_next,x_curr,y_next,y_curr,x_hori,y_vert,northAt):

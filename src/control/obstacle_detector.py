@@ -2,6 +2,7 @@ import threading
 import random
 import time
 import os
+import subprocess
 
 # def poll_data_from_queue():
 # 	#poll data
@@ -10,8 +11,8 @@ def ObstacleDetector():
     self.sensors = sensorData
 
   def collisionWarningDown(self):
-    if self.sensors.sensorDown < 30 and self.sensors.sensorDown != 0:
-  	  os.system("say Stairs in front")
+    if self.sensors.sensorDown > 2000 or self.sensors.sensorDown != 0:
+  	  say("Stairs in front")
 
   def collisionWarningLeft(self): #1
   	if self.sensors.sensorLeft < 30 and self.sensors.sensorLeft != 0:
@@ -68,6 +69,9 @@ def ObstacleDetector():
 
   		time.sleep(1)
   		print('')
+  
+  def say(message):
+    subprocess.call(['espeak', '-v%s+%s' % ('en', 'f3'), message]) 
 
   def run(self):
   	#print("hi")

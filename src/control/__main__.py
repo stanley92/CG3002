@@ -1,4 +1,4 @@
-import run_simulation
+from . import run_simulation
 
 if __name__ == '__main__':
 ################################################
