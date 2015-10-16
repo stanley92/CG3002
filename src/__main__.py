@@ -46,10 +46,10 @@ def setup():
   GPIO.setup(25, GPIO.OUT, pull_up_down = GPIO.PUD_DOWN)
   GPIO.setup(27, GPIO.OUT, pull_up_down = GPIO.PUD_DOWN)
   GPIO.setup(22, GPIO.OUT, pull_up_down = GPIO.PUD_DOWN)
-  GPIO.output(23, False)
-  GPIO.output(25, False)
-  GPIO.output(27, False)
-  GPIO.output(22, False)
+  GPIO.output(23, False) #left  - left belly
+  GPIO.output(25, False) #right - left shoulder
+  GPIO.output(27, False) #leg   - right belly
+  GPIO.output(22, False) #front - right shoulder
 
 if __name__ == '__main__':
   setup()
