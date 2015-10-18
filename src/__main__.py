@@ -42,12 +42,12 @@ def say(message):
 
 def setup():
   GPIO.setmode(GPIO.BCM)
-  GPIO.setup(23, GPIO.OUT, pull_up_down = GPIO.PUD_DOWN)
-  GPIO.setup(25, GPIO.OUT, pull_up_down = GPIO.PUD_DOWN)
-  GPIO.setup(27, GPIO.OUT, pull_up_down = GPIO.PUD_DOWN)
-  GPIO.setup(22, GPIO.OUT, pull_up_down = GPIO.PUD_DOWN)
+  GPIO.setup(23, GPIO.OUT) #pull_up_down = GPIO.PUD_DOWN
+  GPIO.setup(25, GPIO.OUT) #pull_up_down = GPIO.PUD_DOWN
+  GPIO.setup(27, GPIO.OUT) #pull_up_down = GPIO.PUD_DOWN
+  GPIO.setup(22, GPIO.OUT) #pull_up_down = GPIO.PUD_DOWN
   GPIO.output(23, False) #left  - left belly
-  GPIO.output(25, False) #right - left shoulder
+  GPIO.output(25, False) #right - left shoulder - NW
   GPIO.output(27, False) #leg   - right belly
   GPIO.output(22, False) #front - right shoulder
 
