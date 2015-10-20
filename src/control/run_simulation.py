@@ -16,17 +16,18 @@ import subprocess
 ANGLE_MARGIN = 5
 
 class Simulation():
-  def __init__ (self, orient, displace, building, level, start=None, x=None, y=None, end=None, heading=0):
+  def __init__ (self, orient, displace, building, level, start=None, x=None, y=None, end=None):
+    map_info = get_map_info.getMapInfo(building, level)
     self.building = building
     self.level = level
     self.start = start
     self.x = x
     self.y = y
     self.end = end
-    self.graph = get_map_info.generateGraph(get_map_info.getMapInfo(building, level))
+    self.graph = get_map_info.generateGraph(map_info)
     self.path = self._generatePath()
     self.orient = orient
-    self.orient.setNorthAt(heading)
+    self.orient.setNorthAt(map_info.info.north_at)
     self.displace = displace
 
   def setBuilding (self, building): 
