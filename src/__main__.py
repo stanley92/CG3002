@@ -63,45 +63,49 @@ if __name__ == '__main__':
   data_poll_thread = threading.Thread(target = data_poll, args = [c, keypad_data, orient, displace, sensors_data])
   data_poll_thread.start() 
 
-  while True:
-    if keypad_data.data_ready():
-      print('ALL DATA READY START THE THING!')
-      time.sleep(1)
-      building = keypad_data.building #str(input('Building Name: '))
-      if building == 1:
-        building = 'COM1'
-      elif building == 2:
-        building = 'COM2'
-      level = keypad_data.level #input('Building Level: ')
-      if level == 0:
-        level = 'B1'
-      point = 'y' #input('Are you on a starting point? ')
-      if point == 'y':
-        start = keypad_data.start_node #int(input('Start: '))
-        end = keypad_data.end_node #int(input('End: '))
-        run = run_simulation.Simulation(orient, displace, building, level, start=start, end=end)
-        run_simulation_thread = threading.Thread(target = run.start_nav, args = [])
-        run_simulation_thread.start()
-        obstacle_detect = obstacle_detector.ObstacleDetector(sensors_data)
-        obstacle_detect_thread = threading.Thread(target = obstacle_detect.inf_loop, args = [])
-        obstacle_detect_thread.start()
-        keypad_data.clear()
-        
+  try :
+    while True:
+      if keypad_data.data_ready():
+        print('ALL DATA READY START THE THING!')
+        time.sleep(1)
+        building = keypad_data.building #str(input('Building Name: '))
+        if building == 1:
+          building = 'COM1'
+        elif building == 2:
+          building = 'COM2'
+        level = keypad_data.level #input('Building Level: ')
+        if level == 0:
+          level = 'B1'
+        point = 'y' #input('Are you on a starting point? ')
+        if point == 'y':
+          start = keypad_data.start_node #int(input('Start: '))
+          end = keypad_data.end_node #int(input('End: '))
+          run = run_simulation.Simulation(orient, displace, building, level, start=start, end=end)
+          run_simulation_thread = threading.Thread(target = run.start_nav, args = [])
+          run_simulation_thread.start()
+          obstacle_detect = obstacle_detector.ObstacleDetector(sensors_data)
+          obstacle_detect_thread = threading.Thread(target = obstacle_detect.inf_loop, args = [])
+          obstacle_detect_thread.start()
+          keypad_data.clear()
+          
 
-        # run.start_nav()
-      elif point == 'n':
-        x_coord = int (input ('Input x-coordinate: '))
-        y_coord = int (input ('Input y-coordinate: '))
-        heading = float (input ('Input heading: '))
-        end = int(input('End: '))
-        run = run_simulation.Simulation(orient, displace, building, level, x=x_coord, y=y_coord, end=end, heading = heading)
-        run.start_nav()
-    elif keypad_data.function_query_dist():
-      remainingDist = displace.getDistCal()-displace.getDistTra()
-      print('Remaining Dist: ' + str (remainingDist))
-      say('Remaining distance.')
-      say(str(remainingDist))
-
+          # run.start_nav()
+        elif point == 'n':
+          x_coord = int (input ('Input x-coordinate: '))
+          y_coord = int (input ('Input y-coordinate: '))
+          heading = float (input ('Input heading: '))
+          end = int(input('End: '))
+          run = run_simulation.Simulation(orient, displace, building, level, x=x_coord, y=y_coord, end=end, heading = heading)
+          run.start_nav()
+      elif keypad_data.function_query_dist():
+        remainingDist = displace.getDistCal()-displace.getDistTra()
+        print('Remaining Dist: ' + str (remainingDist))
+        say('Remaining distance.')
+        say(str(remainingDist))
+  except KeyboardInterrupt:
+    run_simulation_thread.join()
+    obstacle_detect_thread.join()
+    GPIO.cleanup()
 
   # print("Welcome")
   # building = 'COM1'
