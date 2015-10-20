@@ -16,8 +16,8 @@ import subprocess
 ANGLE_MARGIN = 5
 
 class Simulation():
-  def __init__ (self, orient, displace, building, level, start=None, x=None, y=None, end=None):
-    map_info = get_map_info.getMapInfo(building, level)
+  def __init__ (self, controller, orient, displace, building, level, start=None, x=None, y=None, end=None):
+    self.controller = controller
     self.building = building
     self.level = level
     self.start = start
@@ -102,6 +102,8 @@ class Simulation():
     
     for i in range(length):
       self.walk(i)
+      if not self.controller.running:
+          break
       
   ################################################
   # Walking algoritim
@@ -145,6 +147,8 @@ class Simulation():
         
         #self.say("You have a remaining of" + str(int(self.displace.getDistCal()-self.displace.getDistTra())) + 'cm')
         #os.system ("say You have a remaining of" + str(int(self.displace.getDistCal()-self.displace.getDistTra())) + 'cm')
+        if not self.controller.running:
+          break
         time.sleep(1)
     # print(len(self.path))
     # print(self.graph.getVertex(self.path[len(self.path)-1]).id)

@@ -8,8 +8,9 @@ import RPi.GPIO as GPIO
 # def poll_data_from_queue():
 # 	#poll data
 class ObstacleDetector():
-  def __init__(self, sensorData):
+  def __init__(self, controller, sensorData):
     self.sensors = sensorData
+    self.controller = controller
 
   def collisionWarningDown(self):
     if self.sensors.sensor_down > 2000 or self.sensors.sensor_down == 0:
@@ -68,7 +69,8 @@ class ObstacleDetector():
   		self.collisionWarningLeg()
   		self.collisionWarningLeft()
       time.sleep(0.1)
-
+  		if not self.controller.running:
+        break
   
   def say(self, message):
     subprocess.call('espeak -v%s+%s "%s" 2>/dev/null' % ('en-us', 'f4', message), shell=True) 
