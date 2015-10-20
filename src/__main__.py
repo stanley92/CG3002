@@ -14,6 +14,7 @@ from .data import compass
 from .data import displacement
 from .control import obstacle_detector
 from .control import run_simulation
+from .control import controller
 
 
 def data_poll(comm_data_buffer, keypad_data, compass_data, displacement_data, sensors_data):
@@ -57,6 +58,7 @@ if __name__ == '__main__':
   displace = displacement.Displacement()
   sensors_data = sensors.Sensors()
   keypad_data = keypad.KeypadData()
+  prog_controller = controller.Controller()
   c = communication.Communication()
   while not c.handshaken:
     c.initialise()
@@ -80,10 +82,11 @@ if __name__ == '__main__':
         if point == 'y':
           start = keypad_data.start_node #int(input('Start: '))
           end = keypad_data.end_node #int(input('End: '))
-          run = run_simulation.Simulation(orient, displace, building, level, start=start, end=end)
+          prog_controller.start()
+          run = run_simulation.Simulation(prog_controller, orient, displace, building, level, start=start, end=end)
           run_simulation_thread = threading.Thread(target = run.start_nav, args = [])
           run_simulation_thread.start()
-          obstacle_detect = obstacle_detector.ObstacleDetector(sensors_data)
+          obstacle_detect = obstacle_detector.ObstacleDetector(prog_controller, sensors_data)
           obstacle_detect_thread = threading.Thread(target = obstacle_detect.inf_loop, args = [])
           obstacle_detect_thread.start()
           keypad_data.clear()
@@ -103,6 +106,7 @@ if __name__ == '__main__':
         say('Remaining distance.')
         say(str(remainingDist))
   except KeyboardInterrupt:
+    prog_controller.stop()
     run_simulation_thread.join()
     obstacle_detect_thread.join()
     GPIO.cleanup()

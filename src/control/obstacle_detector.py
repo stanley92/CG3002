@@ -54,7 +54,7 @@ class ObstacleDetector():
   		# s.setSensorLeft(valueLeft)
   		
   		# valueRight = random.randint (0,100)
-  		# s.setSensorRight(valueRight)
+  		# s.setSensorRight(wvalueRight)
   		
   		# valueFront = random.randint (0,100)
   		# s.setSensorFront(valueFront)
@@ -69,7 +69,7 @@ class ObstacleDetector():
   		self.collisionWarningLeg()
   		self.collisionWarningLeft()
       time.sleep(0.1)
-  		if not self.controller.running:
+  		if not self.controller.is_program_running():
         break
   
   def say(self, message):

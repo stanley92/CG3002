@@ -5,7 +5,7 @@ class Controller():
   def start(self):
     self.running = True
 
-  def end(self):
+  def stop(self):
     self.running = False
 
   def is_program_running(self):

@@ -102,7 +102,7 @@ class Simulation():
     
     for i in range(length):
       self.walk(i)
-      if not self.controller.running:
+      if not self.controller.is_program_running():
           break
       
   ################################################
@@ -147,7 +147,7 @@ class Simulation():
         
         #self.say("You have a remaining of" + str(int(self.displace.getDistCal()-self.displace.getDistTra())) + 'cm')
         #os.system ("say You have a remaining of" + str(int(self.displace.getDistCal()-self.displace.getDistTra())) + 'cm')
-        if not self.controller.running:
+        if not self.controller.is_program_running():
           break
         time.sleep(1)
     # print(len(self.path))
