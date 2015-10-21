@@ -37,6 +37,7 @@ def data_poll(comm_data_buffer, keypad_data, compass_data, displacement_data, se
     if comm_data_buffer.buffer.have_data(7):
       sensors_data.set_sensor_right_ankle(int(comm_data_buffer.buffer.last(7)))
     if not prog_controller.running:
+      print("data polling stopped")
       break
 
 def say(message):
@@ -61,7 +62,7 @@ if __name__ == '__main__':
   keypad_data = keypad.KeypadData()
   prog_controller = controller.Controller()
   prog_controller.start()
-  c = communication.Communication()
+  c = communication.Communication(prog_controller)
   while not c.handshaken:
     c.initialise()
   data_poll_thread = threading.Thread(target = data_poll, args = [c, keypad_data, orient, displace, sensors_data, prog_controller])
@@ -108,6 +109,7 @@ if __name__ == '__main__':
         say(str(remainingDist))
   except KeyboardInterrupt:
     prog_controller.stop()
+    c.thread.join()
     run_simulation_thread.join()
     obstacle_detect_thread.join()
     data_poll_thread.join()

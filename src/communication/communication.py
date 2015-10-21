@@ -4,15 +4,20 @@ from . import data_buffer
 import threading
 
 class Communication():
-  def __init__(self):
+  def __init__(self, prog_controller):
     self.ser = serial_comm.SerialCommunication()
+    self.prog_controller = prog_controller
     self.ard = arduino.Arduino(self.ser)
     self.handshaken = False
     self.buffer = None
     self.thread = None
 
   def read_from_port(self):
-    self.buffer.buffer()
+    while True:
+      self.buffer.buffer()
+      if not prog_controller.is_program_running():
+        print("Data buffering stopped")
+        break
 
   def initialise(self, num_queue=9):
     #self.handshaken = self.ard.handshake()
@@ -34,3 +39,4 @@ class Communication():
 
   def pop_all(self, queue_number):
     return self.buffer.pop_all(queue_number)
+

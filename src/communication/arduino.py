@@ -60,44 +60,43 @@ class Arduino():
     return True
 
   def get_data(self, callback):
+    # print("Start getting data")
+    is_timed_out = False
+    start_millis = int(round(time.time() * 1000))
+    # print(start_millis)
     while True:
-      # print("Start getting data")
-      is_timed_out = False
-      start_millis = int(round(time.time() * 1000))
-      # print(start_millis)
-      while True:
-        message = self.ser.serialRead()
+      message = self.ser.serialRead()
 
-        if (message == chr(6)):
-          self.ser.serialWrite(chr(0)); #ACK
-          # print("Handshaking done")
+      if (message == chr(6)):
+        self.ser.serialWrite(chr(0)); #ACK
+        # print("Handshaking done")
 
-        if (message == chr(4)): #Write
+      if (message == chr(4)): #Write
+        break
+    # print("Got write request")
+    while True:
+      message = self.ser.serialRead()
+      if (message): #Write
+        channel = ord(message)
+        break
+    # print("Got channel "+str(channel))
+    while True:
+      # print("read")
+      message = self.ser.serialReadLine()
+      # print("finish reading") 
+      if (len(message) != 0): #Write
+        break
+      else: 
+        current_millis = int(round(time.time() * 1000))
+        if (current_millis - start_millis > 10000):   #10 seconds
+          is_timed_out = True
           break
-      # print("Got write request")
-      while True:
-        message = self.ser.serialRead()
-        if (message): #Write
-          channel = ord(message)
-          break
-      # print("Got channel "+str(channel))
-      while True:
-        # print("read")
-        message = self.ser.serialReadLine()
-        # print("finish reading") 
-        if (len(message) != 0): #Write
-          break
-        else: 
-          current_millis = int(round(time.time() * 1000))
-          if (current_millis - start_millis > 10000):   #10 seconds
-            is_timed_out = True
-            break
-        if is_timed_out:
-          # print("Get data Timed Out")
-          callback(None, None)
-      # print("Data got: "+str(message))
-      self.ser.serialWrite(chr(0))
-      callback(int(channel), message)
+      if is_timed_out:
+        # print("Get data Timed Out")
+        callback(None, None)
+    # print("Data got: "+str(message))
+    self.ser.serialWrite(chr(0))
+    callback(int(channel), message)
 
 
 

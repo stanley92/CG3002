@@ -1,11 +1,13 @@
 from collections import deque
-
+import logging 
 class DataBuffer():
   def __init__(self, num_queue, ard):
     self.queues = num_queue*[0]
     for i in range(num_queue):
       self.queues[i] = deque()
     self.ard = ard
+    logging.basicConfig(filename='databuffer.log', level=logging.DEBUG)
+    logging.debug('***** START BUFFER *****')
 
   def push(self, channel, m):
     try:
@@ -15,6 +17,9 @@ class DataBuffer():
       print("Index Error")
       print("channel = " + str(channel))
       print("message = " + m)
+      logging.ERROR("Index Error")
+      logging.ERROR("channel = " + str(channel))
+      logging.ERROR("message = " + m)
   
   def buffer(self):
     self.ard.get_data(self.push)
@@ -27,7 +32,9 @@ class DataBuffer():
 
   def last(self, channel):
     try:
-      return self.queues[channel].pop()
+      message = self.queues[channel].pop()
+      logging.debug('Channel '+channel+' latest data acknowledged ~ : "'+message+'"')
+      return message
     except IndexError:
       return None
 
