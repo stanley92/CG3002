@@ -25,7 +25,7 @@ class Simulation():
     self.x = x
     self.y = y
     self.end = end
-    map_info = et_map_info.getMapInfo(building, level)
+    map_info = get_map_info.getMapInfo(building, level)
     self.graph = get_map_info.generateGraph(map_info)
     self.path = self._generatePath()
     self.orient = orient
