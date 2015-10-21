@@ -13,7 +13,7 @@ import subprocess
 # + end : int
 #########################################
 
-ANGLE_MARGIN = 5
+ANGLE_MARGIN = 10
 
 class Simulation():
   def __init__ (self, controller, orient, displace, building, level, start=None, x=None, y=None, end=None):
