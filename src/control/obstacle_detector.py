@@ -69,7 +69,7 @@ class ObstacleDetector():
   		self.collisionWarningHand()
   		# self.collisionWarningLeg()
   		self.collisionWarningLeftAnkle()
-      time.sleep(0.1)
+		time.sleep(0.1)
   		if not self.controller.is_program_running():
         break
   
