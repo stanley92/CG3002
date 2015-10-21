@@ -105,7 +105,8 @@ class Simulation():
     for i in range(length):
       self.walk(i)
       if not self.controller.is_program_running():
-          break
+        print("Run Simulation stopped")
+        break
       
   ################################################
   # Walking algoritim
