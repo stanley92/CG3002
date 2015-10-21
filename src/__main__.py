@@ -16,7 +16,6 @@ from .control import obstacle_detector
 from .control import run_simulation
 from .control import controller
 
-
 def data_poll(comm_data_buffer, keypad_data, compass_data, displacement_data, sensors_data):
   while (1):
     latest_key = comm_data_buffer.buffer.last(0)
