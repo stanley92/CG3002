@@ -28,28 +28,28 @@ def data_poll(comm_data_buffer, keypad_data, compass_data, displacement_data, se
     if comm_data_buffer.buffer.have_data(2):
       displacement_data.set_current_step(int(comm_data_buffer.buffer.last(2)))
     if comm_data_buffer.buffer.have_data(3):
-      sensors_data.set_sensor_left(int(comm_data_buffer.buffer.last(3)))
+      sensors_data.set_sensor_hand(int(comm_data_buffer.buffer.last(3)))
     if comm_data_buffer.buffer.have_data(4):
-      sensors_data.set_sensor_down(int(comm_data_buffer.buffer.last(4)))
+      sensors_data.set_sensor_left(int(comm_data_buffer.buffer.last(4)))
     if comm_data_buffer.buffer.have_data(5):
-      sensors_data.set_sensor_front(int(comm_data_buffer.buffer.last(5)))
+      sensors_data.set_sensor_right(int(comm_data_buffer.buffer.last(5)))
     if comm_data_buffer.buffer.have_data(6):
-      sensors_data.set_sensor_right(int(comm_data_buffer.buffer.last(6)))
+      sensors_data.set_sensor_left_ankle(int(comm_data_buffer.buffer.last(6)))
     if comm_data_buffer.buffer.have_data(7):
-      sensors_data.set_sensor_leg(int(comm_data_buffer.buffer.last(7)))
+      sensors_data.set_sensor_right_ankle(int(comm_data_buffer.buffer.last(7)))
 
 def say(message):
   subprocess.call('espeak -v%s+%s -s 170 "%s" 2>/dev/null' % ('en-us', 'f4', message), shell=True) 
 
 def setup():
   GPIO.setmode(GPIO.BCM)
-  GPIO.setup(23, GPIO.OUT) #pull_up_down = GPIO.PUD_DOWN
-  GPIO.setup(25, GPIO.OUT) #pull_up_down = GPIO.PUD_DOWN
-  GPIO.setup(27, GPIO.OUT) #pull_up_down = GPIO.PUD_DOWN
-  GPIO.setup(22, GPIO.OUT) #pull_up_down = GPIO.PUD_DOWN
+  GPIO.setup(23, GPIO.OUT, pull_up_down = GPIO.PUD_DOWN) #pull_up_down = GPIO.PUD_DOWN
+  GPIO.setup(25, GPIO.OUT, pull_up_down = GPIO.PUD_DOWN) #pull_up_down = GPIO.PUD_DOWN
+  # GPIO.setup(27, GPIO.OUT, pull_up_down = GPIO.PUD_DOWN) #pull_up_down = GPIO.PUD_DOWN
+  GPIO.setup(22, GPIO.OUT, pull_up_down = GPIO.PUD_DOWN) #pull_up_down = GPIO.PUD_DOWN
   GPIO.output(23, False) #left  - left belly
   GPIO.output(25, False) #right - left shoulder - NW
-  GPIO.output(27, False) #leg   - right belly
+  # GPIO.output(27, False) #leg   - right belly
   GPIO.output(22, False) #front - right shoulder
 
 if __name__ == '__main__':
