@@ -16,7 +16,7 @@ from .control import obstacle_detector
 from .control import run_simulation
 from .control import controller
 
-def data_poll(comm_data_buffer, keypad_data, compass_data, displacement_data, sensors_data):
+def data_poll(comm_data_buffer, keypad_data, compass_data, displacement_data, sensors_data, prog_controller):
   while (1):
     latest_key = comm_data_buffer.buffer.last(0)
     if latest_key!= None:
@@ -36,6 +36,8 @@ def data_poll(comm_data_buffer, keypad_data, compass_data, displacement_data, se
       sensors_data.set_sensor_left_ankle(int(comm_data_buffer.buffer.last(6)))
     if comm_data_buffer.buffer.have_data(7):
       sensors_data.set_sensor_right_ankle(int(comm_data_buffer.buffer.last(7)))
+    if not prog_controller.running:
+      break
 
 def say(message):
   subprocess.call('espeak -v%s+%s -s 170 "%s" 2>/dev/null' % ('en-us', 'f4', message), shell=True) 
@@ -58,10 +60,11 @@ if __name__ == '__main__':
   sensors_data = sensors.Sensors()
   keypad_data = keypad.KeypadData()
   prog_controller = controller.Controller()
+  prog_controller.start()
   c = communication.Communication()
   while not c.handshaken:
     c.initialise()
-  data_poll_thread = threading.Thread(target = data_poll, args = [c, keypad_data, orient, displace, sensors_data])
+  data_poll_thread = threading.Thread(target = data_poll, args = [c, keypad_data, orient, displace, sensors_data, prog_controller])
   data_poll_thread.start() 
 
   try :
@@ -81,7 +84,6 @@ if __name__ == '__main__':
         if point == 'y':
           start = keypad_data.start_node #int(input('Start: '))
           end = keypad_data.end_node #int(input('End: '))
-          prog_controller.start()
           run = run_simulation.Simulation(prog_controller, orient, displace, building, level, start=start, end=end)
           run_simulation_thread = threading.Thread(target = run.start_nav, args = [])
           run_simulation_thread.start()
@@ -108,6 +110,7 @@ if __name__ == '__main__':
     prog_controller.stop()
     run_simulation_thread.join()
     obstacle_detect_thread.join()
+    data_poll_thread.join()
     GPIO.cleanup()
 
   # print("Welcome")
