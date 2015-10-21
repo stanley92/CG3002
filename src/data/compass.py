@@ -98,7 +98,7 @@ def cal_angle(x_next,x_curr,y_next,y_curr,x_hori,y_vert,northAt):
   elif x_next < x_curr and y_next == y_curr:
     angle = 270    
 
-  angle -= northAt
+  angle = angle - northAt
   
   if angle >= 360:
       angle -= 360
