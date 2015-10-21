@@ -18,21 +18,21 @@ class ObstacleDetector():
   #     self.say("Stairs in front")
 
   def collisionWarningLeftAnkle(self): # detect Low Obstacle on the left
-  	if self.sensors.sensor_left_ankle < 100 and self.sensors.sensor_left_ankle != 0:
+  	if self.sensors.sensor_left_ankle < 60 and self.sensors.sensor_left_ankle != 0:
   		print ("There is obstacle on the left.")
   		GPIO.output(23, True)
   	else:
 		GPIO.output(23, False)
  
   def collisionWarningRightAnkle(self): # detect Low Obstacle on the right
-    if self.sensors.sensor_right_ankle < 100 and self.sensors.sensor_right != 0:
+    if self.sensors.sensor_right_ankle < 60 and self.sensors.sensor_right != 0:
       print ("There is obstacle on the Right.")
       GPIO.output(25, True)
     else: 
       GPIO.output(25, False)
 
   def collisionWarningHand(self): # detect obstacle with hand
-    if self.sensors.sensor_hand < 100 and self.sensors.sensor_hand != 0:
+    if self.sensors.sensor_hand < 75 and self.sensors.sensor_hand != 0:
       print ("There is obstacle in front.")
       GPIO.output(22, True)
     else: 
