@@ -29,7 +29,7 @@ class Simulation():
     self.graph = get_map_info.generateGraph(map_info)
     self.path = self._generatePath()
     self.orient = orient
-    self.orient.setNorthAt(map_info.info.north_at)
+    self.orient.setNorthAt(int(map_info.info.north_at))
     self.displace = displace
 
   def setBuilding (self, building): 
