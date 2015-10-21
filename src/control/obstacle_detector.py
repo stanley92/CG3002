@@ -31,7 +31,7 @@ class ObstacleDetector():
     else: 
       GPIO.output(25, False)
 
-  def collisionWarningFront(self): # detect obstacle with hand
+  def collisionWarningHand(self): # detect obstacle with hand
     if self.sensors.sensor_hand < 100 and self.sensors.sensor_hand != 0:
       print ("There is obstacle in front.")
       GPIO.output(22, True)
