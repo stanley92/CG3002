@@ -39,8 +39,8 @@ class ObstacleDetector():
 				self.collision_right_ankle = True
 				GPIO.output(25, True)
 		else: 
-			if self.collision_left_ankle:
-				self.collision_left_ankle = False
+			if self.collision_right_ankle:
+				self.collision_right_ankle = False
 				GPIO.output(25, False)
 
 	def collisionWarningHand(self): # detect obstacle with hand
@@ -69,7 +69,7 @@ class ObstacleDetector():
 		if self.sensors.sensor_right < 60: #and self.sensors.sensor_left != 0:
 			#print ("Obsatcle on the right.")
 			if not self.collision_right:
-				self.collision_left_ankle = True
+				self.collision_right = True
 				GPIO.output(24, True)
 		else: 
 			if self.collision_right:
