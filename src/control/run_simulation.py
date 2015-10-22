@@ -128,6 +128,9 @@ class Simulation():
 
     while(self.displace.getDistTra() < self.displace.getDistCal()): #havent travel enuf distance
       # turning into correct direction
+      if not self.controller.is_program_running():
+        print("Run Simulation stopped")
+        break
       self.turn()
       newSteps = self.displace.get_new_dist_tra_from_step()
       if newSteps != 0:
@@ -150,8 +153,7 @@ class Simulation():
         
         #self.say("You have a remaining of" + str(int(self.displace.getDistCal()-self.displace.getDistTra())) + 'cm')
         #os.system ("say You have a remaining of" + str(int(self.displace.getDistCal()-self.displace.getDistTra())) + 'cm')
-        if not self.controller.is_program_running():
-          break
+        
         time.sleep(1)
     # print(len(self.path))
     # print(self.graph.getVertex(self.path[len(self.path)-1]).id)

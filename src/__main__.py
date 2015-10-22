@@ -36,7 +36,7 @@ def data_poll(comm_data_buffer, keypad_data, compass_data, displacement_data, se
       sensors_data.set_sensor_left_ankle(int(comm_data_buffer.buffer.last(6)))
     if comm_data_buffer.buffer.have_data(7):
       sensors_data.set_sensor_right_ankle(int(comm_data_buffer.buffer.last(7)))
-    if not prog_controller.running:
+    if not prog_controller.is_program_running():
       print("data polling stopped")
       break
 
@@ -112,10 +112,10 @@ if __name__ == '__main__':
   except KeyboardInterrupt:
     GPIO.cleanup()
     prog_controller.stop()
-    c.thread.join()
-    run_simulation_thread.join()
-    obstacle_detect_thread.join()
-    data_poll_thread.join()
+    c.thread.join() #polling
+    run_simulation_thread.join() #run simulation
+    obstacle_detect_thread.join() #obs detect
+    data_poll_thread.join() #polling
 
   # print("Welcome")
   # building = 'COM1'
