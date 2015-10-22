@@ -149,14 +149,14 @@ class Simulation():
 
         #self.say("You have walked" + str(int(newDistTra)) + 'cm')
         #os.system ("say You have walked" + str(int(newDistTra)) + 'cm')
-
-        self.displace.setDistTra(self.displace.getDistTra() + newDistTra)
-        remainingDist = self.displace.getDistCal()-self.displace.getDistTra()
-        
-        if remainingDist < 0:
-          print('Remaining Dist: 0')
+        totalDistTra = self.displace.getDistTra() + newDistTra
+        if totalDistTra > self.displace.getDistCal(): # reached
+          self.displace.setDistTra(self.displace.getDistCal())
         else:
-          print('Remaining Dist: ' + str (remainingDist))
+          self.displace.setDistTra(totalDistTra)
+        remainingDist = self.displace.getDistCal()-self.displace.getDistTra()
+
+        print('Remaining Dist: ' + str (remainingDist))
         
         #self.say("You have a remaining of" + str(int(self.displace.getDistCal()-self.displace.getDistTra())) + 'cm')
         #os.system ("say You have a remaining of" + str(int(self.displace.getDistCal()-self.displace.getDistTra())) + 'cm')
