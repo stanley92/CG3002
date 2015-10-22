@@ -110,12 +110,12 @@ if __name__ == '__main__':
         say('Remaining distance.')
         say(str(remainingDist))
   except KeyboardInterrupt:
+    GPIO.cleanup()
     prog_controller.stop()
     c.thread.join()
     run_simulation_thread.join()
     obstacle_detect_thread.join()
     data_poll_thread.join()
-    GPIO.cleanup()
 
   # print("Welcome")
   # building = 'COM1'
