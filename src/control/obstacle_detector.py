@@ -17,32 +17,39 @@ class ObstacleDetector():
   #     self.say("Stairs in front")
 
   def collisionWarningLeftAnkle(self): # detect Low Obstacle on the left
-  	if self.sensors.sensor_left_ankle < 60 and self.sensors.sensor_left_ankle != 0:
-  		print ("There is obstacle on the left.")
+  	if self.sensors.sensor_left_ankle < 60: #and self.sensors.sensor_left_ankle != 0:
+  		#print ("Low lying obstacle on the left.")
   		GPIO.output(23, True)
   	else:
 		GPIO.output(23, False)
  
   def collisionWarningRightAnkle(self): # detect Low Obstacle on the right
-    if self.sensors.sensor_right_ankle < 60 and self.sensors.sensor_right != 0:
-      print ("There is obstacle on the Right.")
+    if self.sensors.sensor_right_ankle < 60: #and self.sensors.sensor_right != 0:
+      #print ("Low lying obstacle on the Right.")
       GPIO.output(25, True)
     else: 
       GPIO.output(25, False)
 
   def collisionWarningHand(self): # detect obstacle with hand
-    if self.sensors.sensor_hand < 75 and self.sensors.sensor_hand != 0:
-      print ("There is obstacle in front.")
+    if self.sensors.sensor_hand < 70: #and self.sensors.sensor_hand != 0:
+      #print ("There is obstacle in front.")
       GPIO.output(22, True)
     else: 
       GPIO.output(22, False)
 
-  # def collisionWarningLeg(self): 
-  #   if self.sensors.sensor_leg < 70 and self.sensors.sensor_leg != 0:
-  #     print ("Low lying obstacle.")
-  #     GPIO.output(27, True)
-  #   else: 
-  #     GPIO.output(27, False)
+  def collisionWarningLeft(self): 
+    if self.sensors.sensor_left < 60: #and self.sensors.sensor_left != 0:
+      #print ("Obstacle on the left.")
+      GPIO.output(27, True)
+    else: 
+      GPIO.output(27, False)
+
+  def collisionWarningRight(self): 
+    if self.sensors.sensor_right < 60: #and self.sensors.sensor_left != 0:
+      #print ("Obsatcle on the right.")
+      GPIO.output(24, True)
+    else: 
+      GPIO.output(24, False)
 
   def inf_loop(self):
   	while (1):
@@ -63,10 +70,10 @@ class ObstacleDetector():
   		# s.setSensorLeg(valueLeg)
   		
   		#print ("Value: " + str (value))
-  		# self.collisionWarningDown()
+  		self.collisionWarningRight()
   		self.collisionWarningRightAnkle()
   		self.collisionWarningHand()
-  		# self.collisionWarningLeg()
+  		self.collisionWarningLeft()
   		self.collisionWarningLeftAnkle()
       time.sleep(0.1)
   		if not self.controller.is_program_running():
