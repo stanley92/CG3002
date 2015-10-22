@@ -134,7 +134,10 @@ class Simulation():
       self.turn()
       newSteps = self.displace.get_new_dist_tra_from_step()
       if newSteps != 0:
-        newDistTra = math.cos( math.radians( math.fabs (self.orient.getAngleOfNodes()-self.orient.getCompassValue() ) ) ) * newSteps
+        if math.fabs(self.orient.getAngleOfNodes()-self.orient.getCompassValue()):
+          newDistTra = newSteps
+        else:  
+          newDistTra = math.cos( math.radians( math.fabs (self.orient.getAngleOfNodes()-self.orient.getCompassValue() ) ) ) * newSteps
         # distance to next node
         print('Distance total: ' + str(self.displace.getDistCal()))
         print('Distance travelled: ' + str(self.displace.getDistTra()))
@@ -149,7 +152,11 @@ class Simulation():
 
         self.displace.setDistTra(self.displace.getDistTra() + newDistTra)
         remainingDist = self.displace.getDistCal()-self.displace.getDistTra()
-        print('Remaining Dist: ' + str (remainingDist))
+        
+        if remainingDist < 0:
+          print('Remaining Dist: 0')
+        else:
+          print('Remaining Dist: ' + str (remainingDist))
         
         #self.say("You have a remaining of" + str(int(self.displace.getDistCal()-self.displace.getDistTra())) + 'cm')
         #os.system ("say You have a remaining of" + str(int(self.displace.getDistCal()-self.displace.getDistTra())) + 'cm')
@@ -160,13 +167,13 @@ class Simulation():
     if i!=-1 and i<len(self.path)-2 :
       arrivedText = 'You have reached node ' + self.graph.getVertex(self.path[i+1]).name + ' ' + str(self.orient.userOffset())
       print (str(arrivedText))
-      subprocess.call('espeak -v%s+%s -150 "%s" 2>/dev/null' % ('en-us', 'f3', arrivedText), shell=True)
+      subprocess.call('espeak -v%s+%s -s150 "%s" 2>/dev/null' % ('en-us', 'f3', arrivedText), shell=True)
       #print('You have reached node ' + self.graph.getVertex(self.path[i+1]).name + ' ' + self.orient.userOffset())
       #self.say('You have reached node ' + self.graph.getVertex(self.path[i+1]).name + ' ' + self.orient.userOffset())
     else:
       arrivedText = 'You have reached node ' + self.graph.getVertex(self.path[i+1]).name
       print (str(arrivedText))
-      subprocess.call('espeak -v%s+%s -150 "%s" 2>/dev/null' % ('en-us', 'f3', arrivedText), shell=True)
+      subprocess.call('espeak -v%s+%s -s150 "%s" 2>/dev/null' % ('en-us', 'f3', arrivedText), shell=True)
       #print('You have reached node ' + self.graph.getVertex(self.path[i+1]).name)
       #self.say('You have reached node ' + self.graph.getVertex(self.path[i+1]).name)
 
