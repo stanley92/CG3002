@@ -18,27 +18,30 @@ from .control import controller
 
 def data_poll(comm_data_buffer, keypad_data, compass_data, displacement_data, sensors_data, prog_controller):
   while (1):
-    latest_key = comm_data_buffer.buffer.last(0)
-    if latest_key!= None:
-      print("key in")
-      keypad_data.key_in(latest_key)
-    if comm_data_buffer.buffer.have_data(1):
-      compass_data.setCompassValue(int(comm_data_buffer.buffer.last(1)))
-    if comm_data_buffer.buffer.have_data(2):
-      displacement_data.set_current_step(int(comm_data_buffer.buffer.last(2)))
-    if comm_data_buffer.buffer.have_data(3):
-      sensors_data.set_sensor_hand(int(comm_data_buffer.buffer.last(3)))
-    if comm_data_buffer.buffer.have_data(4):
-      sensors_data.set_sensor_left(int(comm_data_buffer.buffer.last(4)))
-    if comm_data_buffer.buffer.have_data(5):
-      sensors_data.set_sensor_right(int(comm_data_buffer.buffer.last(5)))
-    if comm_data_buffer.buffer.have_data(6):
-      sensors_data.set_sensor_left_ankle(int(comm_data_buffer.buffer.last(6)))
-    if comm_data_buffer.buffer.have_data(7):
-      sensors_data.set_sensor_right_ankle(int(comm_data_buffer.buffer.last(7)))
-    if not prog_controller.is_program_running():
-      print("data polling stopped")
-      break
+    try:
+      latest_key = comm_data_buffer.buffer.last(0)
+      if latest_key!= None:
+        print("key in")
+        keypad_data.key_in(latest_key)
+      if comm_data_buffer.buffer.have_data(1):
+        compass_data.setCompassValue(int(comm_data_buffer.buffer.last(1)))
+      if comm_data_buffer.buffer.have_data(2):
+        displacement_data.set_current_step(int(comm_data_buffer.buffer.last(2)))
+      if comm_data_buffer.buffer.have_data(3):
+        sensors_data.set_sensor_hand(int(comm_data_buffer.buffer.last(3)))
+      if comm_data_buffer.buffer.have_data(4):
+        sensors_data.set_sensor_left(int(comm_data_buffer.buffer.last(4)))
+      if comm_data_buffer.buffer.have_data(5):
+        sensors_data.set_sensor_right(int(comm_data_buffer.buffer.last(5)))
+      if comm_data_buffer.buffer.have_data(6):
+        sensors_data.set_sensor_left_ankle(int(comm_data_buffer.buffer.last(6)))
+      if comm_data_buffer.buffer.have_data(7):
+        sensors_data.set_sensor_right_ankle(int(comm_data_buffer.buffer.last(7)))
+      if not prog_controller.is_program_running():
+        print("data polling stopped")
+        break
+    except:
+      pass
 
 def say(message):
   subprocess.call('espeak -v%s+%s -s 170 "%s" 2>/dev/null' % ('en-us', 'f4', message), shell=True) 
