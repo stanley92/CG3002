@@ -112,10 +112,27 @@ if __name__ == '__main__':
   except KeyboardInterrupt:
     GPIO.cleanup()
     prog_controller.stop()
-    c.thread.join() #polling
-    run_simulation_thread.join() #run simulation
-    obstacle_detect_thread.join() #obs detect
-    data_poll_thread.join() #polling
+    try:
+      c.thread.join() #polling
+    except NameError:
+      print('Communication data buffer thread never started')
+      pass
+    try:
+      run_simulation_thread.join() #run simulation
+    except NameError:
+      print('Run simulation thread never started')
+      pass
+    try:
+      obstacle_detect_thread.join() #obs detect
+    except NameError:
+      print('ObstacleDetector thread never started')
+      pass
+    try:
+      data_poll_thread.join() #polling
+    except NameError:
+      print('Data polling thread never started')
+      pass
+
 
   # print("Welcome")
   # building = 'COM1'
