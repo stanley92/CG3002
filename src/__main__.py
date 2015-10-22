@@ -45,14 +45,16 @@ def say(message):
 
 def setup():
   GPIO.setmode(GPIO.BCM)
-  GPIO.setup(23, GPIO.OUT, pull_up_down = GPIO.PUD_DOWN) #pull_up_down = GPIO.PUD_DOWN
-  GPIO.setup(25, GPIO.OUT, pull_up_down = GPIO.PUD_DOWN) #pull_up_down = GPIO.PUD_DOWN
-  # GPIO.setup(27, GPIO.OUT, pull_up_down = GPIO.PUD_DOWN) #pull_up_down = GPIO.PUD_DOWN
-  GPIO.setup(22, GPIO.OUT, pull_up_down = GPIO.PUD_DOWN) #pull_up_down = GPIO.PUD_DOWN
-  GPIO.output(23, False) #left  - left belly
-  GPIO.output(25, False) #right - left shoulder - NW
-  # GPIO.output(27, False) #leg   - right belly
-  GPIO.output(22, False) #front - right shoulder
+  GPIO.setup(23, GPIO.OUT, pull_up_down = GPIO.PUD_DOWN)
+  GPIO.setup(25, GPIO.OUT, pull_up_down = GPIO.PUD_DOWN)
+  GPIO.setup(22, GPIO.OUT, pull_up_down = GPIO.PUD_DOWN)
+  GPIO.setup(27, GPIO.OUT, pull_up_down = GPIO.PUD_DOWN)
+  GPIO.setup(24, GPIO.OUT, pull_up_down = GPIO.PUD_DOWN)
+  GPIO.output(23, False) #left ankle
+  GPIO.output(25, False) #right ankle
+  GPIO.output(22, False) #hand
+  GPIO.output(27, False) #left 
+  GPIO.output(24, False) #right
 
 if __name__ == '__main__':
   setup()
