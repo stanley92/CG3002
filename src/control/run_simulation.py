@@ -156,11 +156,17 @@ class Simulation():
     # print(len(self.path))
     # print(self.graph.getVertex(self.path[len(self.path)-1]).id)
     if i!=-1 and i<len(self.path)-2 :
-      print('You have reached node ' + self.graph.getVertex(self.path[i+1]).name + ' ' + self.orient.userOffset())
-      self.say('You have reached node ' + self.graph.getVertex(self.path[i+1]).name + ' ' + self.orient.userOffset())
+      arrivedText = 'You have reached node ' + self.graph.getVertex(self.path[i+1]).name + ' ' + self.orient.userOffset()
+      print (str(arrivedText))
+      subprocess.call('espeak -v%s+%s -150 "%s" 2>/dev/null' % ('en-us', 'f3', arrivedText), shell=True)
+      #print('You have reached node ' + self.graph.getVertex(self.path[i+1]).name + ' ' + self.orient.userOffset())
+      #self.say('You have reached node ' + self.graph.getVertex(self.path[i+1]).name + ' ' + self.orient.userOffset())
     else:
-      print('You have reached node ' + self.graph.getVertex(self.path[i+1]).name)
-      self.say('You have reached node ' + self.graph.getVertex(self.path[i+1]).name)
+      arrivedText = 'You have reached node ' + self.graph.getVertex(self.path[i+1]).name
+      print (str(arrivedText))
+      subprocess.call('espeak -v%s+%s -150 "%s" 2>/dev/null' % ('en-us', 'f3', arrivedText), shell=True)
+      #print('You have reached node ' + self.graph.getVertex(self.path[i+1]).name)
+      #self.say('You have reached node ' + self.graph.getVertex(self.path[i+1]).name)
 
   ################################################
   # Turning algorithim
