@@ -37,14 +37,14 @@ class ObstacleDetector():
 		else: 
 			GPIO.output(22, False)
 
-			def collisionWarningLeft(self): 
+	def collisionWarningLeft(self): 
 		if self.sensors.sensor_left < 60: #and self.sensors.sensor_left != 0:
 			#print ("Obstacle on the left.")
 			GPIO.output(27, True)
 		else: 
 			GPIO.output(27, False)
 
-			def collisionWarningRight(self): 
+	def collisionWarningRight(self): 
 		if self.sensors.sensor_right < 60: #and self.sensors.sensor_left != 0:
 			#print ("Obsatcle on the right.")
 			GPIO.output(24, True)
@@ -79,7 +79,7 @@ class ObstacleDetector():
 		if not self.prog_controller.is_program_running():
 			print('ObstacleDetector stopped')
 			break
-			
+
 	def say(self, message):
 		subprocess.call('espeak -v%s+%s "%s" 2>/dev/null' % ('en-us', 'f4', message), shell=True) 
 
