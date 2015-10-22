@@ -75,10 +75,10 @@ class ObstacleDetector():
   		self.collisionWarningHand()
   		self.collisionWarningLeft()
   		self.collisionWarningLeftAnkle()
-      time.sleep(0.1)
+		time.sleep(0.1)
   		if not self.controller.is_program_running():
-        print('ObstacleDetector stopped')
-        break
+		        print('ObstacleDetector stopped')
+        	break
   
   def say(self, message):
     subprocess.call('espeak -v%s+%s "%s" 2>/dev/null' % ('en-us', 'f4', message), shell=True) 

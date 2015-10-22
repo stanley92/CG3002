@@ -15,7 +15,7 @@ class Communication():
   def read_from_port(self):
     while True:
       self.buffer.buffer()
-      if not prog_controller.is_program_running():
+      if not self.prog_controller.is_program_running():
         print("Data buffering stopped")
         break
 

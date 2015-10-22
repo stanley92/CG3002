@@ -33,7 +33,7 @@ class DataBuffer():
   def last(self, channel):
     try:
       message = self.queues[channel].pop()
-      logging.debug('Channel '+channel+' latest data acknowledged ~ : "'+message+'"')
+      logging.debug('Channel '+str(channel)+' latest data acknowledged ~ : "'+str(message)+'"')
       return message
     except IndexError:
       return None
