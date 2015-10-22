@@ -94,8 +94,16 @@ if __name__ == '__main__':
           run_simulation_thread = threading.Thread(target = run.start_nav, args = [])
           run_simulation_thread.start()
           obstacle_detect = obstacle_detector.ObstacleDetector(prog_controller, sensors_data)
-          obstacle_detect_thread = threading.Thread(target = obstacle_detect.inf_loop, args = [])
-          obstacle_detect_thread.start()
+          obstacle_detect_thread_1 = threading.Thread(target = obstacle_detect.inf_loop_1, args = [])
+          obstacle_detect_thread_2 = threading.Thread(target = obstacle_detect.inf_loop_2, args = [])
+          obstacle_detect_thread_3 = threading.Thread(target = obstacle_detect.inf_loop_3, args = [])
+          obstacle_detect_thread_4 = threading.Thread(target = obstacle_detect.inf_loop_4, args = [])
+          obstacle_detect_thread_5 = threading.Thread(target = obstacle_detect.inf_loop_5, args = [])
+          obstacle_detect_thread_1.start()
+          obstacle_detect_thread_2.start()
+          obstacle_detect_thread_3.start()
+          obstacle_detect_thread_4.start()
+          obstacle_detect_thread_5.start()
           keypad_data.clear()
           
 
@@ -126,9 +134,29 @@ if __name__ == '__main__':
       print('Run simulation thread never started')
       pass
     try:
-      obstacle_detect_thread.join() #obs detect
+      obstacle_detect_thread_2.join() #obs detect
     except NameError:
-      print('ObstacleDetector thread never started')
+      print('ObstacleDetector 2 thread never started')
+      pass
+    try:
+      obstacle_detect_thread_3.join() #obs detect
+    except NameError:
+      print('ObstacleDetector 3 thread never started')
+      pass
+    try:
+      obstacle_detect_thread_4.join() #obs detect
+    except NameError:
+      print('ObstacleDetector 4 thread never started')
+      pass
+    try:
+      obstacle_detect_thread_5.join() #obs detect
+    except NameError:
+      print('ObstacleDetector 5 thread never started')
+      pass
+    try:
+      obstacle_detect_thread_1.join() #obs detect
+    except NameError:
+      print('ObstacleDetector 1 thread never started')
       pass
     try:
       data_poll_thread.join() #polling
