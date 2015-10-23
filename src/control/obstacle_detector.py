@@ -21,16 +21,16 @@ class ObstacleDetector():
 	#     print("Stairs in front")
 	#     self.say("Stairs in front")
 
-	def collisionWarningFront(self): # detect Low Obstacle on the left
-		if self.sensors.sensor_front < 70: #and self.sensors.sensor_left_ankle != 0:
-			#print ("Low lying obstacle on the left.")
-			if not self.collision_hand:
-				self.collision_hand = True
-				GPIO.output(22, True)
-		else:
-			if self.collision_hand:
-				self.collision_hand = False
-				GPIO.output(22, False)
+	# def collisionWarningFront(self): # detect Low Obstacle on the left
+	# 	if self.sensors.sensor_front < 70: #and self.sensors.sensor_left_ankle != 0:
+	# 		#print ("Low lying obstacle on the left.")
+	# 		if not self.collision_hand:
+	# 			self.collision_hand = True
+	# 			GPIO.output(22, True)
+	# 	else:
+	# 		if self.collision_hand:
+	# 			self.collision_hand = False
+	# 			GPIO.output(22, False)
 			
 	def collisionWarningRightAnkle(self): # detect Low Obstacle on the right
 		if self.sensors.sensor_right_ankle < 70: #and self.sensors.sensor_right != 0:
@@ -44,7 +44,7 @@ class ObstacleDetector():
 				GPIO.output(25, False)
 
 	def collisionWarningHand(self): # detect obstacle with hand
-		if self.sensors.sensor_hand < 80: #and self.sensors.sensor_hand != 0:
+		if self.sensor.sensor_front < 70 or self.sensors.sensor_hand < 80: #and self.sensors.sensor_hand != 0:
 			#print ("There is obstacle in front.")
 			if not self.collision_hand:
 				self.collision_hand = True
@@ -111,7 +111,6 @@ class ObstacleDetector():
 		self.collisionWarningRightAnkle()
 		self.collisionWarningHand()
 		self.collisionWarningLeft()
-		self.collisionWarningFront()
 		# self.collisionWarningFront()
 		#time.sleep(0.1)
 		if not self.prog_controller.is_program_running():
