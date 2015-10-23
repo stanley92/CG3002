@@ -134,7 +134,7 @@ class Simulation():
       self.turn()
       newSteps = self.displace.get_new_dist_tra_from_step()
       if newSteps != 0:
-        if math.fabs(self.orient.getAngleOfNodes()-self.orient.getCompassValue()):
+        if math.fabs(self.orient.getAngleOfNodes()-self.orient.getCompassValue()) < ANGLE_MARGIN:
           newDistTra = newSteps
         else:  
           newDistTra = math.cos( math.radians( math.fabs (self.orient.getAngleOfNodes()-self.orient.getCompassValue() ) ) ) * newSteps
