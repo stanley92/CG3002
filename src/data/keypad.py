@@ -18,6 +18,8 @@ class KeypadData():
     elif key == '#':
       if self.current_change == -1:
         self.current_change =self.current_change+1
+        self.say('welcome')
+        print('Welcome')
       elif self.current_change == 0:
         self.building = self.current_input
         self.say(self.building)    
