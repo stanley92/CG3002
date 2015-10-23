@@ -72,7 +72,7 @@ class ObstacleDetector():
 					self.front_count = 0
 				if self.front_count == 0:
 					self.say('Front obstacle is very near')
-			elif self.collision_front == False:
+		elif self.collision_front == False:
 				self.front_count = 0
 
 	def collisionWarningLeft(self): 
