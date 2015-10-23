@@ -111,7 +111,7 @@ class ObstacleDetector():
 		self.collisionWarningRightAnkle()
 		self.collisionWarningHand()
 		self.collisionWarningLeft()
-		self.collisionWarningLeftAnkle()
+		self.collisionWarningFront()
 		# self.collisionWarningFront()
 		#time.sleep(0.1)
 		if not self.prog_controller.is_program_running():
