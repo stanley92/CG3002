@@ -15,6 +15,7 @@ class ObstacleDetector():
 		self.collision_hand = False
 		self.collision_left = False
 		self.collision_right = False
+		self front_count = 0
 
 	# def collisionWarningDown(self):
 	#   if self.sensors.sensor_down > 2000 or self.sensors.sensor_down == 0:
@@ -53,6 +54,14 @@ class ObstacleDetector():
 			if self.collision_hand:
 				self.collision_hand = False
 				GPIO.output(22, False)
+
+		if collision_hand = True and front_count = 0 and sensors.sensor_front < 40:
+			self.say('Front obstacle is too near')
+			front_count = front_count + 1
+			if front_count = 5:
+				front_count = 0
+		else if collison_hand = False:
+			front_count = 0
 
 	# def collisionWarningFront(self): 
 	# 	if self.sensors.sensor_front < 70: #and self.sensors.sensor_front != 0:
