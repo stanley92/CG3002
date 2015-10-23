@@ -37,6 +37,8 @@ def data_poll(comm_data_buffer, keypad_data, compass_data, displacement_data, se
         sensors_data.set_sensor_left_ankle(int(comm_data_buffer.buffer.last(6)))
       if comm_data_buffer.buffer.have_data(7):
         sensors_data.set_sensor_right_ankle(int(comm_data_buffer.buffer.last(7)))
+      if comm_data_buffer.buffer.have_data(8):
+        sensors_data.set_sensor_front(int(comm_data_buffer.buffer.last(8)))
       if not prog_controller.is_program_running():
         print("data polling stopped")
         break
@@ -79,7 +81,7 @@ if __name__ == '__main__':
   try :
     while True:
       if keypad_data.data_ready():
-        subprocess.call('espeak -v%s+%s "%s" 2>/dev/null' % ('en-us', 'f3', 'All data ready. You can start walking.'), shell=True)
+        subprocess.call('espeak -v%s+%s "%s" 2>/dev/null' % ('en-us', 'f3', 'Setting Data'), shell=True)
         print('ALL DATA READY START THE THING!')
         time.sleep(1)
         building = keypad_data.building #str(input('Building Name: '))
@@ -103,13 +105,15 @@ if __name__ == '__main__':
           obstacle_detect_thread_3 = threading.Thread(target = obstacle_detect.inf_loop_3, args = [])
           obstacle_detect_thread_4 = threading.Thread(target = obstacle_detect.inf_loop_4, args = [])
           obstacle_detect_thread_5 = threading.Thread(target = obstacle_detect.inf_loop_5, args = [])
+          obstacle_detect_thread_6 = threading.Thread(target = obstacle_detect.inf_loop_6, args = [])
           obstacle_detect_thread_1.start()
           obstacle_detect_thread_2.start()
           obstacle_detect_thread_3.start()
           obstacle_detect_thread_4.start()
           obstacle_detect_thread_5.start()
+          obstacle_detect_thread_6.start()
           keypad_data.clear()
-          
+          subprocess.call('espeak -v%s+%s "%s" 2>/dev/null' % ('en-us', 'f3', 'All data ready. You can start walking.'), shell=True)
 
           # run.start_nav()
         elif point == 'n':

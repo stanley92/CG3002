@@ -7,6 +7,7 @@ class Sensors():
     self.sensor_right = 0
     self.sensor_left_ankle = 0
     self.sensor_right_ankle = 0
+    self.sensor_front = 0
 
   def set_sensor_hand(self,v): #1
     self.sensor_hand = v
@@ -22,4 +23,7 @@ class Sensors():
   
   def set_sensor_right_ankle(self,v): #5
     self.sensor_right_ankle = v  
+
+  def set_sensor_front(self, v): #6
+    self.sensor_front = v
 
