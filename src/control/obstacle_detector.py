@@ -10,7 +10,7 @@ class ObstacleDetector():
 	def __init__(self, prog_controller, sensorData):
 		self.sensors = sensorData
 		self.prog_controller = prog_controller
-		# self.collision_left_ankle = False
+		self.collision_front = False
 		self.collision_right_ankle = False
 		self.collision_hand = False
 		self.collision_left = False
@@ -55,25 +55,25 @@ class ObstacleDetector():
 				self.collision_hand = False
 				GPIO.output(22, False)
 
-		if self.collision_hand == True and self.sensors.sensor_front < 40:
-			self.front_count = self.front_count + 1
-			if self.front_count == 5:
-				self.front_count = 0
-			if self.front_count == 0:
-				self.say('Front obstacle is very near')
-		elif self.collision_hand == False:
-			self.front_count = 0
+	def collisionWarningFront(self): 
+		if self.sensors.sensor_front < 70: #and self.sensors.sensor_front != 0:
+			#print ("Obsatcle on the front.")
+			if not self.collision_front:
+				self.collision_front = True
+				GPIO.output(23, True)
+		else: 
+			if self.collision_front:
+				self.collision_front = False
+				GPIO.output(23, False)
 
-	# def collisionWarningFront(self): 
-	# 	if self.sensors.sensor_front < 70: #and self.sensors.sensor_front != 0:
-	# 		#print ("Obsatcle on the front.")
-	# 		if not self.collision_hand:
-	# 			self.collision_hand = True
-	# 			GPIO.output(22, True)
-	# 	else: 
-	# 		if self.collision_hand:
-	# 			self.collision_hand = False
-	# 			GPIO.output(22, False)
+		if self.collision_front == True and self.sensors.sensor_front < 40:
+				self.front_count = self.front_count + 1
+				if self.front_count == 5:
+					self.front_count = 0
+				if self.front_count == 0:
+					self.say('Front obstacle is very near')
+			elif self.collision_front == False:
+				self.front_count = 0
 
 	def collisionWarningLeft(self): 
 		if self.sensors.sensor_left < 70: #and self.sensors.sensor_left != 0:
@@ -121,7 +121,7 @@ class ObstacleDetector():
 		self.collisionWarningRightAnkle()
 		self.collisionWarningHand()
 		self.collisionWarningLeft()
-		# self.collisionWarningFront()
+		self.collisionWarningFront()
 		#time.sleep(0.1)
 		if not self.prog_controller.is_program_running():
 			print('ObstacleDetector stopped')
