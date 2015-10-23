@@ -61,6 +61,7 @@ def setup():
   GPIO.output(24, False) #right
 
 if __name__ == '__main__':
+  print("Welcome")
   setup()
   orient = compass.Compass()
   displace = displacement.Displacement()
