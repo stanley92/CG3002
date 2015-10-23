@@ -139,9 +139,9 @@ class Simulation():
         else:  
           newDistTra = math.cos( math.radians( math.fabs (self.orient.getAngleOfNodes()-self.orient.getCompassValue() ) ) ) * newSteps
         # distance to next node
-        if newDistTra < 0
+        if newDistTra < 0:
           self.say('You are in the wrong direction')
-          
+
         print('Distance total: ' + str(self.displace.getDistCal()))
         print('Distance travelled: ' + str(self.displace.getDistTra()))
         print('Distance to next node: ' + str(self.displace.getDistCal()-self.displace.getDistTra()))
