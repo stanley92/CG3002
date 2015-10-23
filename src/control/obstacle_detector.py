@@ -45,7 +45,7 @@ class ObstacleDetector():
 				GPIO.output(25, False)
 
 	def collisionWarningHand(self): # detect obstacle with hand
-		if self.sensors.sensor_front < 70 or self.sensors.sensor_hand < 80: #and self.sensors.sensor_hand != 0:
+		if self.sensors.sensor_front < 70 or self.sensors.sensor_hand < 70: #and self.sensors.sensor_hand != 0:
 			#print ("There is obstacle in front.")
 			if not self.collision_hand:
 				self.collision_hand = True
