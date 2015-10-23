@@ -55,13 +55,13 @@ class ObstacleDetector():
 				self.collision_hand = False
 				GPIO.output(22, False)
 
-		# if self.collision_hand == True and self.front_count == 0 and self.sensors.sensor_front < 40:
-		# 	self.say('Front obstacle is too near')
-		# 	self.front_count = self.front_count + 1
-		# 	if self.front_count == 5:
-		# 		self.front_count = 0
-		# elif self.collison_hand == False:
-		# 	self.front_count = 0
+		if self.collision_hand == True and self.front_count == 0 and self.sensors.sensor_front < 40:
+			self.say('Front obstacle is too near')
+			self.front_count = self.front_count + 1
+			if self.front_count == 5:
+				self.front_count = 0
+		elif self.collison_hand == False:
+			self.front_count = 0
 
 	# def collisionWarningFront(self): 
 	# 	if self.sensors.sensor_front < 70: #and self.sensors.sensor_front != 0:
