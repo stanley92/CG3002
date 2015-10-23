@@ -60,7 +60,7 @@ class ObstacleDetector():
 			self.front_count = self.front_count + 1
 			if self.front_count == 5:
 				self.front_count = 0
-		else if self.collison_hand = False:
+		elif self.collison_hand = False:
 			self.front_count = 0
 
 	# def collisionWarningFront(self): 
