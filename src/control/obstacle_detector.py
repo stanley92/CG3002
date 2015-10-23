@@ -152,7 +152,7 @@ class ObstacleDetector():
 
 	def inf_loop_1(self):
 	 while True:
-		self.collisionWarningLeftAnkle()
+		self.collisionWarningLeft()
 		time.sleep(0.1)
 		if not self.prog_controller.is_program_running():
 			print('ObstacleDetector 1 stopped')
