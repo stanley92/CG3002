@@ -3,7 +3,6 @@ import time
 import os
 import subprocess
 import RPi.GPIO as GPIO
-from multiprocessing import Process
 
 # def poll_data_from_queue():
 #   #poll data
@@ -73,7 +72,7 @@ class ObstacleDetector():
 					self.front_count = 0
 				if self.front_count == 0:
 					self.say('Front obstacle is very near')
-		elif self.collision_front == False:
+			elif self.collision_front == False:
 				self.front_count = 0
 
 	def collisionWarningLeft(self): 
@@ -128,7 +127,6 @@ class ObstacleDetector():
 			print('ObstacleDetector stopped')
 			break
 
-
 	def inf_loop_4(self):
 	 while True:
 		self.collisionWarningFront()
@@ -169,12 +167,8 @@ class ObstacleDetector():
 			print('ObstacleDetector 1 stopped')
 			break
 	
-	def speak(self, message):
-		subprocess.call('espeak -v%s+%s "%s" 2>/dev/null' % ('en-us', 'f4', message), shell=True) 
-		
-	def say(self, message):
-		p = Process(target=self.speak, args=[message])
-		p.start()
 
+	def say(self, message):
+		subprocess.call('espeak -v%s+%s "%s" 2>/dev/null' % ('en-us', 'f4', message), shell=True) 
 
 
