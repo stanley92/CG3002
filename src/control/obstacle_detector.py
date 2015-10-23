@@ -58,7 +58,7 @@ class ObstacleDetector():
 		if self.collision_hand and self.front_count == 0 and self.sensors.sensor_front < 40:
 			self.say('Front obstacle is too near')
 			self.front_count = self.front_count + 1
-			if self.front_count = 5:
+			if self.front_count == 5:
 				self.front_count = 0
 		else if self.collison_hand = False:
 			self.front_count = 0
