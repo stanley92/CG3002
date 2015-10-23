@@ -66,14 +66,14 @@ class ObstacleDetector():
 				self.collision_front = False
 				GPIO.output(22, False)
 
-		if self.collision_front == True and self.sensors.sensor_front < 40:
-				self.front_count = self.front_count + 1
-				if self.front_count == 5:
-					self.front_count = 0
-				if self.front_count == 0:
-					self.say('Front obstacle is very near')
-			elif self.collision_front == False:
-				self.front_count = 0
+		# if self.collision_front == True and self.sensors.sensor_front < 40:
+		# 		self.front_count = self.front_count + 1
+		# 		if self.front_count == 5:
+		# 			self.front_count = 0
+		# 		if self.front_count == 0:
+		# 			self.say('Front obstacle is very near')
+		# 	elif self.collision_front == False:
+		# 		self.front_count = 0
 
 	def collisionWarningLeft(self): 
 		if self.sensors.sensor_left < 70: #and self.sensors.sensor_left != 0:
