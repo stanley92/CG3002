@@ -15,7 +15,7 @@ class ObstacleDetector():
 		self.collision_hand = False
 		self.collision_left = False
 		self.collision_right = False
-		self front_count = 0
+		self.front_count = 0
 
 	# def collisionWarningDown(self):
 	#   if self.sensors.sensor_down > 2000 or self.sensors.sensor_down == 0:
