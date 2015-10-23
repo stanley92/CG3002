@@ -51,12 +51,12 @@ def say(message):
 
 def setup():
   GPIO.setmode(GPIO.BCM)
-  GPIO.setup(23, GPIO.OUT, pull_up_down = GPIO.PUD_DOWN)
+  # GPIO.setup(23, GPIO.OUT, pull_up_down = GPIO.PUD_DOWN)
   GPIO.setup(25, GPIO.OUT, pull_up_down = GPIO.PUD_DOWN)
   GPIO.setup(22, GPIO.OUT, pull_up_down = GPIO.PUD_DOWN)
   GPIO.setup(27, GPIO.OUT, pull_up_down = GPIO.PUD_DOWN)
   GPIO.setup(24, GPIO.OUT, pull_up_down = GPIO.PUD_DOWN)
-  GPIO.output(23, False) #left ankle
+  # GPIO.output(23, False) #left ankle
   GPIO.output(25, False) #right ankle
   GPIO.output(22, False) #hand
   GPIO.output(27, False) #left 
@@ -105,13 +105,13 @@ if __name__ == '__main__':
           obstacle_detect_thread_3 = threading.Thread(target = obstacle_detect.inf_loop_3, args = [])
           obstacle_detect_thread_4 = threading.Thread(target = obstacle_detect.inf_loop_4, args = [])
           obstacle_detect_thread_5 = threading.Thread(target = obstacle_detect.inf_loop_5, args = [])
-          obstacle_detect_thread_6 = threading.Thread(target = obstacle_detect.inf_loop_6, args = [])
+          # obstacle_detect_thread_6 = threading.Thread(target = obstacle_detect.inf_loop_6, args = [])
           obstacle_detect_thread_1.start()
           obstacle_detect_thread_2.start()
           obstacle_detect_thread_3.start()
           obstacle_detect_thread_4.start()
           obstacle_detect_thread_5.start()
-          obstacle_detect_thread_6.start()
+          # obstacle_detect_thread_6.start()
           keypad_data.clear()
           subprocess.call('espeak -v%s+%s "%s" 2>/dev/null' % ('en-us', 'f3', 'All data ready. You can start walking.'), shell=True)
 
