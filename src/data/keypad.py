@@ -13,27 +13,32 @@ class KeypadData():
     print(key);
     if key == '*':
       self.clear()
-      
+      self.say('clear')
+      print('clear')  
     elif key == '#':
       if self.current_change == -1:
         self.current_change =self.current_change+1
       elif self.current_change == 0:
         self.building = self.current_input
+        self.say(self.building)    
         print('building: '+ str(self.building))
         self.current_input = 0
         self.current_change=self.current_change+1
       elif self.current_change == 1:
         self.level = self.current_input
+        self.say(int(level))
         print('level: '+ str(self.level))
         self.current_input = 0
         self.current_change=self.current_change+1
       elif self.current_change == 2:
         self.start_node = self.current_input
+        self.say(int(self.start_node))
         print('start_node: '+ str(self.start_node))
         self.current_input = 0
         self.current_change=self.current_change+1
       elif self.current_change == 3:  
         self.end_node = self.current_input
+        self.say(int(self.end_node))
         print('end_node: '+ str(self.end_node))
         self.current_input = 0
         self.current_change=self.current_change+1
@@ -64,6 +69,9 @@ class KeypadData():
       self.request_query_dist = False
       return True
     return self.request_query_dist
+
+  def say(self, message):
+    subprocess.call('espeak -v%s+%s "%s" 2>/dev/null' % ('en-us', 'f3', message), shell=True) 
 
   def clear(self):
     self.building = None
