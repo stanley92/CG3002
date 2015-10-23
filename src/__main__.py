@@ -40,7 +40,8 @@ def data_poll(comm_data_buffer, keypad_data, compass_data, displacement_data, se
       if not prog_controller.is_program_running():
         print("data polling stopped")
         break
-    except:
+    except Exception as e:
+      print(str(e))
       pass
 
 def say(message):

@@ -46,7 +46,7 @@ class KeypadData():
       
 
     elif ord(key) in range(ord('0'),ord('9')+1):
-      self.say(key);
+      self.say(key)
       if self.current_change == -1:
         if ord(key) == ord('9'):
           self.request_query_dist = True
