@@ -17,37 +17,36 @@ class KeypadData():
       print('clear')  
     elif key == '#':
       if self.current_change == -1:
-        self.current_change =self.current_change+1
-        self.say('welcome')
-        print('Welcome')
+        self.current_change = self.current_change+1
       elif self.current_change == 0:
         self.building = self.current_input
-        self.say(self.building)    
         print('building: '+ str(self.building))
+        self.say(str(self.building))
         self.current_input = 0
         self.current_change=self.current_change+1
       elif self.current_change == 1:
         self.level = self.current_input
-        self.say(int(level))
         print('level: '+ str(self.level))
+        self.say(str(self.level))
         self.current_input = 0
         self.current_change=self.current_change+1
       elif self.current_change == 2:
         self.start_node = self.current_input
-        self.say(int(self.start_node))
         print('start_node: '+ str(self.start_node))
+        self.say(str(self.start_node))
         self.current_input = 0
         self.current_change=self.current_change+1
       elif self.current_change == 3:  
         self.end_node = self.current_input
-        self.say(int(self.end_node))
         print('end_node: '+ str(self.end_node))
+        self.say(str(self.end_node))
         self.current_input = 0
         self.current_change=self.current_change+1
         self.ready = True
       
 
     elif ord(key) in range(ord('0'),ord('9')+1):
+      self.say(key);
       if self.current_change == -1:
         if ord(key) == ord('9'):
           self.request_query_dist = True
