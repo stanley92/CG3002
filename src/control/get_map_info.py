@@ -124,6 +124,7 @@ def downloadMap(params):
   resp = requests.get(url=url, params=params)
   print(resp)
   print(resp.json)
+  assert(type(resp.json) == dict)
   return resp.json
 
 def parseMapData(data):
@@ -152,7 +153,21 @@ def parseMapData(data):
   return Map(info, location_nodes, wifi_nodes)
 
 def getMapInfo(building, level):
-  jsonObject = downloadMap(dict(Building=building, Level=level))
+  try:
+    jsonObject = downloadMap(dict(Building=building, Level=level))
+  except Exception as e:
+    print(str(e))
+    print("Cannot download map")
+    if building == 1:
+      if level == 2:
+        data_file = open("1_2.json")
+    elif building == 2:
+      if level == 2:
+        data_file = open("2_2.json")
+      elif level == 3:
+        data_file = open("2_3.json")
+    jsonObject = json.load(data_file)
+  print(jsonObject)
   mapInfo = parseMapData(jsonObject)
   return mapInfo
 
