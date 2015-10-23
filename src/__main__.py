@@ -74,12 +74,12 @@ if __name__ == '__main__':
   data_poll_thread = threading.Thread(target = data_poll, args = [c, keypad_data, orient, displace, sensors_data, prog_controller])
   data_poll_thread.start() 
 
-  self.say('Welcome')
-  
+  subprocess.call('espeak -v%s+%s "%s" 2>/dev/null' % ('en-us', 'f3', 'Welcome'), shell=True)
+
   try :
     while True:
       if keypad_data.data_ready():
-        self.say('All data ready. You can start walking.')
+        subprocess.call('espeak -v%s+%s "%s" 2>/dev/null' % ('en-us', 'f3', 'All data ready. You can start walking.'), shell=True)
         print('ALL DATA READY START THE THING!')
         time.sleep(1)
         building = keypad_data.building #str(input('Building Name: '))
@@ -168,8 +168,6 @@ if __name__ == '__main__':
       print('Data polling thread never started')
       pass
 
-def say(self, message):
-    subprocess.call('espeak -v%s+%s "%s" 2>/dev/null' % ('en-us', 'f3', message), shell=True) 
   # print("Welcome")
   # building = 'COM1'
   # level = 2
