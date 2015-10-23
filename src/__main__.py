@@ -46,8 +46,12 @@ def data_poll(comm_data_buffer, keypad_data, compass_data, displacement_data, se
       print(str(e))
       pass
 
+def speak(message):
+    subprocess.call('espeak -v%s+%s "%s" 2>/dev/null' % ('en-us', 'f4', message), shell=True) 
+    
 def say(message):
-  subprocess.call('espeak -v%s+%s -s 170 "%s" 2>/dev/null' % ('en-us', 'f4', message), shell=True) 
+  p = Process(target=speak, args=[message])
+  p.start()
 
 def setup():
   GPIO.setmode(GPIO.BCM)

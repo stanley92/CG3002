@@ -205,9 +205,12 @@ class Simulation():
   #### TODO: motor
   #print('')
 
+  def speak(self, message):
+    subprocess.call('espeak -v%s+%s "%s" 2>/dev/null' % ('en-us', 'f4', message), shell=True) 
+    
   def say(self, message):
-    subprocess.call('espeak -v%s+%s "%s" 2>/dev/null' % ('en-us', 'f3', message), shell=True) 
-
+    p = Process(target=self.speak, args=[message])
+    p.start()
   
 # Simulation(building, level, start=3, end=6)
 # Simulation(building, level, x=200, y=600, end=6)
