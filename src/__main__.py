@@ -1,7 +1,9 @@
-import threading
+# import threading
 import time
 import subprocess
 import RPi.GPIO as GPIO
+
+from multiprocessing import Process
 
 from . import communication
 from . import control
@@ -74,8 +76,10 @@ if __name__ == '__main__':
   c = communication.Communication(prog_controller)
   while not c.handshaken:
     c.initialise()
-  data_poll_thread = threading.Thread(target = data_poll, args = [c, keypad_data, orient, displace, sensors_data, prog_controller])
-  data_poll_thread.start() 
+  data_poll_process = Process(target = data_poll, args = [c, keypad_data, orient, displace, sensors_data, prog_controller])
+  data_poll_process.start() 
+  # data_poll_thread = threading.Thread(target = data_poll, args = [c, keypad_data, orient, displace, sensors_data, prog_controller])
+  # data_poll_thread.start() 
 
   subprocess.call('espeak -v%s+%s "%s" 2>/dev/null' % ('en-us', 'f3', 'Welcome'), shell=True)
 
@@ -98,17 +102,21 @@ if __name__ == '__main__':
           start = keypad_data.start_node #int(input('Start: '))
           end = keypad_data.end_node #int(input('End: '))
           run = run_simulation.Simulation(prog_controller, orient, displace, building, level, start=start, end=end)
-          run_simulation_thread = threading.Thread(target = run.start_nav, args = [])
-          run_simulation_thread.start()
+          run_simulation_process = Process(target = run.start_nav, args = [])
+          run_simulation_process.start()
+          # run_simulation_thread = threading.Thread(target = run.start_nav, args = [])
+          # run_simulation_thread.start()
           obstacle_detect = obstacle_detector.ObstacleDetector(prog_controller, sensors_data)
-          obstacle_detect_thread = threading.Thread(target = obstacle_detect.inf_loop, args = [])
+          obstacle_detect_process = Process(target = obstacle_detect.inf_loop, args = [])
+          # obstacle_detect_thread = threading.Thread(target = obstacle_detect.inf_loop, args = [])
           # obstacle_detect_thread_1 = threading.Thread(target = obstacle_detect.inf_loop_1, args = [])
           # obstacle_detect_thread_2 = threading.Thread(target = obstacle_detect.inf_loop_2, args = [])
           # obstacle_detect_thread_3 = threading.Thread(target = obstacle_detect.inf_loop_3, args = [])
           # obstacle_detect_thread_4 = threading.Thread(target = obstacle_detect.inf_loop_4, args = [])
           # obstacle_detect_thread_5 = threading.Thread(target = obstacle_detect.inf_loop_5, args = [])
           # obstacle_detect_thread_6 = threading.Thread(target = obstacle_detect.inf_loop_6, args = [])
-          obstacle_detect_thread.start()
+          obstacle_detect_process.start()
+          # obstacle_detect_thread.start()
           # obstacle_detect_thread_1.start()
           # obstacle_detect_thread_2.start()
           # obstacle_detect_thread_3.start()
@@ -135,19 +143,22 @@ if __name__ == '__main__':
     GPIO.cleanup()
     prog_controller.stop()
     try:
-      c.thread.join() #polling
+      c.process.join() #polling
+      # c.thread.join() #polling
     except NameError:
-      print('Communication data buffer thread never started')
+      print('Communication data buffer process never started')
       pass
     try:
-      run_simulation_thread.join() #run simulation
+      run_simulation_process.join()
+      # run_simulation_thread.join() #run simulation
     except NameError:
-      print('Run simulation thread never started')
+      print('Run simulation process never started')
       pass
     try:
-      obstacle_detect_thread.join() #obs detect
+      obstacle_detect_process.join() #obs detect
+      # obstacle_detect_thread.join() #obs detect
     except NameError:
-      print('ObstacleDetector thread never started')
+      print('ObstacleDetector process never started')
       pass
     # try:
     #   obstacle_detect_thread_2.join() #obs detect
@@ -175,9 +186,10 @@ if __name__ == '__main__':
     #   print('ObstacleDetector 1 thread never started')
     #   pass
     try:
-      data_poll_thread.join() #polling
+      data_poll_process.join() #polling
+      # data_poll_thread.join() #polling
     except NameError:
-      print('Data polling thread never started')
+      print('Data polling process never started')
       pass
 
   # print("Welcome")
