@@ -1,7 +1,7 @@
 from . import arduino
 from . import serial_comm
 from . import data_buffer
-# import threading
+import threading
 
 from multiprocessing import Process
 
@@ -12,8 +12,8 @@ class Communication():
     self.ard = arduino.Arduino(self.ser)
     self.handshaken = False
     self.buffer = None
-    self.process = None
-    # self.thread = None
+    # self.process = None
+    self.thread = None
 
   def read_from_port(self):
     while True:
@@ -27,10 +27,10 @@ class Communication():
     self.handshaken = True
     if self.handshaken:
       self.buffer = data_buffer.DataBuffer(num_queue, self.ard)
-      self.process = Process(target=self.read_from_port,args=[]) 
-      self.process.start()
-      # self.thread = threading.Thread(target=self.read_from_port,args=[])
-      # self.thread.start()
+      # self.process = Process(target=self.read_from_port,args=[]) 
+      # self.process.start()
+      self.thread = threading.Thread(target=self.read_from_port,args=[])
+      self.thread.start()
     return self.handshaken # False means failed
     
   def pop_next(self, queue_number):
