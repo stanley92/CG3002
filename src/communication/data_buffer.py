@@ -6,8 +6,7 @@ class DataBuffer():
     for i in range(num_queue):
       self.queues[i] = deque()
     self.ard = ard
-    logging.basicConfig(filename='databuffer.log', level=logging.DEBUG)
-    logging.debug('***** START BUFFER *****')
+    
 
   def push(self, channel, m):
     try:
@@ -17,9 +16,6 @@ class DataBuffer():
       print("Index Error")
       print("channel = " + str(channel))
       print("message = " + m)
-      logging.ERROR("Index Error")
-      logging.ERROR("channel = " + str(channel))
-      logging.ERROR("message = " + m)
   
   def buffer(self):
     self.ard.get_data(self.push)
@@ -33,7 +29,6 @@ class DataBuffer():
   def last(self, channel):
     try:
       message = self.queues[channel].pop()
-      logging.debug('Channel '+str(channel)+' latest data acknowledged ~ : "'+str(message)+'"')
       return message
     except IndexError:
       return None
