@@ -1,4 +1,4 @@
-import threading
+# import threading
 import time
 import subprocess
 import RPi.GPIO as GPIO
@@ -143,8 +143,8 @@ if __name__ == '__main__':
     GPIO.cleanup()
     prog_controller.stop()
     try:
-      # c.process.join() #polling
-      c.thread.join() #polling
+      c.process.join() #polling
+      # c.thread.join() #polling
     except NameError:
       print('Communication data buffer process never started')
       pass
