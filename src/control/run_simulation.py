@@ -128,7 +128,7 @@ class Simulation():
 
     while(self.displace.getDistTra() < self.displace.getDistCal()): #havent travel enuf distance
       # turning into correct direction
-      if not self.prog_controller.is_program_running():
+      if not self.prog_controller.is_program_running_sim():
         print("Run Simulation stopped")
         break
       self.turn()
