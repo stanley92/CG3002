@@ -4,7 +4,7 @@ import math
 #from scipy.integrate import quad
 
 class Displacement():
-  def __init__(self, step_size=28):
+  def __init__(self, step_size=32):
     # Actual distance calculated
     self.step_size = step_size
     self.dist_cal = 0
