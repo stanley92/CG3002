@@ -76,7 +76,7 @@ if __name__ == '__main__':
     c.initialise()
   data_poll_thread = threading.Thread(target = data_poll, args = [c, keypad_data, orient, displace, sensors_data, prog_controller])
   data_poll_thread.start() 
-  displace.initialise()
+  
   subprocess.call('espeak -v%s+%s "%s" 2>/dev/null' % ('en-us', 'f3', 'Welcome'), shell=True)
 
   try :
@@ -97,28 +97,43 @@ if __name__ == '__main__':
         if point == 'y':
           start = keypad_data.start_node #int(input('Start: '))
           end = keypad_data.end_node #int(input('End: '))
-          run = run_simulation.Simulation(prog_controller, orient, displace, building, level, start=start, end=end)
-          run_simulation_thread = threading.Thread(target = run.start_nav, args = [])
-          run_simulation_thread.start()
-          obstacle_detect = obstacle_detector.ObstacleDetector(prog_controller, sensors_data)
-          obstacle_detect_thread = threading.Thread(target = obstacle_detect.inf_loop, args = [])
-          # obstacle_detect_thread_1 = threading.Thread(target = obstacle_detect.inf_loop_1, args = [])
-          # obstacle_detect_thread_2 = threading.Thread(target = obstacle_detect.inf_loop_2, args = [])
-          # obstacle_detect_thread_3 = threading.Thread(target = obstacle_detect.inf_loop_3, args = [])
-          # obstacle_detect_thread_4 = threading.Thread(target = obstacle_detect.inf_loop_4, args = [])
-          # obstacle_detect_thread_5 = threading.Thread(target = obstacle_detect.inf_loop_5, args = [])
-          # obstacle_detect_thread_6 = threading.Thread(target = obstacle_detect.inf_loop_6, args = [])
-          obstacle_detect_thread.start()
-          # obstacle_detect_thread_1.start()
-          # obstacle_detect_thread_2.start()
-          # obstacle_detect_thread_3.start()
-          # obstacle_detect_thread_4.start()
-          # obstacle_detect_thread_5.start()
-          # obstacle_detect_thread_6.start()
-          keypad_data.clear()
-          subprocess.call('espeak -v%s+%s "%s" 2>/dev/null' % ('en-us', 'f3', 'All data ready. You can start walking.'), shell=True)
-
-          # run.start_nav()
+          try:
+            displace.initialise()
+            run = run_simulation.Simulation(prog_controller, orient, displace, building, level, start=start, end=end)
+            run_simulation_thread = threading.Thread(target = run.start_nav, args = [])
+            run_simulation_thread.start()
+            obstacle_detect = obstacle_detector.ObstacleDetector(prog_controller, sensors_data)
+            obstacle_detect_thread = threading.Thread(target = obstacle_detect.inf_loop, args = [])
+            # obstacle_detect_thread_1 = threading.Thread(target = obstacle_detect.inf_loop_1, args = [])
+            # obstacle_detect_thread_2 = threading.Thread(target = obstacle_detect.inf_loop_2, args = [])
+            # obstacle_detect_thread_3 = threading.Thread(target = obstacle_detect.inf_loop_3, args = [])
+            # obstacle_detect_thread_4 = threading.Thread(target = obstacle_detect.inf_loop_4, args = [])
+            # obstacle_detect_thread_5 = threading.Thread(target = obstacle_detect.inf_loop_5, args = [])
+            # obstacle_detect_thread_6 = threading.Thread(target = obstacle_detect.inf_loop_6, args = [])
+            obstacle_detect_thread.start()
+            # obstacle_detect_thread_1.start()
+            # obstacle_detect_thread_2.start()
+            # obstacle_detect_thread_3.start()
+            # obstacle_detect_thread_4.start()
+            # obstacle_detect_thread_5.start()
+            # obstacle_detect_thread_6.start()
+            keypad_data.clear()
+            subprocess.call('espeak -v%s+%s "%s" 2>/dev/null' % ('en-us', 'f3', 'All data ready. You can start walking.'), shell=True)
+          except Exception as e:
+            print('Some error')
+            prog_controller.stop()
+            try:
+              run_simulation_thread.join() #run simulation
+            except NameError:
+              print('Run simulation thread never started')
+              pass
+            try:
+              obstacle_detect_thread.join() #obs detect
+            except NameError:
+              print('ObstacleDetector thread never started')
+              pass
+            say ('Program reset done')
+            prog_controller.start()
         elif point == 'n':
           x_coord = int (input ('Input x-coordinate: '))
           y_coord = int (input ('Input y-coordinate: '))
@@ -144,6 +159,7 @@ if __name__ == '__main__':
           print('ObstacleDetector thread never started')
           pass
         say ('Program reset done')
+        prog_controller.start()
   except KeyboardInterrupt:
     GPIO.cleanup()
     prog_controller.stop()
