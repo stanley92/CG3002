@@ -14,7 +14,7 @@ class Controller():
     self.running_all = False
 
   def stop_sim(self):
-    self.running_all = False
+    self.running_sim = False
 
   def is_program_running_all(self):
     return self.running_all
