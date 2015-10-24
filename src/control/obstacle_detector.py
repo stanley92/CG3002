@@ -123,7 +123,7 @@ class ObstacleDetector():
 		self.collisionWarningLeft()
 		self.collisionWarningFront()
 		#time.sleep(0.1)
-		if not self.prog_controller.is_program_running_sim()::
+		if not self.prog_controller.is_program_running_sim():
 			print('ObstacleDetector stopped')
 			break
 
