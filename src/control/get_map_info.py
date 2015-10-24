@@ -158,13 +158,13 @@ def getMapInfo(building, level):
   except Exception as e:
     print(str(e))
     print("Cannot download map")
-    if building == 1:
-      if level == 2:
+    if building == 1 or building == '1' or building == 'COM1':
+      if level == 2 or level == '2':
         data_file = open("1_2.json")
-    elif building == 2:
-      if level == 2:
+    elif building == 2 or building == '2' or building == 'COM2':
+      if level == 2 or level == '2':
         data_file = open("2_2.json")
-      elif level == 3:
+      elif level == 3 or level == '3':
         data_file = open("2_3.json")
     jsonObject = json.load(data_file)
   print(jsonObject)

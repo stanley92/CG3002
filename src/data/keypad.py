@@ -10,10 +10,14 @@ class KeypadData():
     self.ready = False
     self.current_input = 0
     self.request_query_dist = False
+    self.reset_prog = False
 
   def key_in(self, key):
     print(key);
     if key == '*':
+      if self.current_change == -1:
+        self.reset_prog = True
+        print('program reset')
       self.clear()
       self.say('clear')
       print('clear')  
@@ -70,6 +74,12 @@ class KeypadData():
 
   def data_ready(self):
     return self.ready
+
+  def signal_prog_reset(self):
+    if self.reset_prog:
+      self.reset_prog = False
+      return True
+    return self.reset_prog
 
   def function_query_dist(self):
     if self.request_query_dist:
