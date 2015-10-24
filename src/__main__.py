@@ -104,24 +104,17 @@ if __name__ == '__main__':
             run_simulation_thread.start()
             obstacle_detect = obstacle_detector.ObstacleDetector(prog_controller, sensors_data)
             obstacle_detect_thread = threading.Thread(target = obstacle_detect.inf_loop, args = [])
-            # obstacle_detect_thread_1 = threading.Thread(target = obstacle_detect.inf_loop_1, args = [])
-            # obstacle_detect_thread_2 = threading.Thread(target = obstacle_detect.inf_loop_2, args = [])
-            # obstacle_detect_thread_3 = threading.Thread(target = obstacle_detect.inf_loop_3, args = [])
-            # obstacle_detect_thread_4 = threading.Thread(target = obstacle_detect.inf_loop_4, args = [])
-            # obstacle_detect_thread_5 = threading.Thread(target = obstacle_detect.inf_loop_5, args = [])
-            # obstacle_detect_thread_6 = threading.Thread(target = obstacle_detect.inf_loop_6, args = [])
             obstacle_detect_thread.start()
-            # obstacle_detect_thread_1.start()
-            # obstacle_detect_thread_2.start()
-            # obstacle_detect_thread_3.start()
-            # obstacle_detect_thread_4.start()
-            # obstacle_detect_thread_5.start()
-            # obstacle_detect_thread_6.start()
             keypad_data.clear()
             subprocess.call('espeak -v%s+%s "%s" 2>/dev/null' % ('en-us', 'f3', 'All data ready. You can start walking.'), shell=True)
           except Exception as e:
             print('Some error')
             prog_controller.stop()
+            try:
+              c.thread.join() #polling
+            except NameError:
+              print('Communication data buffer thread never started')
+              pass
             try:
               run_simulation_thread.join() #run simulation
             except NameError:
@@ -132,8 +125,14 @@ if __name__ == '__main__':
             except NameError:
               print('ObstacleDetector thread never started')
               pass
-            say ('Program reset done')
+            try:
+              data_poll_thread.join() #polling
+            except NameError:
+              print('Data polling thread never started')
+              pass
             prog_controller.start()
+            data_poll_thread.start()
+            c.initialise()
         elif point == 'n':
           x_coord = int (input ('Input x-coordinate: '))
           y_coord = int (input ('Input y-coordinate: '))
@@ -149,6 +148,11 @@ if __name__ == '__main__':
       elif keypad_data.signal_prog_reset():
         prog_controller.stop()
         try:
+          c.thread.join() #polling
+        except NameError:
+          print('Communication data buffer thread never started')
+          pass
+        try:
           run_simulation_thread.join() #run simulation
         except NameError:
           print('Run simulation thread never started')
@@ -158,8 +162,14 @@ if __name__ == '__main__':
         except NameError:
           print('ObstacleDetector thread never started')
           pass
-        say ('Program reset done')
+        try:
+          data_poll_thread.join() #polling
+        except NameError:
+          print('Data polling thread never started')
+          pass
         prog_controller.start()
+        data_poll_thread.start()
+        c.initialise()
   except KeyboardInterrupt:
     GPIO.cleanup()
     prog_controller.stop()
@@ -178,77 +188,8 @@ if __name__ == '__main__':
     except NameError:
       print('ObstacleDetector thread never started')
       pass
-    # try:
-    #   obstacle_detect_thread_2.join() #obs detect
-    # except NameError:
-    #   print('ObstacleDetector 2 thread never started')
-    #   pass
-    # try:
-    #   obstacle_detect_thread_3.join() #obs detect
-    # except NameError:
-    #   print('ObstacleDetector 3 thread never started')
-    #   pass
-    # try:
-    #   obstacle_detect_thread_4.join() #obs detect
-    # except NameError:
-    #   print('ObstacleDetector 4 thread never started')
-    #   pass
-    # try:
-    #   obstacle_detect_thread_5.join() #obs detect
-    # except NameError:
-    #   print('ObstacleDetector 5 thread never started')
-    #   pass
-    # try:
-    #   obstacle_detect_thread_1.join() #obs detect
-    # except NameError:
-    #   print('ObstacleDetector 1 thread never started')
-    #   pass
     try:
       data_poll_thread.join() #polling
     except NameError:
       print('Data polling thread never started')
       pass
-
-  # print("Welcome")
-  # building = 'COM1'
-  # level = 2
-  # point = 'y'
-  # if point == 'y':
-  #   start = 1
-  #   end = 28
-  #   run = run_simulation.Simulation(orient, displace, building, level, start=start, end=end)
-  #   run.start_nav()
-  # elif point == 'n':
-  #   x_coord = int (input ('Input x-coordinate: '))
-  #   y_coord = int (input ('Input y-coordinate: '))
-  #   heading = float (input ('Input heading: '))
-  #   end = int(input('End: '))
-  #   run = run_simulation.Simulation(orient, displace, building, level, x=x_coord, y=y_coord, end=end, heading = heading)
-  #   run.start_nav()
-  
-  # print("")
-  
-  #handshaken
-
-  # building = keypad_data.building #str(input('Building Name: '))
-  # if building == 1:
-  #   building = 'COM1'
-  # elif building == 2:
-  #   building = 'COM2'
-  # level = keypad_data.level #input('Building Level: ')
-  # if level == 0:
-  #   level = 'B1'
-  # point = 'y' #input('Are you on a starting point? ')
-  # if point == 'y':
-  #   start = keypad_data.start_node #int(input('Start: '))
-  #   end = keypad_data.end_node #int(input('End: '))
-
-  # run = run_simulation.Simulation(orient, displace, building, level, start=start, end=end)
-  # run.start_nav()
-  # elif point == 'n':
-  #   x_coord = int (input ('Input x-coordinate: '))
-  #   y_coord = int (input ('Input y-coordinate: '))
-  #   heading = float (input ('Input heading: '))
-  #   end = int(input('End: '))
-  #   run = run_simulation.Simulation(orient, displace, building, level, x=x_coord, y=y_coord, end=end, heading = heading)
-  #   run.start_nav()
