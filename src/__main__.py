@@ -131,8 +131,9 @@ if __name__ == '__main__':
               print('Data polling thread never started')
               pass
             prog_controller.start()
-            data_poll_thread.start()
             c.initialise()
+            data_poll_thread = threading.Thread(target = data_poll, args = [c, keypad_data, orient, displace, sensors_data, prog_controller])
+            data_poll_thread.start() 
         elif point == 'n':
           x_coord = int (input ('Input x-coordinate: '))
           y_coord = int (input ('Input y-coordinate: '))
@@ -168,8 +169,9 @@ if __name__ == '__main__':
           print('Data polling thread never started')
           pass
         prog_controller.start()
-        data_poll_thread.start()
         c.initialise()
+        data_poll_thread = threading.Thread(target = data_poll, args = [c, keypad_data, orient, displace, sensors_data, prog_controller])
+        data_poll_thread.start() 
   except KeyboardInterrupt:
     GPIO.cleanup()
     prog_controller.stop()
