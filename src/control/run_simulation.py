@@ -170,7 +170,8 @@ class Simulation():
     if i!=-1 and i<len(self.path)-2 :
       arrivedText = 'You have reached node ' + self.graph.getVertex(self.path[i+1]).name + ' ' + str(self.orient.userOffset())
       print (str(arrivedText))
-      subprocess.call('espeak -v%s+%s -s100 "%s" 2>/dev/null' % ('en-us', 'f3', arrivedText), shell=True)
+      subprocess.call('espeak -v%s+%s -s120 "%s" 2>/dev/null' % ('en-us', 'f3', arrivedText), shell=True)
+      subprocess.call('espeak -v%s+%s -s120 "%s" 2>/dev/null' % ('en-us', 'f3', arrivedText), shell=True)
       #print('You have reached node ' + self.graph.getVertex(self.path[i+1]).name + ' ' + self.orient.userOffset())
       #self.say('You have reached node ' + self.graph.getVertex(self.path[i+1]).name + ' ' + self.orient.userOffset())
     else:
