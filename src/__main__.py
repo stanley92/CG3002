@@ -39,7 +39,7 @@ def data_poll(comm_data_buffer, keypad_data, compass_data, displacement_data, se
         sensors_data.set_sensor_right_ankle(int(comm_data_buffer.buffer.last(7)))
       # if comm_data_buffer.buffer.have_data(8):
       #   sensors_data.set_sensor_front(int(comm_data_buffer.buffer.last(8)))
-      if not prog_controller.is_program_running():
+      if not prog_controller.is_program_running_all():
         print("data polling stopped")
         break
     except Exception as e:
@@ -70,7 +70,7 @@ if __name__ == '__main__':
   sensors_data = sensors.Sensors()
   keypad_data = keypad.KeypadData()
   prog_controller = controller.Controller()
-  prog_controller.start()
+  prog_controller.start_all()
   c = communication.Communication(prog_controller)
   while not c.handshaken:
     c.initialise()
@@ -109,12 +109,7 @@ if __name__ == '__main__':
             subprocess.call('espeak -v%s+%s "%s" 2>/dev/null' % ('en-us', 'f3', 'All data ready. You can start walking.'), shell=True)
           except Exception as e:
             print('Some error')
-            prog_controller.stop()
-            try:
-              c.thread.join() #polling
-            except NameError:
-              print('Communication data buffer thread never started')
-              pass
+            prog_controller.stop_sim()
             try:
               run_simulation_thread.join() #run simulation
             except NameError:
@@ -125,34 +120,21 @@ if __name__ == '__main__':
             except NameError:
               print('ObstacleDetector thread never started')
               pass
-            try:
-              data_poll_thread.join() #polling
-            except NameError:
-              print('Data polling thread never started')
-              pass
-            prog_controller.start()
-            c.initialise()
-            data_poll_thread = threading.Thread(target = data_poll, args = [c, keypad_data, orient, displace, sensors_data, prog_controller])
-            data_poll_thread.start() 
-        elif point == 'n':
-          x_coord = int (input ('Input x-coordinate: '))
-          y_coord = int (input ('Input y-coordinate: '))
-          heading = float (input ('Input heading: '))
-          end = int(input('End: '))
-          run = run_simulation.Simulation(orient, displace, building, level, x=x_coord, y=y_coord, end=end, heading = heading)
-          run.start_nav()
+            prog_controller.start_sim()
+        # elif point == 'n':
+        #   x_coord = int (input ('Input x-coordinate: '))
+        #   y_coord = int (input ('Input y-coordinate: '))
+        #   heading = float (input ('Input heading: '))
+        #   end = int(input('End: '))
+        #   run = run_simulation.Simulation(orient, displace, building, level, x=x_coord, y=y_coord, end=end, heading = heading)
+        #   run.start_nav()
       elif keypad_data.function_query_dist():
         remainingDist = displace.getDistCal()-displace.getDistTra()
         print('Remaining Dist: ' + str (remainingDist))
         say('Remaining distance.')
         say(str(remainingDist))
       elif keypad_data.signal_prog_reset():
-        prog_controller.stop()
-        try:
-          c.thread.join() #polling
-        except NameError:
-          print('Communication data buffer thread never started')
-          pass
+        prog_controller.stop_sim()
         try:
           run_simulation_thread.join() #run simulation
         except NameError:
@@ -163,18 +145,10 @@ if __name__ == '__main__':
         except NameError:
           print('ObstacleDetector thread never started')
           pass
-        try:
-          data_poll_thread.join() #polling
-        except NameError:
-          print('Data polling thread never started')
-          pass
-        prog_controller.start()
-        c.initialise()
-        data_poll_thread = threading.Thread(target = data_poll, args = [c, keypad_data, orient, displace, sensors_data, prog_controller])
-        data_poll_thread.start() 
+        prog_controller.start_sim()
   except KeyboardInterrupt:
     GPIO.cleanup()
-    prog_controller.stop()
+    prog_controller.stop_all()
     try:
       c.thread.join() #polling
     except NameError:

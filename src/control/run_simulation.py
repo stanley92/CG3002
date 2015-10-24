@@ -16,9 +16,9 @@ import subprocess
 ANGLE_MARGIN = 10
 
 class Simulation():
-  def __init__ (self, controller, orient, displace, building, level, start=None, x=None, y=None, end=None):
+  def __init__ (self, prog_controller, orient, displace, building, level, start=None, x=None, y=None, end=None):
    
-    self.controller = controller
+    self.prog_controller = prog_controller
     self.building = building
     self.level = level
     self.start = start
@@ -104,7 +104,7 @@ class Simulation():
     
     for i in range(length):
       self.walk(i)
-      if not self.controller.is_program_running():
+      if not self.prog_controller.is_program_running_sim():
         print("Run Simulation stopped")
         break
       
@@ -128,7 +128,7 @@ class Simulation():
 
     while(self.displace.getDistTra() < self.displace.getDistCal()): #havent travel enuf distance
       # turning into correct direction
-      if not self.controller.is_program_running():
+      if not self.prog_controller.is_program_running():
         print("Run Simulation stopped")
         break
       self.turn()

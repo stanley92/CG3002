@@ -123,50 +123,9 @@ class ObstacleDetector():
 		self.collisionWarningLeft()
 		self.collisionWarningFront()
 		#time.sleep(0.1)
-		if not self.prog_controller.is_program_running():
+		if not self.prog_controller.is_program_running_sim()::
 			print('ObstacleDetector stopped')
 			break
-
-	def inf_loop_4(self):
-	 while True:
-		self.collisionWarningFront()
-		time.sleep(0.1)
-		if not self.prog_controller.is_program_running():
-			print('ObstacleDetector 4 stopped')
-			break
-
-	def inf_loop_5(self):
-	 while True:
-		self.collisionWarningRight()
-		time.sleep(0.1)
-		if not self.prog_controller.is_program_running():
-			print('ObstacleDetector 5 stopped')
-			break
-
-	def inf_loop_2(self):
-	 while True:
-		self.collisionWarningRightAnkle()
-		time.sleep(0.1)
-		if not self.prog_controller.is_program_running():
-			print('ObstacleDetector 2 stopped')
-			break
-
-	def inf_loop_3(self):
-	 while True:
-		self.collisionWarningHand()
-		time.sleep(0.1)
-		if not self.prog_controller.is_program_running():
-			print('ObstacleDetector 3 stopped')
-			break
-
-	def inf_loop_1(self):
-	 while True:
-		self.collisionWarningLeft()
-		time.sleep(0.1)
-		if not self.prog_controller.is_program_running():
-			print('ObstacleDetector 1 stopped')
-			break
-	
 
 	def say(self, message):
 		subprocess.call('espeak -v%s+%s "%s" 2>/dev/null' % ('en-us', 'f4', message), shell=True) 
