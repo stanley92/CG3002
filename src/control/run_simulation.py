@@ -164,7 +164,7 @@ class Simulation():
         #self.say("You have a remaining of" + str(int(self.displace.getDistCal()-self.displace.getDistTra())) + 'cm')
         #os.system ("say You have a remaining of" + str(int(self.displace.getDistCal()-self.displace.getDistTra())) + 'cm')
         
-        time.sleep(1)
+        time.sleep(3)
     # print(len(self.path))
     # print(self.graph.getVertex(self.path[len(self.path)-1]).id)
     if i!=-1 and i<len(self.path)-2 :
