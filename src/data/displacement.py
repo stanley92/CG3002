@@ -28,7 +28,7 @@ class Displacement():
   def distRemain(self):
     return (self.dist_cal - self.dist_tra)
 
-  def set_current_step(self, step_travelled):
+  def set_current_step(self, cumulated_step):
     self.cumulated_step = cumulated_step
 
   def initialise(self):
