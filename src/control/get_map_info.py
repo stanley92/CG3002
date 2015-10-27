@@ -154,7 +154,8 @@ def parseMapData(data):
 
 def getMapInfo(building, level):
   try:
-    assert(building != 42 or building != '42')
+    if (building == 42 or building == '42'):
+      assert False
     jsonObject = downloadMap(dict(Building=building, Level=level))
   except Exception as e:
     print(str(e))
