@@ -169,6 +169,10 @@ def getMapInfo(building, level):
       elif level == 3 or level == '3':
         data_file = open("2_3.json")
         jsonObject = json.load(data_file)
+    elif building == 42 or building == '42':
+      if level == 5 or level == '5':
+        data_file = open("42_5.json")
+        jsonObject = json.load(data_file)
     
       
   print(jsonObject)
