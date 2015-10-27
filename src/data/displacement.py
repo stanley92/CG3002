@@ -29,12 +29,15 @@ class Displacement():
     return (self.dist_cal - self.dist_tra)
 
   def set_current_step(self, cumulated_step):
+    print('Steps: '+str(cumulated_step))
     self.cumulated_step = cumulated_step
 
   def initialise(self):
+    print('Starting steps = '+ str(self.cumulated_step))
     self.step_travelled = self.cumulated_step
 
   def get_new_dist_tra_from_step(self):
     step_walked = self.cumulated_step - self.step_travelled
+    print(str(step_walked)+' recorded')
     self.step_travelled = self.cumulated_step
     return step_walked * self.step_size
