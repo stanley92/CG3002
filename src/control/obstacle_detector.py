@@ -127,7 +127,7 @@ class ObstacleDetector():
 			print('ObstacleDetector stopped')
 			break
 
-	def say(self, message):
-		subprocess.call('espeak -v%s+%s "%s" 2>/dev/null' % ('en-us', 'f4', message), shell=True) 
+	# def say(self, message):
+	# 	subprocess.call('espeak -v%s+%s "%s" 2>/dev/null' % ('en-us', 'f4', message), shell=True) 
 
 

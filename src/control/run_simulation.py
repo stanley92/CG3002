@@ -1,5 +1,7 @@
 from . import find_shortest_path
 from . import get_map_info
+from . import espeak
+
 import math
 import os
 import time
@@ -16,7 +18,7 @@ import subprocess
 ANGLE_MARGIN = 10
 
 class Simulation():
-  def __init__ (self, prog_controller, orient, displace, building, level, start=None, x=None, y=None, end=None):
+  def __init__ (self, prog_controller, orient, displace, building, level, start=None, x=None, y=None, end=None, speak):
    
     self.prog_controller = prog_controller
     self.building = building
@@ -31,6 +33,7 @@ class Simulation():
     self.orient = orient
     self.orient.setNorthAt(int(map_info.info.north_at))
     self.displace = displace
+    self.speak = speak 
 
   def setBuilding (self, building): 
     self.building = building
@@ -90,7 +93,8 @@ class Simulation():
           
     self.navigate()
 
-    self.say('You have reached your destination!')
+    self.speak.add_speech(3, 'You have reached your destination.')
+    # self.say('You have reached your destination!')
     print('You have reached your destination!')
 
   ################################################
@@ -142,7 +146,8 @@ class Simulation():
           sideStep = math.sin ( math.radians ( self.orient.getAngleOfNodes() - self.orient.getCompassValue() ) ) * newSteps
         # distance to next node
         if newDistTra < 0:
-          self.say('You are in the wrong direction')
+          self.speak.add_speech('You are in the wrong direction.')
+          # self.say('You are in the wrong direction')
 
         print('Distance total: ' + str(self.displace.getDistCal()))
         print('Distance travelled: ' + str(self.displace.getDistTra()))
@@ -168,9 +173,11 @@ class Simulation():
         
         time.sleep(0.200)
     if sideStep > 0:
-      self.say('Turn Right 90 degrees')
+      self.speak.add_speech(2, 'Turn Right 90 degrees')
+      # self.say('Turn Right 90 degrees')
     elif sideStep < 0:
-      self.say('Turn Left 90 degrees')
+      self.speak.add_speech(2, 'Turn Left 90 degrees')
+      # self.say('Turn Left 90 degrees')
 
     while (math.fabs(sideStep) > 100):
       newSteps = self.displace.get_new_dist_tra_from_step()
@@ -188,14 +195,20 @@ class Simulation():
     if i!=-1 and i<len(self.path)-2 :
       arrivedText = 'You have reached node ' + self.graph.getVertex(self.path[i+1]).name + ' ' + str(self.orient.userOffset())
       print (str(arrivedText))
-      subprocess.call('espeak -v%s+%s -s120 "%s" 2>/dev/null' % ('en-us', 'f3', arrivedText), shell=True)
-      subprocess.call('espeak -v%s+%s -s120 "%s" 2>/dev/null' % ('en-us', 'f3', arrivedText), shell=True)
+      speak.add_speech(1, arrivedText)
+      speak.add_speech(1, arrivedText)
+      
+      # subprocess.call('espeak -v%s+%s -s120 "%s" 2>/dev/null' % ('en-us', 'f3', arrivedText), shell=True)
+      # subprocess.call('espeak -v%s+%s -s120 "%s" 2>/dev/null' % ('en-us', 'f3', arrivedText), shell=True)
       #print('You have reached node ' + self.graph.getVertex(self.path[i+1]).name + ' ' + self.orient.userOffset())
       #self.say('You have reached node ' + self.graph.getVertex(self.path[i+1]).name + ' ' + self.orient.userOffset())
     else:
       arrivedText = 'You have reached node ' + self.graph.getVertex(self.path[i+1]).name
       print (str(arrivedText))
-      subprocess.call('espeak -v%s+%s -s120 "%s" 2>/dev/null' % ('en-us', 'f3', arrivedText), shell=True)
+      speak.add_speech(1, arrivedText)
+      speak.add_speech(1, arrivedText)
+
+      # subprocess.call('espeak -v%s+%s -s120 "%s" 2>/dev/null' % ('en-us', 'f3', arrivedText), shell=True)
       #print('You have reached node ' + self.graph.getVertex(self.path[i+1]).name)
       #self.say('You have reached node ' + self.graph.getVertex(self.path[i+1]).name)
 
@@ -213,7 +226,8 @@ class Simulation():
 
     if not (-10 < self.orient.getAngleOfNodes() - self.orient.getCompassValue() < 10):
       print ('Wrong direction. ' + self.orient.userOffset())
-      self.say(self.orient.userOffset())
+      speak.add_speech(3, self.orient.userOffset())
+      # self.say(self.orient.userOffset())
 
   #os.system ("say " + direction)
   #self.say(direction)
@@ -224,8 +238,8 @@ class Simulation():
   #### TODO: motor
   #print('')
 
-  def say(self, message):
-    subprocess.call('espeak -v%s+%s "%s" 2>/dev/null' % ('en-us', 'f3', message), shell=True) 
+  # def say(self, message):
+  #   subprocess.call('espeak -v%s+%s "%s" 2>/dev/null' % ('en-us', 'f3', message), shell=True) 
 
 
 

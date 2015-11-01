@@ -1,7 +1,7 @@
-import subprocess
+# import subprocess
 
 class KeypadData():
-  def __init__(self):
+  def __init__(self, speak):
     self.building = None
     self.level = None
     self.start_node = None
@@ -11,6 +11,7 @@ class KeypadData():
     self.current_input = 0
     self.request_query_dist = False
     self.reset_prog = False
+    self.speak = speak
 
   def key_in(self, key):
     print(key);
@@ -19,44 +20,54 @@ class KeypadData():
         self.reset_prog = True
         print('program reset')
       self.clear()
-      self.say('clear')
+      self.speak.add_speech(3, 'clear')
+      # self.say('clear')
       print('clear')  
     elif key == '#':
       if self.current_change == -1:
         self.current_change = self.current_change+1
-        self.say('Input Building')
+        self.speak.add_speech(3, 'Input Building')
+        # self.say('Input Building')
       elif self.current_change == 0:
         self.building = self.current_input
         print('building: '+ str(self.building))
-        self.say('Building. ' + str(self.building))
+        self.speak.add_speech(3, 'Building. ' + str(self.building))
+        # self.say('Building. ' + str(self.building))
         self.current_input = 0
         self.current_change=self.current_change+1
-        self.say(' InputLevel')
+        self.speak.add_speech(3, 'InputLevel)
+        # self.say('InputLevel')
       elif self.current_change == 1:
         self.level = self.current_input
         print('level: '+ str(self.level))
-        self.say('Level. ' + str(self.level))
+        self.speak.add_speech(3, 'Level. ' + str(self.level))
+        # self.say('Level. ' + str(self.level))
         self.current_input = 0
         self.current_change=self.current_change+1
-        self.say('Input Start node')
+        self.speak.add_speech(3, 'Input Start node')
+        # self.say('Input Start node')
       elif self.current_change == 2:
         self.start_node = self.current_input
         print('start_node: '+ str(self.start_node))
-        self.say('Start Node. ' + str(self.start_node))
+        self.speak.add_speech(3, 'Start Node. ' + str(self.start_node))
+        # self.say('Start Node. ' + str(self.start_node))
         self.current_input = 0
         self.current_change=self.current_change+1
-        self.say('Input End node')
+        self.speak.add_speech(3, 'Input End node')
+        # self.say('Input End node')
       elif self.current_change == 3:  
         self.end_node = self.current_input
         print('end_node: '+ str(self.end_node))
-        self.say('End Node. ' +str(self.end_node))
+        self.speak.add_speech(3, 'End Node. ' +str(self.end_node))
+        # self.say('End Node. ' +str(self.end_node))
         self.current_input = 0
         self.current_change=self.current_change+1
         self.ready = True
       
 
     elif ord(key) in range(ord('0'),ord('9')+1):
-      self.say(key)
+      self.speak.add_speech(3, key)
+      # self.say(key)
       if self.current_change == -1:
         if ord(key) == ord('9'):
           self.request_query_dist = True
@@ -87,8 +98,8 @@ class KeypadData():
       return True
     return self.request_query_dist
 
-  def say(self, message):
-    subprocess.call('espeak -v%s+%s "%s" 2>/dev/null' % ('en-us', 'f3', message), shell=True) 
+  # def say(self, message):
+  #   subprocess.call('espeak -v%s+%s "%s" 2>/dev/null' % ('en-us', 'f3', message), shell=True) 
 
   def clear(self):
     self.building = None
