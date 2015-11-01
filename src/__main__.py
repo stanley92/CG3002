@@ -110,7 +110,11 @@ if __name__ == '__main__':
             run_simulation_thread = threading.Thread(target = run.start_nav, args = [])
             run_simulation_thread.start()
             obstacle_detect = obstacle_detector.ObstacleDetector(prog_controller, sensors_data)
-            obstacle_detect_thread = threading.Thread(target = obstacle_detect.inf_loop, args = [])
+            obstacle_detect_thread1 = threading.Thread(target = obstacle_detect.inf_loop1, args = [])
+            obstacle_detect_thread2 = threading.Thread(target = obstacle_detect.inf_loop2, args = [])
+            obstacle_detect_thread3 = threading.Thread(target = obstacle_detect.inf_loop3, args = [])
+            obstacle_detect_thread4 = threading.Thread(target = obstacle_detect.inf_loop4, args = [])
+            obstacle_detect_thread5 = threading.Thread(target = obstacle_detect.inf_loop5, args = [])
             obstacle_detect_thread.start()
             keypad_data.clear()
             speak.add_speech (3, 'All data ready. You can start walking.')
@@ -155,7 +159,11 @@ if __name__ == '__main__':
           print('Run simulation thread never started')
           pass
         try:
-          obstacle_detect_thread.join() #obs detect
+          obstacle_detect_thread1.join() #obs detect
+          obstacle_detect_thread2.join() #obs detect
+          obstacle_detect_thread3.join() #obs detect
+          obstacle_detect_thread4.join() #obs detect
+          obstacle_detect_thread5.join() #obs detect
         except NameError:
           print('ObstacleDetector thread never started')
           pass
@@ -174,7 +182,11 @@ if __name__ == '__main__':
       print('Run simulation thread never started')
       pass
     try:
-      obstacle_detect_thread.join() #obs detect
+      obstacle_detect_thread1.join() #obs detect
+      obstacle_detect_thread2.join() #obs detect
+      obstacle_detect_thread3.join() #obs detect
+      obstacle_detect_thread4.join() #obs detect
+      obstacle_detect_thread5.join() #obs detect
     except NameError:
       print('ObstacleDetector thread never started')
       pass

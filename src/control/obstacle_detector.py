@@ -98,36 +98,39 @@ class ObstacleDetector():
 				GPIO.output(24, False)
 
 
-	def inf_loop(self):
-	 while True:
-		#poll_data_from_queue()
-		# valueDown = random.randint (0,100)
-		# s.setSensorDown(valueDown)
-		
-		# valueLeft = random.randint (0,100)
-		# s.setSensorLeft(valueLeft)
-		
-		# valueRight = random.randint (0,100)
-		# s.setSensorRight(wvalueRight)
-		
-		# valueFront = random.randint (0,100)
-		# s.setSensorFront(valueFront)
-		
-		# valueLeg = random.randint (0,100)
-		# s.setSensorLeg(valueLeg)
-		
-		#print ("Value: " + str (value))
-		self.collisionWarningRight()
-		self.collisionWarningRightAnkle()
-		self.collisionWarningHand()
-		self.collisionWarningLeft()
-		self.collisionWarningFront()
-		#time.sleep(0.1)
-		if not self.prog_controller.is_program_running_sim():
-			print('ObstacleDetector stopped')
-			break
+	def inf_loop1(self):
+		while True:
+			self.collisionWarningRight()
+			if not self.prog_controller.is_program_running_sim():
+				print('ObstacleDetector stopped')
+				break
 
-	# def say(self, message):
-	# 	subprocess.call('espeak -v%s+%s "%s" 2>/dev/null' % ('en-us', 'f4', message), shell=True) 
+	def inf_loop2(self):
+		while True:
+			self.collisionWarningRightAnkle()
+			if not self.prog_controller.is_program_running_sim():
+				print('ObstacleDetector stopped')
+				break
+
+	def inf_loop3(self):
+		while True:
+			self.collisionWarningHand()
+			if not self.prog_controller.is_program_running_sim():
+				print('ObstacleDetector stopped')
+				break
+
+	def inf_loop4(self):
+		while True:
+			self.collisionWarningLeft()
+			if not self.prog_controller.is_program_running_sim():
+				print('ObstacleDetector stopped')
+				break
+
+	def inf_loop5(self):
+		while True:
+			self.collisionWarningFront()
+			if not self.prog_controller.is_program_running_sim():
+				print('ObstacleDetector stopped')
+				break
 
 
