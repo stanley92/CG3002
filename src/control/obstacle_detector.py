@@ -100,6 +100,11 @@ class ObstacleDetector():
 
 	def inf_loop1(self):
 		while True:
+			print(str(self.sensors.sensor_right_ankle)+" "+
+				str(self.sensors.sensor_hand)+" "+
+				str(self.sensors.sensor_left)+" "+
+				str(self.sensors.sensor_right)+" "+
+				str(self.sensors.sensor_front))
 			self.collisionWarningRight()
 			if not self.prog_controller.is_program_running_sim():
 				print('ObstacleDetector stopped')

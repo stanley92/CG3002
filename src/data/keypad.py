@@ -35,7 +35,7 @@ class KeypadData():
         # self.say('Building. ' + str(self.building))
         self.current_input = 0
         self.current_change=self.current_change+1
-        self.speak.add_speech(3, 'InputLevel')
+        self.speak.add_speech(3, 'Input Level')
         # self.say('InputLevel')
       elif self.current_change == 1:
         self.level = self.current_input
