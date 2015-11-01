@@ -47,5 +47,6 @@ class Espeak():
 			subprocess.call('espeak -v%s+%s -s120 "%s" 2>/dev/null' % ('en-us', 'f3', message), shell=True)
 		else:
     		subprocess.call('espeak -v%s+%s "%s" 2>/dev/null' % ('en-us', 'f3', message), shell=True) 
+    		
 
 
