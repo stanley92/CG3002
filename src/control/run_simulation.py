@@ -195,8 +195,8 @@ class Simulation():
     if i!=-1 and i<len(self.path)-2 :
       arrivedText = 'You have reached node ' + self.graph.getVertex(self.path[i+1]).name + ' ' + str(self.orient.userOffset())
       print (str(arrivedText))
-      speak.add_speech(1, arrivedText)
-      speak.add_speech(1, arrivedText)
+      self.speak.add_speech(1, arrivedText)
+      self.speak.add_speech(1, arrivedText)
       
       # subprocess.call('espeak -v%s+%s -s120 "%s" 2>/dev/null' % ('en-us', 'f3', arrivedText), shell=True)
       # subprocess.call('espeak -v%s+%s -s120 "%s" 2>/dev/null' % ('en-us', 'f3', arrivedText), shell=True)
@@ -205,8 +205,8 @@ class Simulation():
     else:
       arrivedText = 'You have reached node ' + self.graph.getVertex(self.path[i+1]).name
       print (str(arrivedText))
-      speak.add_speech(1, arrivedText)
-      speak.add_speech(1, arrivedText)
+      self.speak.add_speech(1, arrivedText)
+      self.speak.add_speech(1, arrivedText)
 
       # subprocess.call('espeak -v%s+%s -s120 "%s" 2>/dev/null' % ('en-us', 'f3', arrivedText), shell=True)
       #print('You have reached node ' + self.graph.getVertex(self.path[i+1]).name)
@@ -226,7 +226,7 @@ class Simulation():
 
     if not (-10 < self.orient.getAngleOfNodes() - self.orient.getCompassValue() < 10):
       print ('Wrong direction. ' + self.orient.userOffset())
-      speak.add_speech(3, self.orient.userOffset())
+      self.speak.add_speech(3, self.orient.userOffset())
       # self.say(self.orient.userOffset())
 
   #os.system ("say " + direction)
