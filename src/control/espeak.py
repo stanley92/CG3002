@@ -6,7 +6,8 @@ from collections import deque
 #########################################
 
 class Espeak():
-	def __init__(self):
+	def __init__(self,prog_controller):
+		self.prog_controller = prog_controller
 		self.queue_1 = deque() #node
 		self.queue_2 = deque() #left-right
 		self.queue_3 = None    #immediate
@@ -40,6 +41,9 @@ class Espeak():
 					message = self.queue_3
 			if message != None:
 				self.say(priority, message)
+			if not prog_controller.is_program_running_all():
+        print("espeak stopped")
+        break
 
 
 	def say(self, priority, message):

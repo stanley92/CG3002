@@ -71,22 +71,24 @@ if __name__ == '__main__':
   displace = displacement.Displacement()
   sensors_data = sensors.Sensors()
   prog_controller = controller.Controller()
-  speak = espeak.Espeak()
+  speak = espeak.Espeak(prog_controller)
   keypad_data = keypad.KeypadData(speak)
   prog_controller.start_all()
   c = communication.Communication(prog_controller)
   while not c.handshaken:
     c.initialise()
+  speak_thread = threading.Thread(target = speak.speak, args = [])
+  speak_thread.start()
   data_poll_thread = threading.Thread(target = data_poll, args = [c, keypad_data, orient, displace, sensors_data, prog_controller])
   data_poll_thread.start() 
   
-  speak.say(3, 'Welcome')
+  speak.add_speech(3, 'Welcome')
   # subprocess.call('espeak -v%s+%s "%s" 2>/dev/null' % ('en-us', 'f3', 'Welcome'), shell=True)
 
   try :
     while True:
       if keypad_data.data_ready():
-        speak.say(3, 'Setting Data')
+        speak.add_speech(3, 'Setting Data')
         # subprocess.call('espeak -v%s+%s "%s" 2>/dev/null' % ('en-us', 'f3', 'Setting Data'), shell=True)
         print('ALL DATA READY START THE THING!')
         time.sleep(1)
@@ -110,8 +112,6 @@ if __name__ == '__main__':
             obstacle_detect = obstacle_detector.ObstacleDetector(prog_controller, sensors_data)
             obstacle_detect_thread = threading.Thread(target = obstacle_detect.inf_loop, args = [])
             obstacle_detect_thread.start()
-            speak_thread = threading.Thread(target = speak.speak, args = [])
-            speak_thread.start()
             keypad_data.clear()
             speak.add_speech (3, 'All data ready. You can start walking.')
             # subprocess.call('espeak -v%s+%s "%s" 2>/dev/null' % ('en-us', 'f3', 'All data ready. You can start walking.'), shell=True)
@@ -158,11 +158,6 @@ if __name__ == '__main__':
           obstacle_detect_thread.join() #obs detect
         except NameError:
           print('ObstacleDetector thread never started')
-          pass
-        try:
-          speak_thread.join() #obs detect
-        except NameError:
-          print('Speak thread never started')
           pass
         prog_controller.start_sim()
   except KeyboardInterrupt:
