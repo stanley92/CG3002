@@ -115,7 +115,11 @@ if __name__ == '__main__':
             obstacle_detect_thread3 = threading.Thread(target = obstacle_detect.inf_loop3, args = [])
             obstacle_detect_thread4 = threading.Thread(target = obstacle_detect.inf_loop4, args = [])
             obstacle_detect_thread5 = threading.Thread(target = obstacle_detect.inf_loop5, args = [])
-            obstacle_detect_thread.start()
+            obstacle_detect_thread1.start()
+            obstacle_detect_thread2.start()
+            obstacle_detect_thread3.start()
+            obstacle_detect_thread4.start()
+            obstacle_detect_thread5.start()
             keypad_data.clear()
             speak.add_speech (3, 'All data ready. You can start walking.')
             # subprocess.call('espeak -v%s+%s "%s" 2>/dev/null' % ('en-us', 'f3', 'All data ready. You can start walking.'), shell=True)
@@ -128,7 +132,11 @@ if __name__ == '__main__':
               print('Run simulation thread never started')
               pass
             try:
-              obstacle_detect_thread.join() #obs detect
+              obstacle_detect_thread1.join()
+              obstacle_detect_thread2.join()
+              obstacle_detect_thread3.join()
+              obstacle_detect_thread4.join()
+              obstacle_detect_thread5.join()
             except NameError:
               print('ObstacleDetector thread never started')
               pass
