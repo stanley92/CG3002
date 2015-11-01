@@ -41,7 +41,7 @@ class Espeak():
 					message = self.queue_3
 			if message != None:
 				self.say(priority, message)
-			if not prog_controller.is_program_running_all():
+			if not self.prog_controller.is_program_running_all():
 				print("espeak stopped")
 				break
 
