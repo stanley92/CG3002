@@ -42,13 +42,13 @@ class Espeak():
 			if message != None:
 				self.say(priority, message)
 			if not prog_controller.is_program_running_all():
-        print("espeak stopped")
-        break
+				print("espeak stopped")
+				break
 
 
 	def say(self, priority, message):
 		if priority == 1:
 			subprocess.call('espeak -v%s+%s -s120 "%s" 2>/dev/null' % ('en-us', 'f3', message), shell=True)
 		else:
-    			subprocess.call('espeak -v%s+%s "%s" 2>/dev/null' % ('en-us', 'f3', message), shell=True) 
+    	subprocess.call('espeak -v%s+%s "%s" 2>/dev/null' % ('en-us', 'f3', message), shell=True) 
     		
