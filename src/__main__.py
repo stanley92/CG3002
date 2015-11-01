@@ -70,7 +70,7 @@ if __name__ == '__main__':
   orient = compass.Compass()
   displace = displacement.Displacement()
   sensors_data = sensors.Sensors()
-  keypad_data = keypad.KeypadData(speak)
+  keypad_data = keypad.KeypadData()
   prog_controller = controller.Controller()
   speak = espeak.Espeak()
   prog_controller.start_all()
