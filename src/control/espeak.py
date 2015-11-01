@@ -46,11 +46,5 @@ class Espeak():
 		if priority == 1:
 			subprocess.call('espeak -v%s+%s -s120 "%s" 2>/dev/null' % ('en-us', 'f3', message), shell=True)
 		else:
-<<<<<<< HEAD
     			subprocess.call('espeak -v%s+%s "%s" 2>/dev/null' % ('en-us', 'f3', message), shell=True) 
-=======
-    		subprocess.call('espeak -v%s+%s "%s" 2>/dev/null' % ('en-us', 'f3', message), shell=True) 
     		
->>>>>>> d589d662cf21b95ad1b28ea6c951f41d3bd0aace
-
-
