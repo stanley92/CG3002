@@ -7,9 +7,9 @@ from collections import deque
 
 class Espeak():
 	def __init__(self):
-		self.queue_1 = deque()
-		self.queue_2 = deque()
-		self.queue_3 = None
+		self.queue_1 = deque() #node
+		self.queue_2 = deque() #left-right
+		self.queue_3 = None    #immediate
 
 	def add_speech(self, priority, message):
 		if priority == 1:
