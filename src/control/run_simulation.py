@@ -181,15 +181,15 @@ class Simulation():
       self.speak.add_speech(2, 'Turn Left 90 degrees')
       # self.say('Turn Left 90 degrees')
 
-    while (math.fabs(sideStep) > 100):
+    while (math.fabs(self.sideStep) > 100):
       newSteps = self.displace.get_new_dist_tra_from_step()
       if -100 < self.orient.getAngleOfNodes() - self.orient.getCompassValue() < -80 :
         #To calculate how much to walk
-        print('sideStep' - str(sideStep))
+        print('sideStep' - str(self.sideStep))
         self.sideStep = self.sideStep - newSteps
       elif 80 < self.orient.getAngleOfNodes() - self.orient.getCompassValue() < 100:
         #to calculate how much to walk
-        print('sideStep' + str(sideStep))
+        print('sideStep' + str(self.sideStep))
         self.sideStep = self.sideStep + newSteps
 
     # print(len(self.path))
