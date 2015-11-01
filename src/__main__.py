@@ -30,15 +30,15 @@ def data_poll(comm_data_buffer, keypad_data, compass_data, displacement_data, se
       if comm_data_buffer.buffer.have_data(2):
         displacement_data.set_current_step(int(comm_data_buffer.buffer.last(2)))
       if comm_data_buffer.buffer.have_data(3):
-        sensors_data.set_sensor_hand(int(comm_data_buffer.buffer.last(3)))
+        sensors_data.set_sensor_hand(int(comm_data_buffer.buffer.pop(3)))
       if comm_data_buffer.buffer.have_data(4):
-        sensors_data.set_sensor_left(int(comm_data_buffer.buffer.last(4)))
+        sensors_data.set_sensor_left(int(comm_data_buffer.buffer.pop(4)))
       if comm_data_buffer.buffer.have_data(5):
-        sensors_data.set_sensor_right(int(comm_data_buffer.buffer.last(5)))
+        sensors_data.set_sensor_right(int(comm_data_buffer.buffer.pop(5)))
       if comm_data_buffer.buffer.have_data(6):
-        sensors_data.set_sensor_front(int(comm_data_buffer.buffer.last(6)))
+        sensors_data.set_sensor_front(int(comm_data_buffer.buffer.pop(6)))
       if comm_data_buffer.buffer.have_data(7):
-        sensors_data.set_sensor_right_ankle(int(comm_data_buffer.buffer.last(7)))
+        sensors_data.set_sensor_right_ankle(int(comm_data_buffer.buffer.pop(7)))
       # if comm_data_buffer.buffer.have_data(8):
       #   sensors_data.set_sensor_front(int(comm_data_buffer.buffer.last(8)))
       if not prog_controller.is_program_running_all():

@@ -29,7 +29,6 @@ class DataBuffer():
   def last(self, channel):
     try:
       message = self.queues[channel].pop()
-      self.queues[channel].clear()
       return message
     except IndexError:
       return None
