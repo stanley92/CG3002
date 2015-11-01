@@ -16,14 +16,14 @@ class Espeak():
 		if priority == 1:
 			self.queue_2.clear()
 			self.queue_3 = None
-			self.queue_1.put(message)
-			self.queue_1.put(message)
-			# self.queue.put(priority, subprocess.call('espeak -v%s+%s -s120 "%s" 2>/dev/null' % ('en-us', 'f3', arrivedText), shell=True))
-			# self.queue.put(priority, subprocess.call('espeak -v%s+%s -s120 "%s" 2>/dev/null' % ('en-us', 'f3', arrivedText), shell=True))
+			self.queue_1.append(message)
+			self.queue_1.append(message)
+			# self.queue.append(priority, subprocess.call('espeak -v%s+%s -s120 "%s" 2>/dev/null' % ('en-us', 'f3', arrivedText), shell=True))
+			# self.queue.append(priority, subprocess.call('espeak -v%s+%s -s120 "%s" 2>/dev/null' % ('en-us', 'f3', arrivedText), shell=True))
 		elif priority == 2:
 			self.queue_3 = None
-			self.queue_2.put(message)
-			# self.queue.put(priority, subprocess.call('espeak -v%s+%s "%s" 2>/dev/null' % ('en-us', 'f3', message), shell=True))
+			self.queue_2.append(message)
+			# self.queue.append(priority, subprocess.call('espeak -v%s+%s "%s" 2>/dev/null' % ('en-us', 'f3', message), shell=True))
 		elif priority == 3:
 			self.queue_3 = message
 	
