@@ -104,7 +104,7 @@ if __name__ == '__main__':
           end = keypad_data.end_node #int(input('End: '))
           try:
             displace.initialise()
-            run = run_simulation.Simulation(prog_controller, orient, displace, building, level, start=start, end=end, speak)
+            run = run_simulation.Simulation(prog_controller, orient, displace, speak, building, level, start=start, end=end)
             run_simulation_thread = threading.Thread(target = run.start_nav, args = [])
             run_simulation_thread.start()
             obstacle_detect = obstacle_detector.ObstacleDetector(prog_controller, sensors_data)
