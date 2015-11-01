@@ -166,20 +166,22 @@ class Simulation():
         #self.say("You have a remaining of" + str(int(self.displace.getDistCal()-self.displace.getDistTra())) + 'cm')
         #os.system ("say You have a remaining of" + str(int(self.displace.getDistCal()-self.displace.getDistTra())) + 'cm')
         
-        time.sleep(1)
+        time.sleep(0.200)
     if sideStep > 0:
       self.say('Turn Right 90 degrees')
     elif sideStep < 0:
       self.say('Turn Left 90 degrees')
 
-    while (math.fabs(sideStep) > 30):
+    while (math.fabs(sideStep) > 100):
       newSteps = self.displace.get_new_dist_tra_from_step()
       if -100 < self.orient.getAngleOfNodes() - self.orient.getCompassValue() < -80 :
         #To calculate how much to walk
+        print('sideStep' - str(sideStep))
         sideStep = sideStep - newSteps
       elif 80 < self.orient.getAngleOfNodes() - self.orient.getCompassValue() < 100:
         #to calculate how much to walk
-        sideStep = sideStep - newSteps
+        print('sideStep' + str(sideStep))
+        sideStep = sideStep + newSteps
 
     # print(len(self.path))
     # print(self.graph.getVertex(self.path[len(self.path)-1]).id)
