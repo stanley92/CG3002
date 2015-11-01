@@ -34,6 +34,7 @@ class Simulation():
     self.orient.setNorthAt(int(map_info.info.north_at))
     self.displace = displace
     self.speak = speak 
+    self.sideStep=0
 
   def setBuilding (self, building): 
     self.building = building
@@ -119,6 +120,7 @@ class Simulation():
   # Calls the User to turn 1st before walking
   ################################################
   def walk(self, i):
+
     if (i == -1):
       self.orient.setAngleOfNodeXY(self.graph,self.x,self.y,self.path[0])
       new_dist = (get_map_info._calcDistance(self.x, self.y, self.graph.getVertex(self.path[0]).x, self.graph.getVertex(self.path[0]).y))
@@ -140,10 +142,10 @@ class Simulation():
       if newSteps != 0:
         if math.fabs(self.orient.getAngleOfNodes()-self.orient.getCompassValue()) < ANGLE_MARGIN:
           newDistTra = newSteps
-          sideStep = 0
+          self.sideStep = 0
         else:  
           newDistTra = math.cos( math.radians( math.fabs (self.orient.getAngleOfNodes()-self.orient.getCompassValue() ) ) ) * newSteps
-          sideStep = math.sin ( math.radians ( self.orient.getAngleOfNodes() - self.orient.getCompassValue() ) ) * newSteps
+          self.sideStep = math.sin ( math.radians ( self.orient.getAngleOfNodes() - self.orient.getCompassValue() ) ) * newSteps
         # distance to next node
         if newDistTra < 0:
           self.speak.add_speech('You are in the wrong direction.')
@@ -172,10 +174,10 @@ class Simulation():
         #os.system ("say You have a remaining of" + str(int(self.displace.getDistCal()-self.displace.getDistTra())) + 'cm')
         
         time.sleep(0.200)
-    if sideStep > 0:
+    if self.sideStep > 0:
       self.speak.add_speech(2, 'Turn Right 90 degrees')
       # self.say('Turn Right 90 degrees')
-    elif sideStep < 0:
+    elif self.sideStep < 0:
       self.speak.add_speech(2, 'Turn Left 90 degrees')
       # self.say('Turn Left 90 degrees')
 
@@ -184,11 +186,11 @@ class Simulation():
       if -100 < self.orient.getAngleOfNodes() - self.orient.getCompassValue() < -80 :
         #To calculate how much to walk
         print('sideStep' - str(sideStep))
-        sideStep = sideStep - newSteps
+        self.sideStep = self.sideStep - newSteps
       elif 80 < self.orient.getAngleOfNodes() - self.orient.getCompassValue() < 100:
         #to calculate how much to walk
         print('sideStep' + str(sideStep))
-        sideStep = sideStep + newSteps
+        self.sideStep = self.sideStep + newSteps
 
     # print(len(self.path))
     # print(self.graph.getVertex(self.path[len(self.path)-1]).id)
