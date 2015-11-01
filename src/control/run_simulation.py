@@ -195,7 +195,7 @@ class Simulation():
     else:
       arrivedText = 'You have reached node ' + self.graph.getVertex(self.path[i+1]).name
       print (str(arrivedText))
-      subprocess.call('espeak -v%s+%s -s100 "%s" 2>/dev/null' % ('en-us', 'f3', arrivedText), shell=True)
+      subprocess.call('espeak -v%s+%s -s120 "%s" 2>/dev/null' % ('en-us', 'f3', arrivedText), shell=True)
       #print('You have reached node ' + self.graph.getVertex(self.path[i+1]).name)
       #self.say('You have reached node ' + self.graph.getVertex(self.path[i+1]).name)
 
@@ -227,11 +227,7 @@ class Simulation():
   def say(self, message):
     subprocess.call('espeak -v%s+%s "%s" 2>/dev/null' % ('en-us', 'f3', message), shell=True) 
 
-  
-# Simulation(building, level, start=3, end=6)
-# Simulation(building, level, x=200, y=600, end=6)
-# DON'T DO THIS:
-# Simulation(building, level, start=3, x=200, y=600, end=6)
+
 
 
 
