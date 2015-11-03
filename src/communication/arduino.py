@@ -69,7 +69,7 @@ class Arduino():
 
       if (message == chr(6)):
         # self.ser.serialWrite(chr(0)); #ACK
-        print("Handshaking done")
+        # print("Handshaking done")
 
       if (message == chr(4)): #Write
         break
