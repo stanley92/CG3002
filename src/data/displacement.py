@@ -33,11 +33,11 @@ class Displacement():
     self.cumulated_step = cumulated_step
 
   def initialise(self):
-    print('Startin/g steps = '+ str(self.cumulated_step))
+    print('Starting steps = '+ str(self.cumulated_step))
     self.step_travelled = self.cumulated_step
 
   def get_new_dist_tra_from_step(self):
     step_walked = self.cumulated_step - self.step_travelled
-    print(str(step_walked)+' recorded')
+    # print(str(step_walked)+' recorded')
     self.step_travelled = self.cumulated_step
     return step_walked * self.step_size
