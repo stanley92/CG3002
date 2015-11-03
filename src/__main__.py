@@ -55,7 +55,7 @@ def data_poll_test(comm_data_buffer, keypad_data, compass_data, displacement_dat
         str(comm_data_buffer.buffer.queues.channel[4]) + " " +
         str(comm_data_buffer.buffer.queues.channel[5]) + " " +
         str(comm_data_buffer.buffer.queues.channel[6]) + " " +
-        str(comm_data_buffer.buffer.queues.channel[7]) + " " +)
+        str(comm_data_buffer.buffer.queues.channel[7]) + " " +);
       # if comm_data_buffer.buffer.have_data(8):
       #   sensors_data.set_sensor_front(int(comm_data_buffer.buffer.last(8)))
       if not prog_controller.is_program_running_all():
