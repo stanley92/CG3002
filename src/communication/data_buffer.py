@@ -40,7 +40,6 @@ class DataBuffer():
         return self.queues[channel].pop()
       else:
         m = self.queues[channel]
-        self.queues[channel] = None
         return m
     except IndexError:
       return None
