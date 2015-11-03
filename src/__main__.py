@@ -98,8 +98,8 @@ if __name__ == '__main__':
   speak_thread.start()
   data_poll_thread = threading.Thread(target = data_poll, args = [c, keypad_data, orient, displace, sensors_data, prog_controller])
   data_poll_thread.start() 
-  data_poll_test_thread = threading.Thread(target = data_poll_test, args = [c, keypad_data, orient, displace, sensors_data, prog_controller])
-  data_poll_test_thread.start() 
+  # data_poll_test_thread = threading.Thread(target = data_poll_test, args = [c, keypad_data, orient, displace, sensors_data, prog_controller])
+  # data_poll_test_thread.start() 
   speak.add_speech(3, 'Welcome')
   # subprocess.call('espeak -v%s+%s "%s" 2>/dev/null' % ('en-us', 'f3', 'Welcome'), shell=True)
 
@@ -223,7 +223,7 @@ if __name__ == '__main__':
       pass
     try:
       data_poll_thread.join() #polling
-      data_poll_test_thread.join() #polling
+      # data_poll_test_thread.join() #polling
     except NameError:
       print('Data polling thread never started')
       pass
