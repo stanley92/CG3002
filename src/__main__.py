@@ -13,7 +13,7 @@ from .data import keypad
 from .data import compass
 from .data import displacement
 
-from .control import obstacle_detector
+# from .control import obstacle_detector
 from .control import run_simulation
 from .control import controller
 from .control import espeak
