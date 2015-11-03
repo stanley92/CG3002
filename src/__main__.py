@@ -128,6 +128,7 @@ if __name__ == '__main__':
             # subprocess.call('espeak -v%s+%s "%s" 2>/dev/null' % ('en-us', 'f3', 'All data ready. You can start walking.'), shell=True)
           except Exception as e:
             print('Some error')
+            print(str(e))
             prog_controller.stop_sim()
             try:
               run_simulation_thread.join() #run simulation
