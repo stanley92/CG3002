@@ -3,7 +3,7 @@ import logging
 class DataBuffer():
   def __init__(self, num_queue, ard):
     self.queues = num_queue*[0]
-    for i in range(num_queue):
+    for i in range(3):
       self.queues[i] = deque()
     self.ard = ard
     
@@ -11,7 +11,10 @@ class DataBuffer():
   def push(self, channel, m):
     try:
       if (channel != None and m != None):
-        self.queues[channel].append(m)
+        if (channel in range(3)):
+          self.queues[channel].append(m)
+        else:
+          self.queues[channel] = m
     except IndexError:
       print("Index Error")
       print("channel = " + str(channel))
@@ -22,27 +25,48 @@ class DataBuffer():
 
   def pop(self, channel):
     try:
-      return self.queues[channel].popleft()
+      if (channel in range(3)):
+        return self.queues[channel].popleft()
+      else:
+        m = self.queues[channel]
+        self.queues[channel] = None
+        return m
     except IndexError:
       return None
 
   def last(self, channel):
     try:
-      message = self.queues[channel].pop()
-      return message
+      if (channel in range(3)):
+        return self.queues[channel].pop()
+      else:
+        m = self.queues[channel]
+        self.queues[channel] = None
+        return m
     except IndexError:
       return None
 
   def clear(self, channel):
-    self.queues[channel].clear()
+    if (channel in range(3)):
+      self.queues[channel].clear()
+    else:
+      self.queues[channel] = None
 
   def pop_all(self, channel):
     all_data = []
     while True:
       try:
-        all_data.append(self.queues[channel].pop());
+        if (channel in range(3)):
+          all_data.append(self.queues[channel].pop());
+        else:
+          m = self.queues[channel]
+          self.queues[channel] = None
+          return m
       except IndexError:
         return all_data
 
   def have_data(self, channel):
-    return bool(self.queues[channel])
+    if (channel in range(3)):
+      return bool(self.queues[channel])
+    else:
+      return self.queues[channel] != None
+    
