@@ -10,6 +10,7 @@ class DataBuffer():
 
   def push(self, channel, m):
     try:
+      print(channel+" - "+ m)
       if (channel != None and m != None):
         if (channel in range(3)):
           self.queues[channel].append(m)
@@ -68,5 +69,5 @@ class DataBuffer():
     if (channel in range(3)):
       return bool(self.queues[channel])
     else:
-      return self.queues[channel] != None
+      return (self.queues[channel] != None)
     
