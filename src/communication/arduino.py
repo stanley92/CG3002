@@ -68,7 +68,7 @@ class Arduino():
       message = self.ser.serialRead()
 
       if (message == chr(6)):
-        self.ser.serialWrite(chr(0)); #ACK
+        # self.ser.serialWrite(chr(0)); #ACK
         # print("Handshaking done")
 
       if (message == chr(4)): #Write
@@ -95,7 +95,7 @@ class Arduino():
         # print("Get data Timed Out")
         callback(None, None)
     # print("Data got: "+str(message))
-    self.ser.serialWrite(chr(0))
+    # self.ser.serialWrite(chr(0))
     callback(int(channel), message)
 
 
