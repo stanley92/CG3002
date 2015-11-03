@@ -3,6 +3,7 @@ import time
 import os
 import subprocess
 import RPi.GPIO as GPIO
+import time
 
 # def poll_data_from_queue():
 #   #poll data
@@ -100,12 +101,13 @@ class ObstacleDetector():
 
 	def inf_loop1(self):
 		while True:
-			# print(
-			# 	str(self.sensors.sensor_hand)+" "+
-			# 	str(self.sensors.sensor_left)+" "+
-			# 	str(self.sensors.sensor_right)+" "+
-			# 	str(self.sensors.sensor_front)+" "+
-			# 	str(self.sensors.sensor_right_ankle))
+			print(
+				str(self.sensors.sensor_hand)+" "+
+				str(self.sensors.sensor_left)+" "+
+				str(self.sensors.sensor_right)+" "+
+				str(self.sensors.sensor_front)+" "+
+				str(self.sensors.sensor_right_ankle))
+			time.sleep(2)
 			self.collisionWarningRight()
 			if not self.prog_controller.is_program_running_sim():
 				print('ObstacleDetector stopped')
