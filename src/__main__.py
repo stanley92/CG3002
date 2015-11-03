@@ -48,6 +48,23 @@ def data_poll(comm_data_buffer, keypad_data, compass_data, displacement_data, se
       print(str(e))
       pass
 
+def data_poll_test(comm_data_buffer, keypad_data, compass_data, displacement_data, sensors_data, prog_controller):
+  while (1):
+    try:
+      print(str(comm_data_buffer.buffer.queues.channel[3])+ " " +
+        str(comm_data_buffer.buffer.queues.channel[4]) + " " +
+        str(comm_data_buffer.buffer.queues.channel[5]) + " " +
+        str(comm_data_buffer.buffer.queues.channel[6]) + " " +
+        str(comm_data_buffer.buffer.queues.channel[7]) + " " +)
+      # if comm_data_buffer.buffer.have_data(8):
+      #   sensors_data.set_sensor_front(int(comm_data_buffer.buffer.last(8)))
+      if not prog_controller.is_program_running_all():
+        print("data polling test stopped")
+        break
+    except Exception as e:
+      print(str(e))
+      pass
+
 # def say(message):
 #   subprocess.call('espeak -v%s+%s -s 170 "%s" 2>/dev/null' % ('en-us', 'f4', message), shell=True) 
 
@@ -81,7 +98,8 @@ if __name__ == '__main__':
   speak_thread.start()
   data_poll_thread = threading.Thread(target = data_poll, args = [c, keypad_data, orient, displace, sensors_data, prog_controller])
   data_poll_thread.start() 
-  
+  data_poll_test_thread = threading.Thread(target = data_poll_test, args = [c, keypad_data, orient, displace, sensors_data, prog_controller])
+  data_poll_test_thread.start() 
   speak.add_speech(3, 'Welcome')
   # subprocess.call('espeak -v%s+%s "%s" 2>/dev/null' % ('en-us', 'f3', 'Welcome'), shell=True)
 
@@ -205,6 +223,7 @@ if __name__ == '__main__':
       pass
     try:
       data_poll_thread.join() #polling
+      data_poll_test_thread.join() #polling
     except NameError:
       print('Data polling thread never started')
       pass
