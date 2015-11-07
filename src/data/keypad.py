@@ -55,6 +55,7 @@ class KeypadData():
         print('start_node: '+ str(self.start_node))
         self.speak.add_speech(3, 'Start Node. ' + str(self.start_node))
         # self.say('Start Node. ' + str(self.start_node))
+        time.sleep(0.2)
         self.current_input = 0
         self.current_change=self.current_change+1
         self.speak.add_speech(3, 'Input End node')
@@ -67,6 +68,7 @@ class KeypadData():
         # self.say('End Node. ' +str(self.end_node))
         self.current_input = 0
         self.current_change=self.current_change+1
+      elif self.current_change == 4:  
         self.ready = True
       
 
