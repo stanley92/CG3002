@@ -148,7 +148,7 @@ class Simulation():
           self.sideStep = math.sin ( math.radians ( self.orient.getAngleOfNodes() - self.orient.getCompassValue() ) ) * newSteps
         # distance to next node
         if newDistTra < 0:
-          self.speak.add_speech('You are in the wrong direction.')
+          self.speak.add_speech(3, 'You are in the wrong direction.')
           # self.say('You are in the wrong direction')
 
         print('Distance total: ' + str(self.displace.getDistCal()))
