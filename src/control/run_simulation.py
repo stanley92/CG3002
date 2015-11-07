@@ -196,7 +196,7 @@ class Simulation():
     # print(len(self.path))
     # print(self.graph.getVertex(self.path[len(self.path)-1]).id)
     if i!=-1 and i<len(self.path)-2 :
-      arrivedText = 'You have reached node ' + self.graph.getVertex(self.path[i+1]).name + ' ' + str(self.orient.userOffset())
+      arrivedText = 'You have reached node ' + self.graph.getVertex(self.path[i+1]).name )
       print (str(arrivedText))
       self.speak.add_speech(1, arrivedText)
       self.speak.add_speech(1, arrivedText)
@@ -227,10 +227,17 @@ class Simulation():
     # direction = self.orient.userOffset()
     #print(direction)
 
-    
-    self.speak.add_speech(3, self.orient.userOffset())
-    time.sleep(1.5)
-    
+    if not (-10 < self.orient.getAngleOfNodes() - self.orient.getCompassValue() < 10):
+      print ('Wrong direction. ' + self.orient.userOffset())
+      self.speak.add_speech(3, self.orient.userOffset())
+      walk_straight_added = False
+      time.sleep(1.5)
+    else 
+      if not walk_straight_added:
+        walk_straight_added = True
+        self.speak.add_speech(3, 'walk straight')
+        time.sleep(1.5)
+
       # self.say(self.orient.userOffset())
 
   #os.system ("say " + direction)
