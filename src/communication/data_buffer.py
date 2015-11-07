@@ -46,8 +46,5 @@ class DataBuffer():
         return all_data
 
   def have_data(self, channel):
-    if (channel in range(3)):
-      return bool(self.queues[channel])
-    else:
-      return (self.queues[channel] != None)
+    return bool(self.queues[channel])
     
