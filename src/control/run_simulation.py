@@ -35,6 +35,7 @@ class Simulation():
     self.displace = displace
     self.speak = speak 
     self.sideStep=0
+    self.walk_straight_added = False
 
   def setBuilding (self, building): 
     self.building = building
@@ -230,11 +231,11 @@ class Simulation():
     if not (-10 < self.orient.getAngleOfNodes() - self.orient.getCompassValue() < 10):
       print ('Wrong direction. ' + self.orient.userOffset())
       self.speak.add_speech(3, self.orient.userOffset())
-      walk_straight_added = False
+      self.walk_straight_added = False
       time.sleep(1.5)
     else:
-      if not walk_straight_added:
-        walk_straight_added = True
+      if not self.walk_straight_added:
+        self.walk_straight_added = True
         self.speak.add_speech(3, 'walk straight')
         time.sleep(1.5)
 
