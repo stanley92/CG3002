@@ -68,7 +68,7 @@ def setup():
 
 if __name__ == '__main__':
   print("Welcome")
-  # setup()
+  setup()
   orient = compass.Compass()
   displace = displacement.Displacement()
   sensors_data = sensors.Sensors()
