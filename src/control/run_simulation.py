@@ -227,10 +227,10 @@ class Simulation():
     # direction = self.orient.userOffset()
     #print(direction)
 
-    if not (-10 < self.orient.getAngleOfNodes() - self.orient.getCompassValue() < 10):
-      print ('Wrong direction. ' + self.orient.userOffset())
-      self.speak.add_speech(3, self.orient.userOffset())
-      time.sleep(1)
+    
+    self.speak.add_speech(3, self.orient.userOffset())
+    time.sleep(1.5)
+    
       # self.say(self.orient.userOffset())
 
   #os.system ("say " + direction)
