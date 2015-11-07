@@ -174,7 +174,7 @@ class Simulation():
         #os.system ("say You have a remaining of" + str(int(self.displace.getDistCal()-self.displace.getDistTra())) + 'cm')
         
         time.sleep(2)
-        
+
     if self.sideStep > 0:
       self.speak.add_speech(2, 'Turn Right 90 degrees')
       # self.say('Turn Right 90 degrees')
@@ -229,9 +229,8 @@ class Simulation():
 
     if not (-10 < self.orient.getAngleOfNodes() - self.orient.getCompassValue() < 10):
       print ('Wrong direction. ' + self.orient.userOffset())
-      time.sleep(1)
       self.speak.add_speech(3, self.orient.userOffset())
-
+      time.sleep(3)
       # self.say(self.orient.userOffset())
 
   #os.system ("say " + direction)
