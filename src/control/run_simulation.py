@@ -196,7 +196,7 @@ class Simulation():
     # print(len(self.path))
     # print(self.graph.getVertex(self.path[len(self.path)-1]).id)
     if i!=-1 and i<len(self.path)-2 :
-      arrivedText = 'You have reached node ' + self.graph.getVertex(self.path[i+1]).name )
+      arrivedText = 'You have reached node ' + self.graph.getVertex(self.path[i+1]).name
       print (str(arrivedText))
       self.speak.add_speech(1, arrivedText)
       self.speak.add_speech(1, arrivedText)
@@ -206,7 +206,7 @@ class Simulation():
       #print('You have reached node ' + self.graph.getVertex(self.path[i+1]).name + ' ' + self.orient.userOffset())
       #self.say('You have reached node ' + self.graph.getVertex(self.path[i+1]).name + ' ' + self.orient.userOffset())
     else:
-      arrivedText = 'You have reached node ' + self.graph.getVertex(self.path[i+1]).name
+      arrivedText = 'You have reached node ' + self.graph.getVertex(self.path[i+1]).name 
       print (str(arrivedText))
       self.speak.add_speech(1, arrivedText)
       self.speak.add_speech(1, arrivedText)
