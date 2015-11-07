@@ -54,17 +54,17 @@ def data_poll(comm_data_buffer, keypad_data, compass_data, displacement_data, se
 #   subprocess.call('espeak -v%s+%s -s 170 "%s" 2>/dev/null' % ('en-us', 'f4', message), shell=True) 
 
 def setup():
-  GPIO.setmode(GPIO.BCM)
-  GPIO.setup(23, GPIO.OUT, pull_up_down = GPIO.PUD_DOWN)
-  GPIO.setup(25, GPIO.OUT, pull_up_down = GPIO.PUD_DOWN)
-  GPIO.setup(22, GPIO.OUT, pull_up_down = GPIO.PUD_DOWN)
-  GPIO.setup(27, GPIO.OUT, pull_up_down = GPIO.PUD_DOWN)
-  GPIO.setup(24, GPIO.OUT, pull_up_down = GPIO.PUD_DOWN)
-  GPIO.output(23, False) #Front
-  GPIO.output(25, False) #right ankle
-  GPIO.output(22, False) #hand
-  GPIO.output(27, False) #left 
-  GPIO.output(24, False) #right
+  # GPIO.setmode(GPIO.BCM)
+  # GPIO.setup(23, GPIO.OUT, pull_up_down = GPIO.PUD_DOWN)
+  # GPIO.setup(25, GPIO.OUT, pull_up_down = GPIO.PUD_DOWN)
+  # GPIO.setup(22, GPIO.OUT, pull_up_down = GPIO.PUD_DOWN)
+  # GPIO.setup(27, GPIO.OUT, pull_up_down = GPIO.PUD_DOWN)
+  # GPIO.setup(24, GPIO.OUT, pull_up_down = GPIO.PUD_DOWN)
+  # GPIO.output(23, False) #Front
+  # GPIO.output(25, False) #right ankle
+  # GPIO.output(22, False) #hand
+  # GPIO.output(27, False) #left 
+  # GPIO.output(24, False) #right
 
 if __name__ == '__main__':
   print("Welcome")
@@ -180,7 +180,7 @@ if __name__ == '__main__':
         #   pass
         prog_controller.start_sim()
   except KeyboardInterrupt:
-    GPIO.cleanup()
+    # GPIO.cleanup()
     prog_controller.stop_all()
     try:
       c.thread.join() #polling
