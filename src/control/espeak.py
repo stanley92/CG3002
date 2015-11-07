@@ -39,7 +39,6 @@ class Espeak():
 				except IndexError:
 					priority = 3
 					message = self.queue_3
-					self.queue_3 = None
 			if message != None:
 				self.say(priority, message)
 			if not self.prog_controller.is_program_running_all():
