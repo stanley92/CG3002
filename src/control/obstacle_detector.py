@@ -113,7 +113,7 @@ class ObstacleDetector():
 			if not self.prog_controller.is_program_running_sim():
 				print('ObstacleDetector stopped')
 				break
-			time.sleep(1.5)
+			time.sleep(0.5)
 
 	def inf_loop2(self):
 
@@ -122,7 +122,7 @@ class ObstacleDetector():
 			if not self.prog_controller.is_program_running_sim():
 				print('ObstacleDetector stopped')
 				break
-			time.sleep(1.5)
+			time.sleep(0.5)
 
 	def inf_loop3(self):
 		while True:
@@ -130,7 +130,7 @@ class ObstacleDetector():
 			if not self.prog_controller.is_program_running_sim():
 				print('ObstacleDetector stopped')
 				break
-			time.sleep(1.5)
+			time.sleep(0.5)
 
 	def inf_loop4(self):
 		while True:
@@ -138,7 +138,7 @@ class ObstacleDetector():
 			if not self.prog_controller.is_program_running_sim():
 				print('ObstacleDetector stopped')
 				break
-			time.sleep(1.5)
+			time.sleep(0.5)
 
 	def inf_loop5(self):
 		while True:
@@ -146,6 +146,6 @@ class ObstacleDetector():
 			if not self.prog_controller.is_program_running_sim():
 				print('ObstacleDetector stopped')
 				break
-			time.sleep(1.5)
+			time.sleep(0.5)
 
 
