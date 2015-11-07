@@ -220,14 +220,14 @@ class Simulation():
   def turn(self):
     #### TODO: handledata compassValue (keep reading)
     #### DUMMY: compass Value
-    # print('Next node angle: ' + str(self.orient.getAngleOfNodes()))
-    # print('Current direction: ' + str(self.orient.getCompassValue()))
+    print('Next node angle: ' + str(self.orient.getAngleOfNodes()))
+    print('Current direction: ' + str(self.orient.getCompassValue()))
      
     # direction = self.orient.userOffset()
     #print(direction)
 
     if not (-10 < self.orient.getAngleOfNodes() - self.orient.getCompassValue() < 10):
-      # print ('Wrong direction. ' + self.orient.userOffset())
+      print ('Wrong direction. ' + self.orient.userOffset())
       self.speak.add_speech(3, self.orient.userOffset())
 
       # self.say(self.orient.userOffset())
