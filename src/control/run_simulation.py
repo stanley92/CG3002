@@ -232,7 +232,7 @@ class Simulation():
       self.speak.add_speech(3, self.orient.userOffset())
       walk_straight_added = False
       time.sleep(1.5)
-    else 
+    else:
       if not walk_straight_added:
         walk_straight_added = True
         self.speak.add_speech(3, 'walk straight')
