@@ -112,7 +112,7 @@ if __name__ == '__main__':
             run = run_simulation.Simulation(prog_controller, orient, displace, speak, building, level, start=start, end=end)
             run_simulation_thread = threading.Thread(target = run.start_nav, args = [])
             run_simulation_thread.start()
-            obstacle_detect = obstacle_detector.ObstacleDetector(prog_controller, sensors_data)
+            obstacle_detect = obstacle_detector.ObstacleDetector(prog_controller, sensors_data, speak)
             obstacle_detect_thread1 = threading.Thread(target = obstacle_detect.inf_loop1, args = [])
             obstacle_detect_thread2 = threading.Thread(target = obstacle_detect.inf_loop2, args = [])
             obstacle_detect_thread3 = threading.Thread(target = obstacle_detect.inf_loop3, args = [])
@@ -159,7 +159,7 @@ if __name__ == '__main__':
       elif keypad_data.function_query_dist():
         remainingDist = displace.getDistCal()-displace.getDistTra()
         print('Remaining Dist: ' + str (remainingDist))
-        self.speak.add_speech(3, 'Remaining distance ' + str(remainingDist))
+        speak.add_speech(3, 'Remaining distance ' + str(remainingDist))
         # say('Remaining distance.')
         # say(str(remainingDist))
       elif keypad_data.signal_prog_reset():

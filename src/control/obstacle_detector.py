@@ -8,7 +8,7 @@ import time
 # def poll_data_from_queue():
 #   #poll data
 class ObstacleDetector():
-	def __init__(self, prog_controller, sensorData):
+	def __init__(self, prog_controller, sensorData, espeak):
 		self.sensors = sensorData
 		self.prog_controller = prog_controller
 		self.collision_front = False
@@ -17,6 +17,7 @@ class ObstacleDetector():
 		self.collision_left = False
 		self.collision_right = False
 		self.front_count = 0
+		self.espeak = espeak
 
 	# def collisionWarningDown(self):
 	#   if self.sensors.sensor_down > 2000 or self.sensors.sensor_down == 0:
@@ -58,10 +59,12 @@ class ObstacleDetector():
 
 	def collisionWarningFront(self): 
 		if self.sensors.sensor_front < 70: #and self.sensors.sensor_front != 0:
-			#print ("Obsatcle on the front.")
 			if not self.collision_front:
 				self.collision_front = True
 				GPIO.output(22, True)
+			if self.sensors.sensor_front < 20:
+				self.speak.add_speech(3, 'Obstacle in front')
+				print ("Obsatcle on the front.")
 		else: 
 			if self.collision_front:
 				self.collision_front = False
