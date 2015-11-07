@@ -174,7 +174,7 @@ class Simulation():
         #self.say("You have a remaining of" + str(int(self.displace.getDistCal()-self.displace.getDistTra())) + 'cm')
         #os.system ("say You have a remaining of" + str(int(self.displace.getDistCal()-self.displace.getDistTra())) + 'cm')
         
-        time.sleep(2)
+        time.sleep(1)
 
     if self.sideStep > 0:
       self.speak.add_speech(2, 'Turn Right 90 degrees')

@@ -108,43 +108,44 @@ class ObstacleDetector():
 			# 	str(self.sensors.sensor_front)+" "+
 			# 	str(self.sensors.sensor_right_ankle))
 			# time.sleep(2)
-			time.sleep(2)
+			
 			self.collisionWarningRight()
 			if not self.prog_controller.is_program_running_sim():
 				print('ObstacleDetector stopped')
 				break
+			time.sleep(1.5)
 
 	def inf_loop2(self):
 
 		while True:
-			time.sleep(2)
 			self.collisionWarningRightAnkle()
 			if not self.prog_controller.is_program_running_sim():
 				print('ObstacleDetector stopped')
 				break
+			time.sleep(1.5)
 
 	def inf_loop3(self):
 		while True:
-			time.sleep(2)
 			self.collisionWarningHand()
 			if not self.prog_controller.is_program_running_sim():
 				print('ObstacleDetector stopped')
 				break
+			time.sleep(1.5)
 
 	def inf_loop4(self):
 		while True:
-			time.sleep(2)
 			self.collisionWarningLeft()
 			if not self.prog_controller.is_program_running_sim():
 				print('ObstacleDetector stopped')
 				break
+			time.sleep(1.5)
 
 	def inf_loop5(self):
 		while True:
-			time.sleep(2)
 			self.collisionWarningFront()
 			if not self.prog_controller.is_program_running_sim():
 				print('ObstacleDetector stopped')
 				break
+			time.sleep(1.5)
 
 
