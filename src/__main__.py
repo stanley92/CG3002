@@ -95,65 +95,61 @@ if __name__ == '__main__':
         # subprocess.call('espeak -v%s+%s "%s" 2>/dev/null' % ('en-us', 'f3', 'Setting Data'), shell=True)
         print('ALL DATA READY START THE THING!')
         time.sleep(1)
-        building = keypad_data.building #str(input('Building Name: '))
-        level = keypad_data.level #input('Building Level: ')
-        point = 'y' #input('Are you on a starting point? ')
-        if point == 'y':
-          start = keypad_data.start_node #int(input('Start: '))
-          end = keypad_data.end_node #int(input('End: '))
+        start_building = keypad_data.start_building 
+        start_level = keypad_data.start_level
+        end_building = keypad_data.end_building
+        end_level = keypad_data.end_level
+        start_node = keypad_data.start_node
+        end_node = keypad_data.end_node
+        try:
+          displace.initialise()
+          run = run_simulation.Simulation(prog_controller, orient, displace, speak, 
+            building_start=start_building, level_start = start_level, start=start_node,
+            building_end=end_building, level_end = end_level, end=end_node)
+          run_simulation_thread = threading.Thread(target = run.start_nav, args = [])
+          run_simulation_thread.start()
+          obstacle_detect = obstacle_detector.ObstacleDetector(prog_controller, sensors_data, speak)
+          obstacle_detect_thread1 = threading.Thread(target = obstacle_detect.inf_loop1, args = [])
+          obstacle_detect_thread2 = threading.Thread(target = obstacle_detect.inf_loop2, args = [])
+          obstacle_detect_thread3 = threading.Thread(target = obstacle_detect.inf_loop3, args = [])
+          obstacle_detect_thread4 = threading.Thread(target = obstacle_detect.inf_loop4, args = [])
+          obstacle_detect_thread5 = threading.Thread(target = obstacle_detect.inf_loop5, args = [])
+          obstacle_detect_thread1.start()
+          obstacle_detect_thread2.start()
+          obstacle_detect_thread3.start()
+          obstacle_detect_thread4.start()
+          obstacle_detect_thread5.start()
+          keypad_data.clear()
+          speak.add_speech (3, 'All data ready. You can start walking.')
+          # subprocess.call('espeak -v%s+%s "%s" 2>/dev/null' % ('en-us', 'f3', 'All data ready. You can start walking.'), shell=True)
+        except Exception as e:
+          print('Some error')
+          prog_controller.stop_sim()
           try:
-            displace.initialise()
-            run = run_simulation.Simulation(prog_controller, orient, displace, speak, building, level, start=start, end=end)
-            run_simulation_thread = threading.Thread(target = run.start_nav, args = [])
-            run_simulation_thread.start()
-            obstacle_detect = obstacle_detector.ObstacleDetector(prog_controller, sensors_data, speak)
-            obstacle_detect_thread1 = threading.Thread(target = obstacle_detect.inf_loop1, args = [])
-            obstacle_detect_thread2 = threading.Thread(target = obstacle_detect.inf_loop2, args = [])
-            obstacle_detect_thread3 = threading.Thread(target = obstacle_detect.inf_loop3, args = [])
-            obstacle_detect_thread4 = threading.Thread(target = obstacle_detect.inf_loop4, args = [])
-            obstacle_detect_thread5 = threading.Thread(target = obstacle_detect.inf_loop5, args = [])
-            obstacle_detect_thread1.start()
-            obstacle_detect_thread2.start()
-            obstacle_detect_thread3.start()
-            obstacle_detect_thread4.start()
-            obstacle_detect_thread5.start()
-            keypad_data.clear()
-            speak.add_speech (3, 'All data ready. You can start walking.')
-            # subprocess.call('espeak -v%s+%s "%s" 2>/dev/null' % ('en-us', 'f3', 'All data ready. You can start walking.'), shell=True)
-          except Exception as e:
-            print('Some error')
-            prog_controller.stop_sim()
-            try:
-              run_simulation_thread.join() #run simulation
-            except NameError:
-              print('Run simulation thread never started')
-              pass
-            try:
-              obstacle_detect_thread1.join()
-              obstacle_detect_thread2.join()
-              obstacle_detect_thread3.join()
-              obstacle_detect_thread4.join()
-              obstacle_detect_thread5.join()
-            except NameError:
-              print('ObstacleDetector thread never started')
-              pass
-            try:
-              speak_thread.join() #obs detect
-            except NameError:
-              print('Speak thread never started')
-              pass
-            prog_controller.start_sim()
-        # elif point == 'n':
-        #   x_coord = int (input ('Input x-coordinate: '))
-        #   y_coord = int (input ('Input y-coordinate: '))
-        #   heading = float (input ('Input heading: '))
-        #   end = int(input('End: '))
-        #   run = run_simulation.Simulation(orient, displace, building, level, x=x_coord, y=y_coord, end=end, heading = heading)
-        #   run.start_nav()
+            run_simulation_thread.join() #run simulation
+          except NameError:
+            print('Run simulation thread never started')
+            pass
+          try:
+            obstacle_detect_thread1.join()
+            obstacle_detect_thread2.join()
+            obstacle_detect_thread3.join()
+            obstacle_detect_thread4.join()
+            obstacle_detect_thread5.join()
+          except NameError:
+            print('ObstacleDetector thread never started')
+            pass
+          try:
+            speak_thread.join() #obs detect
+          except NameError:
+            print('Speak thread never started')
+            pass
+          prog_controller.start_sim()
+    
       elif keypad_data.function_query_dist():
         remainingDist = displace.getDistCal()-displace.getDistTra()
         print('Remaining Dist: ' + str (remainingDist))
-        speak.add_speech(3, 'Remaining distance ' + str(remainingDist))
+        speak.add_speech(3, 'Remaining distance ' + int(remainingDist))
         # say('Remaining distance.')
         # say(str(remainingDist))
       elif keypad_data.signal_prog_reset():
