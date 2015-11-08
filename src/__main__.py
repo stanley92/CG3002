@@ -96,13 +96,7 @@ if __name__ == '__main__':
         print('ALL DATA READY START THE THING!')
         time.sleep(1)
         building = keypad_data.building #str(input('Building Name: '))
-        if building == 1:
-          building = 'COM1'
-        elif building == 2:
-          building = 'COM2'
         level = keypad_data.level #input('Building Level: ')
-        if level == 0:
-          level = 'B1'
         point = 'y' #input('Are you on a starting point? ')
         if point == 'y':
           start = keypad_data.start_node #int(input('Start: '))
