@@ -177,9 +177,9 @@ def parse_map_data(data):
 
 def get_map_info(building, level):
   try:
-    if (building == 42 or building == '42'):
-      assert False
-    jsonObject = download_map(dict(Building=building, Level=level))
+    # if (building == 42 or building == '42'):
+    assert False
+    # jsonObject = download_map(dict(Building=building, Level=level))
   except Exception as e:
     print(str(e))
     print("Cannot download map")
@@ -214,6 +214,7 @@ def generate_graph(map_data):
     if location_nodes[i].is_interbuilding_node():
       graph.add_interbuilding_link(location_nodes[i])
     # add edges
+  for i in location_nodes:
     for link in location_nodes[i].link_to:
       graph.add_edge(location_nodes[i].id, link)
   return graph
