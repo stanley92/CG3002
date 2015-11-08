@@ -82,21 +82,20 @@ class Simulation():
   ################################################
   def _init_path (self):
     try:
-      if self.start!=None:
-        # importing the interbuilding links map
-        data_file = open("links.json")
-        global_links = json.load(data_file)
-        print(global_links)
-        for navigation in global_links:
-          if str(navigation['building_start']) == str(building_start) \
-          and str(navigation['level_start']) == str(level_start) \
-          and str(navigation['building_end']) == str(building_end) \
-          and str(navigation['level_end']) == str(level_end):
-            print(navigation)
-            self.link_count = int(navigation['link_count'])
-            self.links = navigation['links']
-          
-
+      # importing the interbuilding links map
+      data_file = open("links.json")
+      global_links = json.load(data_file)
+      print(global_links)
+      for navigation in global_links:
+        if str(navigation['building_start']) == str(building_start) \
+        and str(navigation['level_start']) == str(level_start) \
+        and str(navigation['building_end']) == str(building_end) \
+        and str(navigation['level_end']) == str(level_end):
+          print(navigation)
+          self.link_count = int(navigation['link_count'])
+          self.links = navigation['links']
+        return 
+      assert False
     # elif self.x!=None and self.y!= None:
     #   closestVertex = get_map_info.getNearestVertex(self.x, self.y, self.current_graph)
     #   path = find_shortest_path.shortest(self.current_graph, closestVertex.id, self.end)
