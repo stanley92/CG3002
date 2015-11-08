@@ -140,7 +140,7 @@ class Simulation():
     else:
       self.current_end_id = None
 
-    print("S-E: " + "str(self.current_start_id)+" " +str(self.current_end_id))
+    print("S-E: " + str(self.current_start_id)+" " +str(self.current_end_id))
     if self.current_start_id == None: # continue from prev map
       print("continue from prev map")
       self.current_start_id = self.next_start_id
