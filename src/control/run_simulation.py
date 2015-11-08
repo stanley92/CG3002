@@ -201,12 +201,12 @@ class Simulation():
 
     if (i == -1):
       self.orient.setAngleOfNodeXY(self.current_graph,self.x,self.y,self.path[0])
-      new_dist = (get_map_info._calcDistance(self.x, self.y, self.current_graph.get_vertex(self.path[0]).x, self.current_graph.get_vertex(self.path[0]).y))
+      new_dist = (get_map_info._calc_distance(self.x, self.y, self.current_graph.get_vertex(self.path[0]).x, self.current_graph.get_vertex(self.path[0]).y))
       self.displace.setDistCal(new_dist)
     else:      
       self.orient.setAngleOfNodes(self.current_graph,self.path[i],self.path[i+1])
       old_dist = self.displace.getDistCal()
-      new_dist = (get_map_info._calcDistance(self.current_graph.get_vertex(self.path[i]).x, self.current_graph.get_vertex(self.path[i]).y, self.current_graph.get_vertex(self.path[i+1]).x, self.current_graph.get_vertex(self.path[i+1]).y))
+      new_dist = (get_map_info._calc_distance(self.current_graph.get_vertex(self.path[i]).x, self.current_graph.get_vertex(self.path[i]).y, self.current_graph.get_vertex(self.path[i+1]).x, self.current_graph.get_vertex(self.path[i+1]).y))
       total_dist = old_dist + new_dist
       self.displace.setDistCal(total_dist)
 
