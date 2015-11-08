@@ -85,15 +85,17 @@ class Simulation():
       # importing the interbuilding links map
       data_file = open("/home/pi/Desktop/CG3002/src/control/links.json")
       global_links = json.load(data_file)
-      print(global_links)
       for navigation in global_links:
+        print(navigation)
         if str(navigation['building_start']) == str(self.building_start) \
         and str(navigation['level_start']) == str(self.level_start) \
         and str(navigation['building_end']) == str(self.building_end) \
         and str(navigation['level_end']) == str(self.level_end):
+          print('YEPP!!')
           print(navigation)
           self.link_count = int(navigation['link_count'])
           self.links = navigation['links']
+
         return 
       assert False
     # elif self.x!=None and self.y!= None:
