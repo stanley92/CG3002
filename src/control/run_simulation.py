@@ -97,8 +97,7 @@ class Simulation():
           print(navigation)
           self.link_count = int(navigation['link_count'])
           self.links = navigation['links']
-
-        return 
+          return 
       assert False
     # elif self.x!=None and self.y!= None:
     #   closestVertex = get_map_info.getNearestVertex(self.x, self.y, self.current_graph)
