@@ -101,7 +101,8 @@ class Simulation():
     #   closestVertex = get_map_info.getNearestVertex(self.x, self.y, self.current_graph)
     #   path = find_shortest_path.shortest(self.current_graph, closestVertex.id, self.end)
     #   return path
-    except Exception:
+    except Exception e:
+      print(str(e))
       print('Failed to init Path')
     
 
