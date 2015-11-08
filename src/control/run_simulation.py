@@ -133,11 +133,11 @@ class Simulation():
     else:
       self.current_end_id = None
 
-    if current_start_id == None: # continue from prev map
+    if self.current_start_id == None: # continue from prev map
       self.current_start_id = self.next_start_id
       self.next_start_id = None
 
-    if current_end_id == None: # have a next map to continue
+    if self.current_end_id == None: # have a next map to continue
       next_link = self.links[self.current_link_id+1]
       next_building = str(next_link['building'])
       next_level = str(next_link['level'])
