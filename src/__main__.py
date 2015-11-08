@@ -123,7 +123,9 @@ if __name__ == '__main__':
           speak.add_speech (3, 'All data ready. You can start walking.')
           # subprocess.call('espeak -v%s+%s "%s" 2>/dev/null' % ('en-us', 'f3', 'All data ready. You can start walking.'), shell=True)
         except Exception as e:
-          print('Some error')
+          print(str(e))
+          print('Some error. Key in again')
+          speak.add_speech(3, 'Some error. Key in again')
           prog_controller.stop_sim()
           try:
             run_simulation_thread.join() #run simulation
