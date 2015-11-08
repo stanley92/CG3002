@@ -34,7 +34,7 @@ graph = get_map_info.generateGraph(mapInfo)
 s_path = find_shortest_path.shortest(graph,0,getDestination(dest))	# u didn't include the module names
 
 north_at = mapInfo.info.north_at
-lastKnownNode = graph.getVertex(i).id
+lastKnownNode = graph.get_vertex(i).id
 
 
 # walking algorithm is only btw 2 nodes

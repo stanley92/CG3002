@@ -2,20 +2,20 @@ import heapq
 
 def dijkstra(graph, start, target):
   inf = float('inf')
-  D={i:inf for i in graph.getVertices()}    # distance from start
-  P={i:i for i in graph.getVertices()}      # previous
-  V={i:False for i in graph.getVertices()}  # visited?
+  D={i:inf for i in graph.get_vertices()}    # distance from start
+  P={i:i for i in graph.get_vertices()}      # previous
+  V={i:False for i in graph.get_vertices()}  # visited?
 
   D[start] = 0
 
-  unvisited_queue = [(D[i], i) for i in graph.getVertices()]
+  unvisited_queue = [(D[i], i) for i in graph.get_vertices()]
   heapq.heapify(unvisited_queue)
 
   while len(unvisited_queue):
     uv = heapq.heappop(unvisited_queue)
     current_id = uv[1]
     V[current_id] = True
-    current_vertex = graph.getVertex(current_id)
+    current_vertex = graph.get_vertex(current_id)
 
     for next in current_vertex.adjacent:
       if V[next]: continue
@@ -28,7 +28,7 @@ def dijkstra(graph, start, target):
     while len(unvisited_queue):
       heapq.heappop(unvisited_queue)
 
-    unvisited_queue = [(D[i], i) for i in graph.getVertices() if not V[i]]
+    unvisited_queue = [(D[i], i) for i in graph.get_vertices() if not V[i]]
     heapq.heapify(unvisited_queue)
 
   return (D,P)
@@ -55,4 +55,4 @@ if __name__ == '__main__':
   mapInfo = get_map_info.getMapInfo(building, level)
   graph = get_map_info.generateGraph(mapInfo)
   path = shortest(graph, start, end)
-  print([graph.getVertex(i).name for i in path])
+  print([graph.get_vertex(i).name for i in path])

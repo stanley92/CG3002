@@ -31,10 +31,10 @@ class Compass():
 
   # Sets the angle between two nodes
   def setAngleOfNodes(self,graph,currNodeId,nextNodeId):
-    x_curr = graph.getVertex(currNodeId).x
-    y_curr = graph.getVertex(currNodeId).y
-    x_next = graph.getVertex(nextNodeId).x
-    y_next = graph.getVertex(nextNodeId).y
+    x_curr = graph.get_vertex(currNodeId).x
+    y_curr = graph.get_vertex(currNodeId).y
+    x_next = graph.get_vertex(nextNodeId).x
+    y_next = graph.get_vertex(nextNodeId).y
     x_hori = math.fabs(x_curr - x_next)
     y_vert = math.fabs(y_curr - y_next)
 
@@ -42,8 +42,8 @@ class Compass():
 
   # Sets the angle between a node and the current coordinates
   def setAngleOfNodeXY(self,graph,x_new,y_new,nextNodeId):
-    x_next = graph.getVertex(nextNodeId).x
-    y_next = graph.getVertex(nextNodeId).y
+    x_next = graph.get_vertex(nextNodeId).x
+    y_next = graph.get_vertex(nextNodeId).y
     x_hori = math.fabs(x_new - x_next)
     y_vert = math.fabs(y_new - y_next)
 
