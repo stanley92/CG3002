@@ -161,7 +161,7 @@ class Simulation():
       else:
         raise LookupError("Cannot find link btw building")
 
-    print("S-E: "str(self.current_start_id)+" " +str(self.current_end_id))
+    print("S-E: "+str(self.current_start_id)+" " +str(self.current_end_id))
 
     path = find_shortest_path.shortest(self.current_graph, self.current_start_id, self.current_end_id)
 
