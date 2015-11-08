@@ -62,9 +62,9 @@ class ObstacleDetector():
 			if not self.collision_front:
 				self.collision_front = True
 				GPIO.output(22, True)
-				if self.sensors.sensor_front < 20:
-					self.espeak.add_speech(1, 'Obstacle in front')
-					print ("Obsatcle on the front.")
+				# if self.sensors.sensor_front < 20:
+				# 	self.espeak.add_speech(3, 'Obstacle in front')
+				# 	print ("Obsatcle on the front.")
 		else: 
 			if self.collision_front:
 				self.collision_front = False
