@@ -119,8 +119,15 @@ class Simulation():
     self.current_link = self.links[str(self.current_link_id)]
     self.current_building = str(self.current_link['building'])
     self.current_level = str(self.current_link['level'])
+    print(str(self.current_link_id)+ " " +
+      str(self.current_link) + " " + 
+      str(self.current_building)+ " "+ 
+      str(self.current_level))
     current_map_info = get_map_info.get_map_info(self.current_building, self.current_level)
+    print('got map info')
     self.current_graph = get_map_info.generate_graph(current_map_info)
+    print('graph generated')
+
     self.orient.setNorthAt(int(current_map_info.info.north_at))
     # find start and end in the current map
     if self.current_link_id == 0:
@@ -138,9 +145,12 @@ class Simulation():
       self.next_start_id = None
 
     if self.current_end_id == None: # have a next map to continue
-      next_link = self.links[self.current_link_id+1]
+      next_link = self.links[str(self.current_link_id+1)]
       next_building = str(next_link['building'])
       next_level = str(next_link['level'])
+      print(str(next_link)+ " " +
+        str(next_building) + " " + 
+        str(next_level))
       m_from, m_to = self.current_graph.get_link_to(building=next_building,level=next_level)
       self.current_end_id = m_from
       self.next_start_id = m_to
