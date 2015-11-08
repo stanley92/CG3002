@@ -36,6 +36,7 @@ def dijkstra(graph, start, target):
 def shortest(graph, start, target):
   print('start find shortest path')
   D,P = dijkstra(graph, start, target)
+  print(D,P)
   path = []
   print('before loop')
   while 1:
