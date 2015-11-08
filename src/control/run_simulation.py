@@ -40,7 +40,7 @@ class Simulation():
     
     self.current_building = building_start
     self.current_level = level_start
-    self.current_link_id = 0
+    self.current_link_id = -1
     self.current_link = {}
     self.current_start_id = self.id_start
     self.current_end_id = None
