@@ -140,11 +140,14 @@ class Simulation():
     else:
       self.current_end_id = None
 
+    print("S-E: "str(self.current_start_id)+" " +str(self.current_end_id))
     if self.current_start_id == None: # continue from prev map
+      print("continue from prev map")
       self.current_start_id = self.next_start_id
       self.next_start_id = None
 
     if self.current_end_id == None: # have a next map to continue
+      print("have a next map to continue")
       next_link = self.links[str(self.current_link_id+1)]
       next_building = str(next_link['building'])
       next_level = str(next_link['level'])
@@ -157,7 +160,9 @@ class Simulation():
         self.next_start_id = m_to
       else:
         raise LookupError("Cannot find link btw building")
-    
+
+    print("S-E: "str(self.current_start_id)+" " +str(self.current_end_id))
+
     path = find_shortest_path.shortest(self.current_graph, self.current_start_id, self.current_end_id)
 
     return path, is_final_path
