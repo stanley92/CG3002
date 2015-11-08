@@ -173,6 +173,7 @@ class Simulation():
   ################################################
   def start_nav(self):
     while not self.is_final_path:
+      self.speak.add_speech(1, 'You are in building ' + str(self.current_building)+'. Level '+str(self.current_level))
       self.path, self.is_final_path = self._find_next_path()
       print('found path')
       self.navigate()
@@ -257,29 +258,40 @@ class Simulation():
         
         time.sleep(1)
 
-    if self.side_steps > 0:
-      self.speak.add_speech(2, 'Turn Right 90 degrees')
-      # self.say('Turn Right 90 degrees')
-    elif self.side_steps < 0:
-      self.speak.add_speech(2, 'Turn Left 90 degrees')
-      # self.say('Turn Left 90 degrees')
+    # if self.side_steps > 0:
+    #   self.speak.add_speech(2, 'Turn Right 90 degrees')
+    #   # self.say('Turn Right 90 degrees')
+    # elif self.side_steps < 0:
+    #   self.speak.add_speech(2, 'Turn Left 90 degrees')
+    #   # self.say('Turn Left 90 degrees')
 
-    while (math.fabs(self.side_steps) > 100):
-      newSteps = self.displace.get_new_dist_tra_from_step()
-      if -100 < self.orient.getAngleOfNodes() - self.orient.getCompassValue() < -80 :
-        #To calculate how much to walk
-        print('side_steps' - str(self.side_steps))
-        self.side_steps = self.side_steps - newSteps
-      elif 80 < self.orient.getAngleOfNodes() - self.orient.getCompassValue() < 100:
-        #to calculate how much to walk
-        print('side_steps' + str(self.side_steps))
-        self.side_steps = self.side_steps + newSteps
+    # while (math.fabs(self.side_steps) > 100):
+    #   newSteps = self.displace.get_new_dist_tra_from_step()
+    #   if -100 < self.orient.getAngleOfNodes() - self.orient.getCompassValue() < -80 :
+    #     #To calculate how much to walk
+    #     print('side_steps' - str(self.side_steps))
+    #     self.side_steps = self.side_steps - newSteps
+    #   elif 80 < self.orient.getAngleOfNodes() - self.orient.getCompassValue() < 100:
+    #     #to calculate how much to walk
+    #     print('side_steps' + str(self.side_steps))
+    #     self.side_steps = self.side_steps + newSteps
 
     # print(len(self.path))
     # print(self.current_graph.get_vertex(self.path[len(self.path)-1]).id)
     arrivedText = 'You have reached node ' + self.current_graph.get_vertex(self.path[i+1]).name
+    if ('Stair' in self.current_graph.get_vertex(self.path[i+1]).name and \
+      'Halfway' in self.current_graph.get_vertex(self.path[i+2]).name):
+      self.speak.add_speech(2, '12 steps upstairs')
+    if ('TO 2-2-16' in self.current_graph.get_vertex(self.path[i+1]).name and \
+      'Stair' in self.current_graph.get_vertex(self.path[i+2]).name):
+      self.speak.add_speech(2, '12 steps upstairs')
+    if ('Halfway' in self.current_graph.get_vertex(self.path[i+1]).name and \
+      'Stair' in self.current_graph.get_vertex(self.path[i+2]).name):
+      self.speak.add_speech(2, '12 steps downstairs')
+    if ('Stair' in self.current_graph.get_vertex(self.path[i+1]).name and \
+      'Halfway' in self.current_graph.get_vertex(self.path[i+2]).name):
+      self.speak.add_speech(2, '12 steps downstairs')
     print (str(arrivedText))
-    self.speak.add_speech(1, arrivedText)
     self.speak.add_speech(1, arrivedText)
       
       # subprocess.call('espeak -v%s+%s -s120 "%s" 2>/dev/null' % ('en-us', 'f3', arrivedText), shell=True)
