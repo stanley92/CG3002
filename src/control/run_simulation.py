@@ -40,7 +40,7 @@ class Simulation():
     
     self.current_building = building_start
     self.current_level = level_start
-    self.current_link_id = -1
+    self.current_link_id = 0
     self.current_link = {}
     self.current_start_id = self.id_start
     self.current_end_id = None
@@ -113,7 +113,7 @@ class Simulation():
     is_final_path = False
 
     self.current_link_id = self.current_link_id +1
-    self.current_link = self.links[self.current_link_id]
+    self.current_link = self.links[str(self.current_link_id)]
     self.current_building = str(self.current_link['building'])
     self.current_level = str(self.current_link['level'])
     current_map_info = get_map_info.get_map_info(self.current_building, self.current_level)
