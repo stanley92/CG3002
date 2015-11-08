@@ -156,7 +156,7 @@ class Simulation():
   def start_nav(self):
     while not self.is_final_path:
       self.path, self.is_final_path = self._find_next_path()
-
+      print('found path')
       self.navigate()
 
       
@@ -171,9 +171,11 @@ class Simulation():
     if self.x!=None and self.y!= None:
       self.walk(-1)
       
+    print('start navigate')
     length = (len(self.path)) - 1
     
     for i in range(length):
+      print('walk '+str(i))
       self.walk(i)
       if not self.prog_controller.is_program_running_sim():
         print("Run Simulation stopped")
