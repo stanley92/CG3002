@@ -28,7 +28,7 @@ class KeypadData():
     elif key == '#':
       if self.current_change == -1:
         self.current_change = self.current_change+1
-        time.sleep(0.2)
+        time.sleep(0.5)
         self.speak.add_speech(3, 'Input Start Building')
       elif self.current_change == 0:
         self.start_building = self.current_input
@@ -36,37 +36,37 @@ class KeypadData():
         self.speak.add_speech(3, 'Start Building. ' + str(self.start_building))
         self.current_input = 0
         self.current_change=self.current_change+1
-        time.sleep(0.2)
-        self.speak.add_speech(3, 'Input Start start_Level')
+        time.sleep(0.5)
+        self.speak.add_speech(3, 'Input Start Level')
       elif self.current_change == 1:
         self.start_level = self.current_input
         print('start_level: '+ str(self.start_level))
         self.speak.add_speech(3, 'Start Level. ' + str(self.start_level))
         self.current_input = 0
         self.current_change=self.current_change+1
-        time.sleep(0.2)
+        time.sleep(0.5)
         self.speak.add_speech(3, 'Input Start node')
       elif self.current_change == 2:
         self.start_node = self.current_input
         print('start_node: '+ str(self.start_node))
         self.speak.add_speech(3, 'Start Node. ' + str(self.start_node))
-        time.sleep(0.2)
+        time.sleep(0.5)
         self.current_input = 0
         self.current_change=self.current_change+1
         self.speak.add_speech(3, 'Input End Building')
       elif self.current_change == 3:  
-        self.end_node = self.current_input
-        print('end_node: '+ str(self.end_building))
+        self.end_building = self.current_input
+        print('end_building: '+ str(self.end_building))
         self.speak.add_speech(3, 'End Building. ' +str(self.end_node))
-        time.sleep(0.2)
+        time.sleep(0.5)
         self.current_input = 0
         self.current_change=self.current_change+1
         self.speak.add_speech(3, 'Input End Level')
       elif self.current_change == 4:  
-        self.end_node = self.current_input
-        print('end_node: '+ str(self.end_level))
+        self.end_level = self.current_input
+        print('end_level: '+ str(self.end_level))
         self.speak.add_speech(3, 'End Level. ' +str(self.end_node))
-        time.sleep(0.2)
+        time.sleep(0.5)
         self.current_input = 0
         self.current_change=self.current_change+1
         self.speak.add_speech(3, 'Input End Node')
@@ -74,7 +74,7 @@ class KeypadData():
         self.end_node = self.current_input
         print('end_node: '+ str(self.end_node))
         self.speak.add_speech(3, 'End Node. ' +str(self.end_node))
-        time.sleep(0.2)
+        time.sleep(0.5)
         self.current_input = 0
         self.current_change=self.current_change+1
         self.speak.add_speech(3, 'Press # to start')
