@@ -177,9 +177,9 @@ def parse_map_data(data):
 
 def get_map_info(building, level):
   try:
-    # if (building == 42 or building == '42'):
-    assert False
-    # jsonObject = download_map(dict(Building=building, Level=level))
+    if (building == 42 or building == '42'):
+      assert False
+    jsonObject = download_map(dict(Building=building, Level=level))
   except Exception as e:
     print(str(e))
     print("Cannot download map")
