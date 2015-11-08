@@ -1,1 +1,151 @@
-[{"building_start":"1","level_start":"2","building_end":"1","level_end":"2","link_count":"0","links":{"1":{"building":"1","level":"2"}}},{"building_start":"1","level_start":"2","building_end":"2","level_end":"2","link_count":"1","links":{"1":{"building":"1","level":"2"},"2":{"building":"2","level":"2"}}},{"building_start":"1","level_start":"2","building_end":"2","level_end":"3","link_count":"2","links":{"1":{"building":"1","level":"2"},"2":{"building":"2","level":"2"},"3":{"building":"2","level":"3"}}},{"building_start":"2","level_start":"2","building_end":"1","level_end":"2","link_count":"1","links":{"1":{"building":"2","level":"2"},"2":{"building":"1","level":"1"}}},{"building_start":"2","level_start":"2","building_end":"2","level_end":"2","link_count":"0","links":{"1":{"building":"2","level":"2"}}},{"building_start":"2","level_start":"2","building_end":"2","level_end":"3","link_count":"1","links":{"1":{"building":"2","level":"2"},"2":{"building":"2","level":"3"}}},{"building_start":"2","level_start":"3","building_end":"1","level_end":"2","link_count":"2","links":{"1":{"building":"2","level":"3"},"2":{"building":"2","level":"2"},"3":{"building":"1","level":"2"}}},{"building_start":"2","level_start":"3","building_end":"2","level_end":"2","link_count":"1","links":{"1":{"building":"2","level":"3"},"2":{"building":"2","level":"2"}}},{"building_start":"2","level_start":"3","building_end":"2","level_end":"3","link_count":"0","links":{"1":{"building":"2","level":"3"}}}]
+[
+  {
+    "building_start": "1",
+    "level_start": "2",
+    "building_end": "1",
+    "level_end": "2",
+    "link_count": "1",
+    "links": {
+      "0": {
+        "building": "1",
+        "level": "2"
+      }
+    }
+  },
+  {
+    "building_start": "1",
+    "level_start": "2",
+    "building_end": "2",
+    "level_end": "2",
+    "link_count": "2",
+    "links": {
+      "0": {
+        "building": "1",
+        "level": "2"
+      },
+      "1": {
+        "building": "2",
+        "level": "2"
+      }
+    }
+  },
+  {
+    "building_start": "1",
+    "level_start": "2",
+    "building_end": "2",
+    "level_end": "3",
+    "link_count": "3",
+    "links": {
+      "0": {
+        "building": "1",
+        "level": "2"
+      },
+      "1": {
+        "building": "2",
+        "level": "2"
+      },
+      "2": {
+        "building": "2",
+        "level": "3"
+      }
+    }
+  },
+  {
+    "building_start": "2",
+    "level_start": "2",
+    "building_end": "1",
+    "level_end": "2",
+    "link_count": "2",
+    "links": {
+      "0": {
+        "building": "2",
+        "level": "2"
+      },
+      "1": {
+        "building": "1",
+        "level": "1"
+      }
+    }
+  },
+  {
+    "building_start": "2",
+    "level_start": "2",
+    "building_end": "2",
+    "level_end": "2",
+    "link_count": "1",
+    "links": {
+      "0": {
+        "building": "2",
+        "level": "2"
+      }
+    }
+  },
+  {
+    "building_start": "2",
+    "level_start": "2",
+    "building_end": "2",
+    "level_end": "3",
+    "link_count": "2",
+    "links": {
+      "0": {
+        "building": "2",
+        "level": "2"
+      },
+      "1": {
+        "building": "2",
+        "level": "3"
+      }
+    }
+  },
+  {
+    "building_start": "2",
+    "level_start": "3",
+    "building_end": "1",
+    "level_end": "2",
+    "link_count": "3",
+    "links": {
+      "0": {
+        "building": "2",
+        "level": "3"
+      },
+      "1": {
+        "building": "2",
+        "level": "2"
+      },
+      "2": {
+        "building": "1",
+        "level": "2"
+      }
+    }
+  },
+  {
+    "building_start": "2",
+    "level_start": "3",
+    "building_end": "2",
+    "level_end": "2",
+    "link_count": "2",
+    "links": {
+      "0": {
+        "building": "2",
+        "level": "3"
+      },
+      "1": {
+        "building": "2",
+        "level": "2"
+      }
+    }
+  },
+  {
+    "building_start": "2",
+    "level_start": "3",
+    "building_end": "2",
+    "level_end": "3",
+    "link_count": "1",
+    "links": {
+      "0": {
+        "building": "2",
+        "level": "3"
+      }
+    }
+  }
+]

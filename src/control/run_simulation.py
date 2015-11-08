@@ -134,7 +134,7 @@ class Simulation():
       self.current_start_id = self.id_start
     else:
       self.current_start_id = None
-    if self.current_link_id == self.link_count:
+    if self.current_link_id == self.link_count -1:
       self.current_end_id = self.id_end
       is_final_path = True
     else:
