@@ -185,18 +185,18 @@ def get_map_info(building, level):
     print("Cannot download map")
     if building == 1 or building == '1' or building == 'COM1':
       if level == 2 or level == '2':
-        data_file = open("1_2.json")
+        data_file = open("/home/pi/Desktop/CG3002/src/control/1_2.json")
         jsonObject = json.load(data_file)
     elif building == 2 or building == '2' or building == 'COM2':
       if level == 2 or level == '2':
-        data_file = open("2_2.json")
+        data_file = open("/home/pi/Desktop/CG3002/src/control/2_2.json")
         jsonObject = json.load(data_file)
       elif level == 3 or level == '3':
-        data_file = open("2_3.json")
+        data_file = open("/home/pi/Desktop/CG3002/src/control/2_3.json")
         jsonObject = json.load(data_file)
     elif building == 42 or building == '42':
       if level == 5 or level == '5':
-        data_file = open("42_5.json")
+        data_file = open("/home/pi/Desktop/CG3002/src/control/42_5.json")
         jsonObject = json.load(data_file)
     
       

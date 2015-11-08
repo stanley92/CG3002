@@ -83,7 +83,7 @@ class Simulation():
   def _init_path (self):
     try:
       # importing the interbuilding links map
-      data_file = open("links.json")
+      data_file = open("/home/pi/Desktop/CG3002/src/control/links.json")
       global_links = json.load(data_file)
       print(global_links)
       for navigation in global_links:
