@@ -87,10 +87,10 @@ class Simulation():
       global_links = json.load(data_file)
       print(global_links)
       for navigation in global_links:
-        if str(navigation['building_start']) == str(building_start) \
-        and str(navigation['level_start']) == str(level_start) \
-        and str(navigation['building_end']) == str(building_end) \
-        and str(navigation['level_end']) == str(level_end):
+        if str(navigation['building_start']) == str(self.building_start) \
+        and str(navigation['level_start']) == str(self.level_start) \
+        and str(navigation['building_end']) == str(self.building_end) \
+        and str(navigation['level_end']) == str(self.level_end):
           print(navigation)
           self.link_count = int(navigation['link_count'])
           self.links = navigation['links']
