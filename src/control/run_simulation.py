@@ -85,6 +85,8 @@ class Simulation():
       # importing the interbuilding links map
       data_file = open("/home/pi/Desktop/CG3002/src/control/links.json")
       global_links = json.load(data_file)
+      print('ALL LINKS: ')
+      print(global_links)
       for navigation in global_links:
         print(navigation)
         if str(navigation['building_start']) == str(self.building_start) \
