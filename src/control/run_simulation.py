@@ -20,8 +20,8 @@ ANGLE_MARGIN = 10
 
 class Simulation():
   def __init__ (self, prog_controller, orient, displace, speak, 
-    building_start=None, level_start=None, start=None, 
-    building_end=None, level_end=None, end=None,
+    building_start=None, level_start=None, id_start=None, 
+    building_end=None, level_end=None, id_end=None,
     x=None, y=None ):
    
     # map information

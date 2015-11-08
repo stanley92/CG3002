@@ -104,8 +104,8 @@ if __name__ == '__main__':
         try:
           displace.initialise()
           run = run_simulation.Simulation(prog_controller, orient, displace, speak, 
-            building_start=start_building, level_start = start_level, start=start_node,
-            building_end=end_building, level_end = end_level, end=end_node)
+            building_start=start_building, level_start = start_level, id_start=start_node,
+            building_end=end_building, level_end = end_level, id_end=end_node)
           run_simulation_thread = threading.Thread(target = run.start_nav, args = [])
           run_simulation_thread.start()
           obstacle_detect = obstacle_detector.ObstacleDetector(prog_controller, sensors_data, speak)
