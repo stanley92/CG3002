@@ -163,7 +163,7 @@ class Simulation():
 
     print("S-E: "+str(self.current_start_id)+" " +str(self.current_end_id))
 
-    path = find_shortest_path.shortest(self.current_graph, self.current_start_id, self.current_end_id)
+    path = find_shortest_path.shortest(self.current_graph, int(self.current_start_id), int(self.current_end_id))
 
     print("path: "+ str(path))
     return path, is_final_path
