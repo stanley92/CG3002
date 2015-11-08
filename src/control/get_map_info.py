@@ -119,7 +119,7 @@ class Graph():
 
   def get_link_to(self, building=None, level=None):
     for i in self.links:
-      if self.links[i][building] == building && self.links[i][level] == level:
+      if self.links[i][building] == building and self.links[i][level] == level:
         return i, self.links[i][id]
 
   def get_vertices(self):
