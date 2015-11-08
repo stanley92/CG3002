@@ -37,6 +37,20 @@ class LocationNode():
     self.y = y
     self.node_name = node_name
     self.link_to = link_to
+    try:
+      if node_name.split(' ')[0] == 'TO':
+        self.go_to = dict(
+          building = node_name.split(' ')[1].split('-')[0],
+          level = node_name.split(' ')[1].split('-')[1],
+          id = node_name.split(' ')[1].split('-')[2]
+        )
+      else:
+        self.go_to = None
+    except Exception:
+      self.go_to = None
+
+  def is_interbuilding_node(self):
+    return self.go_to != None
 
 #########################################
 # WifiNode class
@@ -71,10 +85,10 @@ class Vertex():
     self.name = node.node_name
     self.adjacent = {}
 
-  def addNeighbor(self, node, code):
-    self.adjacent[node.id] = _calcDistance(self.x, self.y, node.x, node.y)
+  def add_neighbor(self, node, code):
+    self.adjacent[node.id] = _calc_distance(self.x, self.y, node.x, node.y)
 
-  def getConnections(self):
+  def get_connections(self):
     return self.adjacent.keys()  
 
 #########################################
@@ -86,38 +100,47 @@ class Graph():
   def __init__(self):
     self.vertices = {}
     self.num_vertices = 0
+    self.links = {}
 
-  def addVertex(self, node): # (LocationNode) -> (Vertex)
+  def add_vertex(self, node): # (LocationNode) -> (Vertex)
     self.num_vertices = self.num_vertices + 1
     new_vertex = Vertex(node)
     self.vertices[new_vertex.id] = new_vertex
     return new_vertex
 
-  def getVertex(self, n): # (int) -> (Vertex or None)
+  def get_vertex(self, n): # (int) -> (Vertex or None)
     if n in self.vertices:
       return self.vertices[n]
     else: 
       return None
 
-  def getVertices(self):
+  def add_interbuilding_link(self, node):
+    self.links[node.id] = node.go_to
+
+  def get_link_to(self, building=None, level=None):
+    for i in self.links:
+      if self.links[i][building] == building && self.links[i][level] == level:
+        return i, self.links[i][id]
+
+  def get_vertices(self):
     return self.vertices.keys()
 
-  def addEdge(self, frm, to): # (int, int)
+  def add_edge(self, frm, to): # (int, int)
     if frm not in self.vertices:
       raise KeyError('Vertex not found')
     if to not in self.vertices:
       raise KeyError('Vertex not found')
     fromNode = self.vertices[frm]
     toNode = self.vertices[to]
-    cost = _calcDistance(fromNode.x, fromNode.y, toNode.x, toNode.y)
-    self.vertices[frm].addNeighbor(self.vertices[to], cost)
-    self.vertices[to].addNeighbor(self.vertices[frm], cost)
+    cost = _calc_distance(fromNode.x, fromNode.y, toNode.x, toNode.y)
+    self.vertices[frm].add_neighbor(self.vertices[to], cost)
+    self.vertices[to].add_neighbor(self.vertices[frm], cost)
 
 
-def _calcDistance(x1, y1, x2, y2):
+def _calc_distance(x1, y1, x2, y2):
   return math.sqrt((x1-x2)**2+ (y1-y2)**2)
 
-def downloadMap(params):
+def download_map(params):
   print('download map!')
   url = "http://showmyway.comp.nus.edu.sg/getMapInfo.php"
   print(params)
@@ -127,7 +150,7 @@ def downloadMap(params):
   assert(type(resp.json) == dict)
   return resp.json
 
-def parseMapData(data):
+def parse_map_data(data):
   info = Info(data['info']['northAt'])
   location_nodes = {}
   wifi_nodes = {}
@@ -152,11 +175,11 @@ def parseMapData(data):
 
   return Map(info, location_nodes, wifi_nodes)
 
-def getMapInfo(building, level):
+def get_map_info(building, level):
   try:
-    if (building == 42 or building == '42'):
-      assert False
-    jsonObject = downloadMap(dict(Building=building, Level=level))
+    # if (building == 42 or building == '42'):
+    assert False
+    # jsonObject = download_map(dict(Building=building, Level=level))
   except Exception as e:
     print(str(e))
     print("Cannot download map")
@@ -178,31 +201,35 @@ def getMapInfo(building, level):
     
       
   print(jsonObject)
-  mapInfo = parseMapData(jsonObject)
+  mapInfo = parse_map_data(jsonObject)
   return mapInfo
 
-def generateGraph(mapData):
-  location_nodes = mapData.location_nodes
+def generate_graph(map_data):
+  location_nodes = map_data.location_nodes
   graph = Graph()
   for i in location_nodes:
-    graph.addVertex(location_nodes[i])
-  for i in location_nodes:
+    # add vertex
+    graph.add_vertex(location_nodes[i])
+    # add interbuilding links
+    if location_nodes[i].is_interbuilding_node():
+      graph.add_interbuilding_link(location_nodes[i])
+    # add edges
     for link in location_nodes[i].link_to:
-      graph.addEdge(location_nodes[i].id, link)
+      graph.add_edge(location_nodes[i].id, link)
   return graph
 
-def getNearestVertex(x_curr, y_curr, graph):
-  nearestDist = -1;
+def get_nearest_vertex(x_curr, y_curr, graph):
+  nearest_dist = -1;
   
-  for i in graph.getVertices():
-    dist = int (_calcDistance(x_curr,y_curr,graph.getVertex(i).x, graph.getVertex(i).y))
+  for i in graph.get_vertices():
+    dist = int (_calc_distance(x_curr,y_curr,graph.get_vertex(i).x, graph.get_vertex(i).y))
     
-    if nearestDist == -1:
-      nearestDist = dist
-      nearestVertex = graph.getVertex(i)
-    elif dist < nearestDist:
-      nearestDist = dist
-      nearestVertex = graph.getVertex(i)
+    if nearest_dist == -1:
+      nearest_dist = dist
+      nearest_vertex = graph.get_vertex(i)
+    elif dist < nearest_dist:
+      nearest_dist = dist
+      nearest_vertex = graph.get_vertex(i)
 
-  return nearestVertex
+  return nearest_vertex
 

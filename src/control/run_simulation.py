@@ -6,6 +6,7 @@ import math
 import os
 import time
 import subprocess
+import json
 
 #########################################
 # simulation class
@@ -18,83 +19,142 @@ import subprocess
 ANGLE_MARGIN = 10
 
 class Simulation():
-  def __init__ (self, prog_controller, orient, displace, speak, building, level, start=None, x=None, y=None, end=None):
+  def __init__ (self, prog_controller, orient, displace, speak, 
+    building_start=None, level_start=None, start=None, 
+    building_end=None, level_end=None, end=None,
+    x=None, y=None ):
    
+    # map information
+    self.building_start = building_start
+    self.level_start = level_start
+    self.id_start = id_start
+    self.building_end = building_end
+    self.level_end = level_end
+    self.id_end = id_end
+
+    # interbuilding information
+    self.link_count = 0
+    self.links = {}
+    
+    # global variable for interbuilding navigating
+    
+    self.current_building = building_start
+    self.current_level = level_start
+    self.current_link_id = 0
+    self.current_link = {}
+    self.current_start_id = self.id_start
+    self.current_end_id = None
+    self.next_start_id = None
+    self.is_final_path = False
+
+    # initial path finding
+    self._init_path()
+    
+
+    # modules to navigate
     self.prog_controller = prog_controller
-    self.building = building
-    self.level = level
-    self.start = start
-    self.x = x
-    self.y = y
-    self.end = end
-    map_info = get_map_info.getMapInfo(building, level)
-    self.graph = get_map_info.generateGraph(map_info)
-    self.path = self._generatePath()
     self.orient = orient
     self.orient.setNorthAt(int(map_info.info.north_at))
     self.displace = displace
     self.speak = speak 
-    self.sideStep=0
+
+    # global variables for immediate navigation
+    self.side_steps=0
     self.walk_straight_added = False
 
-  def setBuilding (self, building): 
-    self.building = building
-
-  def getBuilding (self): 
-    return self.building
-
-  def setLevel (self, level): 
-    self.level = level
-
-  def getLevel (self): 
-    return self.level
-
-  def setStart (self, start): 
-    self.start = start
-
-  def getStart (self): 
-    return self.start
-
-  def setEnd (self, end): 
-    self.end = end
-
-  def getEnd (self): 
-    return self.end
+    self.x = x
+    self.y = y
 
   ################################################
   # Determines if the path is VALID
   ################################################
-  def _checkValidPath (self,graph):
-    if not 0<self.start<=len(self.graph.getVertices()):
+  def _check_valid_node_id (self, graph, node_start, node_end):
+    if not 0<node_start<=len(self.graph.get_vertices()):
       print('No such start point')
       return False
-    elif not 0<self.end<=len(self.graph.getVertices()):
+    elif not 0<node_end<=len(self.graph.get_vertices()):
       print('No such end point')
       return False
     return True
 
   ################################################
-  # Assigns the path dependent on start or x,y
+  # Init the path dependent on start
   ################################################
-  def _generatePath (self):
-    if self.start!=None:
-      if self._checkValidPath(self.graph):
-        self.path = find_shortest_path.shortest(self.graph, self.start, self.end)
-        return self.path
-    elif self.x!=None and self.y!= None:
-      closestVertex = get_map_info.getNearestVertex(self.x, self.y, self.graph)
-      self.path = find_shortest_path.shortest(self.graph, closestVertex.id, self.end)
-      return self.path
+  def _init_path (self):
+    try:
+      if self.start!=None:
+        # importing the interbuilding links map
+        data_file = open("links.json")
+        global_links = json.load(data_file)
+        for navigation in global_links:
+          if str(navigation['building_start']) == str(building_start) \
+          and str(navigation['level_start']) == str(level_start) \
+          and str(navigation['building_end']) == str(building_end) \
+          and str(navigation['level_end']) == str(level_end):
+            self.link_count = int(navigation['link_count'])
+            self.links = navigation['links']
+          return
+      assert False
+    # elif self.x!=None and self.y!= None:
+    #   closestVertex = get_map_info.getNearestVertex(self.x, self.y, self.current_graph)
+    #   path = find_shortest_path.shortest(self.current_graph, closestVertex.id, self.end)
+    #   return path
+    except Exception:
+      print('Failed to init Path')
+    
+
+
+  ################################################
+  # Find the path within current building
+  ################################################
+  def _find_next_path(self):
+    is_final_path = False
+
+    self.current_link_id = self.current_link_id +1
+    self.current_link = self.links[self.current_link_id]
+    self.current_building = str(self.current_link['building'])
+    self.current_level = str(self.current_link['level'])
+    current_map_info = get_map_info.get_map_info(self.current_building, self.current_level)
+    self.current_graph = get_map_info.generate_graph(current_map_info)
+
+    # find start and end in the current map
+    if self.current_link_id == 0:
+      self.current_start_id = self.id_start
     else:
-      return None
+      self.current_start_id = None
+    if self.current_link_id == self.link_count:
+      self.current_end_id = self.id_end
+      is_final_path = True
+    else:
+      self.current_end_id = None
+
+    if current_start_id == None: # continue from prev map
+      self.current_start_id = self.next_start_id
+      self.next_start_id = None
+
+    if current_end_id == None: # have a next map to continue
+      next_link = self.links[self.current_link_id+1]
+      next_building = str(next_link['building'])
+      next_level = str(next_link['level'])
+      m_from, m_to = self.current_graph.get_link_to(building=next_building,level=next_level)
+      self.current_end_id = m_from
+      self.next_start_id = m_to
+      
+    
+    path = find_shortest_path.shortest(self.current_graph, self.current_start_id, self.current_end_id)
+
+    return path, is_final_path
 
   ################################################
   # Begin the navigation process
   ################################################
   def start_nav(self):
-          
-    self.navigate()
+    while not self.is_final_path:
+      self.path, self.is_final_path = self._find_next_path()
 
+      self.navigate()
+
+      
     self.speak.add_speech(3, 'You have reached your destination.')
     # self.say('You have reached your destination!')
     print('You have reached your destination!')
@@ -123,45 +183,44 @@ class Simulation():
   def walk(self, i):
 
     if (i == -1):
-      self.orient.setAngleOfNodeXY(self.graph,self.x,self.y,self.path[0])
-      new_dist = (get_map_info._calcDistance(self.x, self.y, self.graph.getVertex(self.path[0]).x, self.graph.getVertex(self.path[0]).y))
+      self.orient.setAngleOfNodeXY(self.current_graph,self.x,self.y,self.path[0])
+      new_dist = (get_map_info._calcDistance(self.x, self.y, self.current_graph.get_vertex(self.path[0]).x, self.current_graph.get_vertex(self.path[0]).y))
       self.displace.setDistCal(new_dist)
     else:      
-      self.orient.setAngleOfNodes(self.graph,self.path[i],self.path[i+1])
+      self.orient.setAngleOfNodes(self.current_graph,self.path[i],self.path[i+1])
       old_dist = self.displace.getDistCal()
-      new_dist = (get_map_info._calcDistance(self.graph.getVertex(self.path[i]).x, self.graph.getVertex(self.path[i]).y, self.graph.getVertex(self.path[i+1]).x, self.graph.getVertex(self.path[i+1]).y))
+      new_dist = (get_map_info._calcDistance(self.current_graph.get_vertex(self.path[i]).x, self.current_graph.get_vertex(self.path[i]).y, self.current_graph.get_vertex(self.path[i+1]).x, self.current_graph.get_vertex(self.path[i+1]).y))
       total_dist = old_dist + new_dist
       self.displace.setDistCal(total_dist)
 
     while(self.displace.getDistTra() < self.displace.getDistCal()): #havent travel enuf distance
-      # turning into correct direction
+      
       if not self.prog_controller.is_program_running_sim():
         print("Run Simulation stopped")
         break
+
       self.turn()
+
       newSteps = self.displace.get_new_dist_tra_from_step()
       if newSteps != 0:
         if math.fabs(self.orient.getAngleOfNodes()-self.orient.getCompassValue()) < ANGLE_MARGIN:
           newDistTra = newSteps
-          self.sideStep = 0
+          self.side_steps = 0
         else:  
           newDistTra = math.cos( math.radians( math.fabs (self.orient.getAngleOfNodes()-self.orient.getCompassValue() ) ) ) * newSteps
-          self.sideStep = math.sin ( math.radians ( self.orient.getAngleOfNodes() - self.orient.getCompassValue() ) ) * newSteps
-        # distance to next node
+          self.side_steps = math.sin ( math.radians ( self.orient.getAngleOfNodes() - self.orient.getCompassValue() ) ) * newSteps # distance to next node
+
         if newDistTra < 0:
           self.speak.add_speech(3, 'You are in the wrong direction.')
-          # self.say('You are in the wrong direction')
 
         print('Distance total: ' + str(self.displace.getDistCal()))
         print('Distance travelled: ' + str(self.displace.getDistTra()))
         print('Distance to next node: ' + str(self.displace.getDistCal()-self.displace.getDistTra()))
-        #newDistTra = int (input ('Distance Travelled:'))
+        
 
         print('Angle: ' + str((self.orient.getCompassValue())))
         print('Actual Dist: ' + str(newDistTra))
 
-        #self.say("You have walked" + str(int(newDistTra)) + 'cm')
-        #os.system ("say You have walked" + str(int(newDistTra)) + 'cm')
         totalDistTra = self.displace.getDistTra() + newDistTra
         if totalDistTra > self.displace.getDistCal(): # reached
           self.displace.setDistTra(self.displace.getDistCal())
@@ -171,50 +230,47 @@ class Simulation():
 
         print('Remaining Dist: ' + str (remainingDist))
         
-        #self.say("You have a remaining of" + str(int(self.displace.getDistCal()-self.displace.getDistTra())) + 'cm')
-        #os.system ("say You have a remaining of" + str(int(self.displace.getDistCal()-self.displace.getDistTra())) + 'cm')
-        
         time.sleep(1)
 
-    if self.sideStep > 0:
+    if self.side_steps > 0:
       self.speak.add_speech(2, 'Turn Right 90 degrees')
       # self.say('Turn Right 90 degrees')
-    elif self.sideStep < 0:
+    elif self.side_steps < 0:
       self.speak.add_speech(2, 'Turn Left 90 degrees')
       # self.say('Turn Left 90 degrees')
 
-    while (math.fabs(self.sideStep) > 100):
+    while (math.fabs(self.side_steps) > 100):
       newSteps = self.displace.get_new_dist_tra_from_step()
       if -100 < self.orient.getAngleOfNodes() - self.orient.getCompassValue() < -80 :
         #To calculate how much to walk
-        print('sideStep' - str(self.sideStep))
-        self.sideStep = self.sideStep - newSteps
+        print('side_steps' - str(self.side_steps))
+        self.side_steps = self.side_steps - newSteps
       elif 80 < self.orient.getAngleOfNodes() - self.orient.getCompassValue() < 100:
         #to calculate how much to walk
-        print('sideStep' + str(self.sideStep))
-        self.sideStep = self.sideStep + newSteps
+        print('side_steps' + str(self.side_steps))
+        self.side_steps = self.side_steps + newSteps
 
     # print(len(self.path))
-    # print(self.graph.getVertex(self.path[len(self.path)-1]).id)
+    # print(self.current_graph.get_vertex(self.path[len(self.path)-1]).id)
     if i!=-1 and i<len(self.path)-2 :
-      arrivedText = 'You have reached node ' + self.graph.getVertex(self.path[i+1]).name
+      arrivedText = 'You have reached node ' + self.current_graph.get_vertex(self.path[i+1]).name
       print (str(arrivedText))
       self.speak.add_speech(1, arrivedText)
       self.speak.add_speech(1, arrivedText)
       
       # subprocess.call('espeak -v%s+%s -s120 "%s" 2>/dev/null' % ('en-us', 'f3', arrivedText), shell=True)
       # subprocess.call('espeak -v%s+%s -s120 "%s" 2>/dev/null' % ('en-us', 'f3', arrivedText), shell=True)
-      #print('You have reached node ' + self.graph.getVertex(self.path[i+1]).name + ' ' + self.orient.userOffset())
-      #self.say('You have reached node ' + self.graph.getVertex(self.path[i+1]).name + ' ' + self.orient.userOffset())
+      #print('You have reached node ' + self.current_graph.get_vertex(self.path[i+1]).name + ' ' + self.orient.userOffset())
+      #self.say('You have reached node ' + self.current_graph.get_vertex(self.path[i+1]).name + ' ' + self.orient.userOffset())
     else:
-      arrivedText = 'You have reached node ' + self.graph.getVertex(self.path[i+1]).name 
+      arrivedText = 'You have reached node ' + self.current_graph.get_vertex(self.path[i+1]).name 
       print (str(arrivedText))
       self.speak.add_speech(1, arrivedText)
       self.speak.add_speech(1, arrivedText)
 
       # subprocess.call('espeak -v%s+%s -s120 "%s" 2>/dev/null' % ('en-us', 'f3', arrivedText), shell=True)
-      #print('You have reached node ' + self.graph.getVertex(self.path[i+1]).name)
-      #self.say('You have reached node ' + self.graph.getVertex(self.path[i+1]).name)
+      #print('You have reached node ' + self.current_graph.get_vertex(self.path[i+1]).name)
+      #self.say('You have reached node ' + self.current_graph.get_vertex(self.path[i+1]).name)
 
   ################################################
   # Turning algorithim
