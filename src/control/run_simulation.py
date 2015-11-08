@@ -277,21 +277,16 @@ class Simulation():
 
     # print(len(self.path))
     # print(self.current_graph.get_vertex(self.path[len(self.path)-1]).id)
-    if i!=-1 and i<len(self.path)-2 :
-      arrivedText = 'You have reached node ' + self.current_graph.get_vertex(self.path[i+1]).name
-      print (str(arrivedText))
-      self.speak.add_speech(1, arrivedText)
-      self.speak.add_speech(1, arrivedText)
+    arrivedText = 'You have reached node ' + self.current_graph.get_vertex(self.path[i+1]).name
+    print (str(arrivedText))
+    self.speak.add_speech(1, arrivedText)
+    self.speak.add_speech(1, arrivedText)
       
       # subprocess.call('espeak -v%s+%s -s120 "%s" 2>/dev/null' % ('en-us', 'f3', arrivedText), shell=True)
       # subprocess.call('espeak -v%s+%s -s120 "%s" 2>/dev/null' % ('en-us', 'f3', arrivedText), shell=True)
       #print('You have reached node ' + self.current_graph.get_vertex(self.path[i+1]).name + ' ' + self.orient.userOffset())
       #self.say('You have reached node ' + self.current_graph.get_vertex(self.path[i+1]).name + ' ' + self.orient.userOffset())
-    else:
-      arrivedText = 'You have reached node ' + self.current_graph.get_vertex(self.path[i+1]).name 
-      print (str(arrivedText))
-      self.speak.add_speech(1, arrivedText)
-      self.speak.add_speech(1, arrivedText)
+ 
 
       # subprocess.call('espeak -v%s+%s -s120 "%s" 2>/dev/null' % ('en-us', 'f3', arrivedText), shell=True)
       #print('You have reached node ' + self.current_graph.get_vertex(self.path[i+1]).name)

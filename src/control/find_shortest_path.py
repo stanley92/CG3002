@@ -34,12 +34,15 @@ def dijkstra(graph, start, target):
   return (D,P)
 
 def shortest(graph, start, target):
+  print('start find shortest path')
   D,P = dijkstra(graph, start, target)
   path = []
+  print('before loop')
   while 1:
     path.append(target)
     if (target == start): break
     target = P[target]
+  print('after loop')
   path.reverse()
   return path
 
