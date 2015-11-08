@@ -118,9 +118,10 @@ class Graph():
     self.links[node.id] = node.go_to
 
   def get_link_to(self, building=None, level=None):
-    for i in self.links:
-      if self.links[i]['building'] == building and self.links[i]['level'] == level:
-        return i, self.links[i]['id']
+    print(self.links)
+    for link in self.links:
+      if link['building'] == building and link['level'] == level:
+        return i, link['id']
 
   def get_vertices(self):
     return self.vertices.keys()
