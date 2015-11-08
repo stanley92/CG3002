@@ -119,9 +119,11 @@ class Graph():
 
   def get_link_to(self, building=None, level=None):
     print(self.links)
-    for link in self.links:
-      if link['building'] == building and link['level'] == level:
-        return i, link['id']
+    for i in self.links:
+      if str(self.links[i]['building']) == str(building) and str(self.links[i]['level']) == str(level):
+        return i, self.links[i]['id']
+
+    return (None, None)
 
   def get_vertices(self):
     return self.vertices.keys()
@@ -184,11 +186,11 @@ def get_map_info(building, level):
   except Exception as e:
     print(str(e))
     print("Cannot download map")
-    if building == 1 or building == '1' or building == 'COM1':
+    if building == 1 or building == '1' or building == '1':
       if level == 2 or level == '2':
         data_file = open("/home/pi/Desktop/CG3002/src/control/1_2.json")
         jsonObject = json.load(data_file)
-    elif building == 2 or building == '2' or building == 'COM2':
+    elif building == 2 or building == '2' or building == '2':
       if level == 2 or level == '2':
         data_file = open("/home/pi/Desktop/CG3002/src/control/2_2.json")
         jsonObject = json.load(data_file)

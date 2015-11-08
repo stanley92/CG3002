@@ -5,9 +5,9 @@ class getUserInput():
 	
 	def getBuildingName(btn):
 		if (btn == "1#")
-			building = "COM1"		
+			building = "1"		
 		elif (btn == "2#")
-			building = "COM2"
+			building = "2"
 
 		return building
 

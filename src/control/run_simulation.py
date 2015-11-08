@@ -152,9 +152,11 @@ class Simulation():
         str(next_building) + " " + 
         str(next_level))
       m_from, m_to = self.current_graph.get_link_to(building=next_building,level=next_level)
-      self.current_end_id = m_from
-      self.next_start_id = m_to
-      
+      if m_from!= None and m_to!= None:
+        self.current_end_id = m_from
+        self.next_start_id = m_to
+      else:
+        raise LookupError("Cannot find link btw building")
     
     path = find_shortest_path.shortest(self.current_graph, self.current_start_id, self.current_end_id)
 

@@ -46,7 +46,7 @@ def shortest(graph, start, target):
 
 if __name__ == '__main__':
   import get_map_info
-  building = 'COM1'
+  building = '1'
   level = 2
   start = 1
   end = 28

@@ -114,7 +114,7 @@ def cal_angle(x_next,x_curr,y_next,y_curr,x_hori,y_vert,northAt):
 
 
 ##x = Compass()
-##g = get_map_info.generateGraph(get_map_info.getMapInfo('COM1',2))
+##g = get_map_info.generateGraph(get_map_info.getMapInfo('1',2))
 ##
 ##x.setCompassValue(0)
 ##print('User angle = ' + str(x.getCompassValue()))
