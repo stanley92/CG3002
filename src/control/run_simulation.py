@@ -310,8 +310,8 @@ class Simulation():
   def turn(self):
     #### TODO: handledata compassValue (keep reading)
     #### DUMMY: compass Value
-    print('Next node angle: ' + str(self.orient.getAngleOfNodes()))
-    print('Current direction: ' + str(self.orient.getCompassValue()))
+    # print('Next node angle: ' + str(self.orient.getAngleOfNodes()))
+    # print('Current direction: ' + str(self.orient.getCompassValue()))
      
     # direction = self.orient.userOffset()
     #print(direction)
