@@ -173,8 +173,8 @@ class Simulation():
   ################################################
   def start_nav(self):
     while not self.is_final_path:
+      self.path, self.is_final_path = self._find_next_path()self.speak.add_speech(1, 'You are in building ' + str(self.current_building)+'. Level '+str(self.current_level))
       self.speak.add_speech(1, 'You are in building ' + str(self.current_building)+'. Level '+str(self.current_level))
-      self.path, self.is_final_path = self._find_next_path()
       print('found path')
       self.navigate()
 
