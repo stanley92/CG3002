@@ -58,7 +58,7 @@ class ObstacleDetector():
 				GPIO.output(23, False)
 
 	def collisionWarningFront(self): 
-		if self.sensors.sensor_front < 70: #and self.sensors.sensor_front != 0:
+		if self.sensors.sensor_front < 60: #and self.sensors.sensor_front != 0:
 			if not self.collision_front:
 				self.collision_front = True
 				GPIO.output(22, True)
