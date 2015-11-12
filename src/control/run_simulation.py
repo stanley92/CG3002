@@ -195,6 +195,33 @@ class Simulation():
     
     for i in range(length):
       print('walk '+str(i))
+      #change northat manually if needed
+        # get node id, building, leve
+        # if match
+          # setNorthAt(currentNorthAt +-?15)
+
+      if (self.current_building == 1 or self.current_building == '1') and (self.current_level == 2 or self.current_level == '2') and self.current_graph.get_vertex(i).id == 10:
+        self.orient.setNorthAt(305)
+        print("New angle: " + orient.getNorth())
+      elif (self.current_building == 1 or self.current_building == '1') and (self.current_level == 2 or self.current_level == '2') and self.current_graph.get_vertex(i).id == 11:
+        self.orient.setNorthAt(305)
+        print("New angle: " + orient.getNorth())
+      elif (self.current_building == 1 or self.current_building == '1') and (self.current_level == 2 or self.current_level == '2') and self.current_graph.get_vertex(i).id == 14:
+        self.orient.setNorthAt(305)
+        print("New angle: " + orient.getNorth())
+      elif (self.current_building == 1 or self.current_building == '1') and (self.current_level == 2 or self.current_level == '2') and self.current_graph.get_vertex(i).id == 37:
+        self.orient.setNorthAt(305)
+        print("New angle: " + orient.getNorth())
+      elif (self.current_building == 1 or self.current_building == '1') and (self.current_level == 2 or self.current_level == '2') and self.current_graph.get_vertex(i).id == 16:
+        self.orient.setNorthAt(303)
+        print("New angle: " + orient.getNorth())
+      elif (self.current_building == 1 or self.current_building == '1') and (self.current_level == 2 or self.current_level == '2') and self.current_graph.get_vertex(i).id == 18:
+        self.orient.setNorthAt(303)
+        print("New angle: " + orient.getNorth())
+      else: 
+        self.orient.setNorthAt(int(current_map_info.info.north_at))
+        print("New angle: " + orient.getNorth())
+
       self.walk(i)
       if not self.prog_controller.is_program_running_sim():
         print("Run Simulation stopped")
