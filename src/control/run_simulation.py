@@ -202,25 +202,25 @@ class Simulation():
 
       if (self.current_building == 1 or self.current_building == '1') and (self.current_level == 2 or self.current_level == '2') and self.current_graph.get_vertex(self.path[i]).id == 10:
         self.orient.setNorthAt(305)
-        print("New angle: " + int(self.orient.getNorth()))
+        print("New angle: " + int(self.orient.getNorthAt()))
       elif (self.current_building == 1 or self.current_building == '1') and (self.current_level == 2 or self.current_level == '2') and self.current_graph.get_vertex(self.path[i]).id == 11:
         self.orient.setNorthAt(305)
-        print("New angle: " + int(self.orient.getNorth()))
+        print("New angle: " + int(self.orient.getNorthAt()))
       elif (self.current_building == 1 or self.current_building == '1') and (self.current_level == 2 or self.current_level == '2') and self.current_graph.get_vertex(self.path[i]).id == 14:
         self.orient.setNorthAt(305)
-        print("New angle: " + int(self.orient.getNorth()))
+        print("New angle: " + int(self.orient.getNorthAt()))
       elif (self.current_building == 1 or self.current_building == '1') and (self.current_level == 2 or self.current_level == '2') and self.current_graph.get_vertex(self.path[i]).id == 37:
         self.orient.setNorthAt(305)
-        print("New angle: " + int(self.orient.getNorth()))
+        print("New angle: " + int(self.orient.getNorthAt()))
       elif (self.current_building == 1 or self.current_building == '1') and (self.current_level == 2 or self.current_level == '2') and self.current_graph.get_vertex(self.path[i]).id == 16:
         self.orient.setNorthAt(303)
-        print("New angle: " + int(self.orient.getNorth()))
+        print("New angle: " + int(self.orient.getNorthAt()))
       elif (self.current_building == 1 or self.current_building == '1') and (self.current_level == 2 or self.current_level == '2') and self.current_graph.get_vertex(self.path[i]).id == 18:
         self.orient.setNorthAt(303)
-        print("New angle: " + int(self.orient.getNorth()))
+        print("New angle: " + int(self.orient.getNorthAt()))
       else: 
         self.orient.setNorthAt(int(current_map_info.info.north_at))
-        print("New angle: " + int(self.orient.getNorth()))
+        print("New angle: " + int(self.orient.getNorthAt()))
 
       self.walk(i)
       if not self.prog_controller.is_program_running_sim():
