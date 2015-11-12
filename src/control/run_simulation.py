@@ -219,7 +219,7 @@ class Simulation():
         self.orient.setNorthAt(303)
         print("New angle: " + str(self.orient.getNorthAt()))
       else: 
-        self.orient.setNorthAt(int(current_map_info.info.north_at))
+        self.orient.setNorthAt(int(self.current_map_info.info.north_at))
         print("New angle: " + str(self.orient.getNorthAt()))
 
       self.walk(i)
