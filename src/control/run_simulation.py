@@ -218,9 +218,16 @@ class Simulation():
       elif (self.current_building == 1 or self.current_building == '1') and (self.current_level == 2 or self.current_level == '2') and self.current_graph.get_vertex(self.path[i]).id == 18:
         self.orient.setNorthAt(303)
         print("New angle: " + str(self.orient.getNorthAt()))
-      else: 
-        self.orient.setNorthAt(int(self.current_map_info.info.north_at))
+      elif (self.current_building == 1 or self.current_building == '1') and (self.current_level == 2 or self.current_level == '2') and self.current_graph.get_vertex(self.path[i]).id == 22:
+        self.orient.setNorthAt(303)
         print("New angle: " + str(self.orient.getNorthAt()))
+      elif (self.current_building == 1 or self.current_building == '1') and (self.current_level == 2 or self.current_level == '2') and self.current_graph.get_vertex(self.path[i]).id == 34:
+        self.orient.setNorthAt(300)
+        print("New angle: " + str(self.orient.getNorthAt()))
+      elif (self.current_building == 1 or self.current_building == '1') and (self.current_level == 2 or self.current_level == '2'):
+        self.orient.setNorthAt(315)
+        print("New angle: " + str(self.orient.getNorthAt()))
+
 
       self.walk(i)
       if not self.prog_controller.is_program_running_sim():
