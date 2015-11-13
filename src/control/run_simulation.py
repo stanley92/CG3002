@@ -254,12 +254,35 @@ class Simulation():
       else :
         print("NorthAt: " + str(self.orient.getNorthAt()))
       try:
-        if (self.current_building == 1 or self.current_building == '1') and (self.current_level == 2 or self.current_level == '2') and self.current_graph.get_vertex(self.path[i+1]).id == 24 \
-          and self.current_graph.get_vertex(self.path[i+2]).id == 28:
-          self.speak.add_speech(3, 'Wall in front of next node.')
+        if (self.current_building == 1 or self.current_building == '1') and (self.current_level == 2 or self.current_level == '2') \
+          and \
+          ( \
+              ( \
+              self.current_graph.get_vertex(self.path[i]).id == 21 \
+              and self.current_graph.get_vertex(self.path[i+1]).id == 24 \
+              ) \
+          or \
+              ( \
+              self.current_graph.get_vertex(self.path[i]).id == 37 \
+              and self.current_graph.get_vertex(self.path[i+1]).id == 16 \
+              ) \
+          ):
+          self.speak.add_speech(2, 'Wall in front of next node.')
         elif (self.current_building == 1 or self.current_building == '1') and (self.current_level == 2 or self.current_level == '2') \
-          and self.current_graph.get_vertex(self.path[i+1]).id == 14 and self.current_graph.get_vertex(self.path[i+1]).id == 15 or self.current_graph.get_vertex(self.path[i+1]).id == 16:
-          self.speak.add_speech(3, 'Locker in front. Walk till you feel obstacle.')
+          and self.current_graph.get_vertex(self.path[i]).id == 11 \
+          and self.current_graph.get_vertex(self.path[i+1]).id == 14 :
+            #student area to P14
+          self.speak.add_speech(2, 'Locker in front. Walk till you feel obstacle.')
+        elif (self.current_building == 2 or self.current_building == '2') and (self.current_level == 2 or self.current_level == '2') \
+          and \
+          ( \
+              ( \
+              self.current_graph.get_vertex(self.path[i]).id == 13 \
+              and self.current_graph.get_vertex(self.path[i+1]).id == 14 \
+              ) \
+          ):
+          self.speak.add_speech(2, 'Wall in front of next node. Walk until you feel obstacle. Stair on the left')
+       
       except Exception as e:
         print(str(e))
       self.walk(i)
