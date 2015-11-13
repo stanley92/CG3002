@@ -11,6 +11,7 @@ class Espeak():
 		self.queue_1 = deque() #node
 		self.queue_2 = deque() #left-right
 		self.queue_3 = None    #immediate
+		self.speaking = None
 
 	def add_speech(self, priority, message):
 		if priority == 1:
@@ -48,7 +49,11 @@ class Espeak():
 
 	def say(self, priority, message):
 		if priority == 1:
+			try:
+				self.speaking.terminate()
+			except Exception:
+				pass
 			subprocess.call('espeak -v%s+%s -s120 "%s" 2>/dev/null' % ('en-us', 'f3', message), shell=True)
 		else:
-			subprocess.call('espeak -v%s+%s "%s" 2>/dev/null' % ('en-us', 'f3', message), shell=True) 
+			self.speaking = subprocess.Popen('espeak -v%s+%s "%s" 2>/dev/null' % ('en-us', 'f3', message), shell=True) 
     		
