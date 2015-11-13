@@ -55,22 +55,26 @@ class Espeak():
 				if self.speaking_priority > 1:
 					self.speaking.send_signal(signal.SIGINT)
 					self.speaking = None
+				elif self.speaking.poll() != None:
+					self.speaking_priority = 1
+					self.speaking = subprocess.Popen('espeak -v%s+%s -s120 "%s" 2>/dev/null' % ('en-us', 'f3', message), shell=True)
 			except Exception as e:
 				print(str(e))
-				pass
-			self.speaking_priority = 1
-			self.speaking = subprocess.Popen('espeak -v%s+%s -s120 "%s" 2>/dev/null' % ('en-us', 'f3', message), shell=True)
+				pass	
 		elif priority == 2:
 			try:
 				if self.speaking_priority > 2:
 					self.speaking.send_signal(signal.SIGINT)
 					self.speaking = None
+				elif self.speaking.poll() != None:
+					self.speaking_priority = 2
+					self.speaking = subprocess.Popen('espeak -v%s+%s "%s" 2>/dev/null' % ('en-us', 'f3', message), shell=True)
 			except Exception as e:
 				print(str(e))
 				pass
-			self.speaking_priority = 2
-			self.speaking = subprocess.Popen('espeak -v%s+%s "%s" 2>/dev/null' % ('en-us', 'f3', message), shell=True) 
 		else:
-			self.speaking_priority = 3
-			self.speaking = subprocess.Popen('espeak -v%s+%s "%s" 2>/dev/null' % ('en-us', 'f3', message), shell=True) 
+			if self.speaking.poll() != None:
+				self.speaking_priority = 3
+				self.speaking = subprocess.Popen('espeak -v%s+%s "%s" 2>/dev/null' % ('en-us', 'f3', message), shell=True) 
+
     		
