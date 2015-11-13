@@ -1,4 +1,5 @@
 import subprocess
+import signal
 from collections import deque
 #########################################
 # espeak class
@@ -52,7 +53,8 @@ class Espeak():
 		if priority == 1:
 			try:
 				if self.speaking_priority > 1:
-					self.speaking.terminate()
+					self.speaking.send_signal(signal.SIGINT)
+					self.speaking = None
 			except Exception:
 				pass
 			self.speaking_priority = 1
@@ -60,7 +62,8 @@ class Espeak():
 		elif priority == 2:
 			try:
 				if self.speaking_priority > 2:
-					self.speaking.terminate()
+					self.speaking.send_signal(signal.SIGINT)
+					self.speaking = None
 			except Exception:
 				pass
 			self.speaking_priority = 2
