@@ -73,7 +73,7 @@ class Espeak():
 				print(str(e))
 				pass
 		else:
-			if self.speaking.poll() != None or self.speaking == None:
+			if self.speaking == None or self.speaking.poll() != None:
 				self.speaking_priority = 3
 				self.speaking = subprocess.Popen('espeak -v%s+%s "%s" 2>/dev/null' % ('en-us', 'f3', message), shell=True) 
 		
