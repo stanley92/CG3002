@@ -202,32 +202,54 @@ class Simulation():
 
       if (self.current_building == 1 or self.current_building == '1') and (self.current_level == 2 or self.current_level == '2') and self.current_graph.get_vertex(self.path[i]).id == 10:
         self.orient.setNorthAt(305)
-        print("New angle: " + str(self.orient.getNorthAt()))
+        print("NorthAt: " + str(self.orient.getNorthAt()))
       elif (self.current_building == 1 or self.current_building == '1') and (self.current_level == 2 or self.current_level == '2') and self.current_graph.get_vertex(self.path[i]).id == 11:
         self.orient.setNorthAt(305)
-        print("New angle: " + str(self.orient.getNorthAt()))
+        print("NorthAt: " + str(self.orient.getNorthAt()))
       elif (self.current_building == 1 or self.current_building == '1') and (self.current_level == 2 or self.current_level == '2') and self.current_graph.get_vertex(self.path[i]).id == 14:
         self.orient.setNorthAt(305)
-        print("New angle: " + str(self.orient.getNorthAt()))
+        print("NorthAt: " + str(self.orient.getNorthAt()))
       elif (self.current_building == 1 or self.current_building == '1') and (self.current_level == 2 or self.current_level == '2') and self.current_graph.get_vertex(self.path[i]).id == 37:
         self.orient.setNorthAt(305)
-        print("New angle: " + str(self.orient.getNorthAt()))
+        print("NorthAt: " + str(self.orient.getNorthAt()))
       elif (self.current_building == 1 or self.current_building == '1') and (self.current_level == 2 or self.current_level == '2') and self.current_graph.get_vertex(self.path[i]).id == 16:
         self.orient.setNorthAt(303)
-        print("New angle: " + str(self.orient.getNorthAt()))
+        print("NorthAt: " + str(self.orient.getNorthAt()))
       elif (self.current_building == 1 or self.current_building == '1') and (self.current_level == 2 or self.current_level == '2') and self.current_graph.get_vertex(self.path[i]).id == 18:
         self.orient.setNorthAt(303)
-        print("New angle: " + str(self.orient.getNorthAt()))
+        print("NorthAt: " + str(self.orient.getNorthAt()))
       elif (self.current_building == 1 or self.current_building == '1') and (self.current_level == 2 or self.current_level == '2') and self.current_graph.get_vertex(self.path[i]).id == 22:
         self.orient.setNorthAt(303)
-        print("New angle: " + str(self.orient.getNorthAt()))
+        print("NorthAt: " + str(self.orient.getNorthAt()))
       elif (self.current_building == 1 or self.current_building == '1') and (self.current_level == 2 or self.current_level == '2') and self.current_graph.get_vertex(self.path[i]).id == 34:
         self.orient.setNorthAt(300)
-        print("New angle: " + str(self.orient.getNorthAt()))
+        print("NorthAt: " + str(self.orient.getNorthAt()))
+      elif (self.current_building == 1 or self.current_building == '1') and (self.current_level == 2 or self.current_level == '2') and self.current_graph.get_vertex(self.path[i]).id == 24:
+        self.orient.setNorthAt(320)
+        print("NorthAt: " + str(self.orient.getNorthAt()))
+      elif (self.current_building == 1 or self.current_building == '1') and (self.current_level == 2 or self.current_level == '2') and self.current_graph.get_vertex(self.path[i]).id == 1:
+        self.orient.setNorthAt(303)
+        print("NorthAt: " + str(self.orient.getNorthAt()))
+      elif (self.current_building == 1 or self.current_building == '1') and (self.current_level == 2 or self.current_level == '2') and self.current_graph.get_vertex(self.path[i]).id == 2:
+        self.orient.setNorthAt(303)
+        print("NorthAt: " + str(self.orient.getNorthAt()))
+      elif (self.current_building == 1 or self.current_building == '1') and (self.current_level == 2 or self.current_level == '2') and self.current_graph.get_vertex(self.path[i]).id == 4:
+        self.orient.setNorthAt(303)
+        print("NorthAt: " + str(self.orient.getNorthAt()))
+      elif (self.current_building == 1 or self.current_building == '1') and (self.current_level == 2 or self.current_level == '2') and self.current_graph.get_vertex(self.path[i]).id == 5:   
+        self.orient.setNorthAt(303)
+        print("NorthAt: " + str(self.orient.getNorthAt()))
+      elif (self.current_building == 1 or self.current_building == '1') and (self.current_level == 2 or self.current_level == '2') and self.current_graph.get_vertex(self.path[i]).id == 2:
+        self.orient.setNorthAt(303)
+        print("NorthAt: " + str(self.orient.getNorthAt()))
+      elif (self.current_building == 1 or self.current_building == '1') and (self.current_level == 2 or self.current_level == '2') and self.current_graph.get_vertex(self.path[i]).id == 2:
+        self.orient.setNorthAt(303)
+        print("NorthAt: " + str(self.orient.getNorthAt()))
       elif (self.current_building == 1 or self.current_building == '1') and (self.current_level == 2 or self.current_level == '2'):
         self.orient.setNorthAt(315)
-        print("New angle: " + str(self.orient.getNorthAt()))
-
+        print("NorthAt: " + str(self.orient.getNorthAt()))
+      else :
+        print("NorthAt: " + str(self.orient.getNorthAt()))
 
       self.walk(i)
       if not self.prog_controller.is_program_running_sim():
