@@ -239,25 +239,29 @@ class Simulation():
       elif (self.current_building == 1 or self.current_building == '1') and (self.current_level == 2 or self.current_level == '2') and self.current_graph.get_vertex(self.path[i]).id == 5:   
         self.orient.setNorthAt(303)
         print("NorthAt: " + str(self.orient.getNorthAt()))
-      elif (self.current_building == 1 or self.current_building == '1') and (self.current_level == 2 or self.current_level == '2') and self.current_graph.get_vertex(self.path[i]).id == 2:
+      elif (self.current_building == 1 or self.current_building == '1') and (self.current_level == 2 or self.current_level == '2') and self.current_graph.get_vertex(self.path[i]).id == 8:
         self.orient.setNorthAt(303)
         print("NorthAt: " + str(self.orient.getNorthAt()))
-      elif (self.current_building == 1 or self.current_building == '1') and (self.current_level == 2 or self.current_level == '2') and self.current_graph.get_vertex(self.path[i]).id == 2:
+      elif (self.current_building == 1 or self.current_building == '1') and (self.current_level == 2 or self.current_level == '2') and self.current_graph.get_vertex(self.path[i]).id == 10:
         self.orient.setNorthAt(303)
+        print("NorthAt: " + str(self.orient.getNorthAt()))
+      elif (self.current_building == 1 or self.current_building == '1') and (self.current_level == 2 or self.current_level == '2') and self.current_graph.get_vertex(self.path[i]).id == 15:
+        self.orient.setNorthAt(310)
         print("NorthAt: " + str(self.orient.getNorthAt()))
       elif (self.current_building == 1 or self.current_building == '1') and (self.current_level == 2 or self.current_level == '2'):
         self.orient.setNorthAt(315)
         print("NorthAt: " + str(self.orient.getNorthAt()))
       else :
         print("NorthAt: " + str(self.orient.getNorthAt()))
-
-      if (self.current_building == 1 or self.current_building == '1') and (self.current_level == 2 or self.current_level == '2') and self.current_graph.get_vertex(self.path[i+1]).id == 24 \
-        and self.current_graph.get_vertex(self.path[i+2]).id == 28:
-        self.speak.add_speech(3, 'Wall in front of next node.')
-      elif (self.current_building == 1 or self.current_building == '1') and (self.current_level == 2 or self.current_level == '2') \
-        and self.current_graph.get_vertex(self.path[i+1]).id == 14 and self.current_graph.get_vertex(self.path[i+1]).id == 15 or self.current_graph.get_vertex(self.path[i+1]).id == 16:
-        self.speak.add_speech(3, 'Locker in front. Walk till you feel obstacle.')
-
+      try:
+        if (self.current_building == 1 or self.current_building == '1') and (self.current_level == 2 or self.current_level == '2') and self.current_graph.get_vertex(self.path[i+1]).id == 24 \
+          and self.current_graph.get_vertex(self.path[i+2]).id == 28:
+          self.speak.add_speech(3, 'Wall in front of next node.')
+        elif (self.current_building == 1 or self.current_building == '1') and (self.current_level == 2 or self.current_level == '2') \
+          and self.current_graph.get_vertex(self.path[i+1]).id == 14 and self.current_graph.get_vertex(self.path[i+1]).id == 15 or self.current_graph.get_vertex(self.path[i+1]).id == 16:
+          self.speak.add_speech(3, 'Locker in front. Walk till you feel obstacle.')
+      except Exception as e:
+        print(str(e))
       self.walk(i)
       if not self.prog_controller.is_program_running_sim():
         print("Run Simulation stopped")
