@@ -1,4 +1,5 @@
 import subprocess
+import signal
 from collections import deque
 #########################################
 # espeak class
@@ -52,20 +53,33 @@ class Espeak():
 		if priority == 1:
 			try:
 				if self.speaking_priority > 1:
-					self.speaking.terminate()
-			except Exception:
-				pass
-			self.speaking_priority = 1
-			self.speaking = subprocess.Popen('espeak -v%s+%s -s120 "%s" 2>/dev/null' % ('en-us', 'f3', message), shell=True)
+					self.speaking.send_signal(signal.SIGINT)
+					self.speaking = None
+					self.speaking_priority = 1
+					self.speaking = subprocess.Popen('espeak -v%s+%s -s120 "%s" 2>/dev/null' % ('en-us', 'f3', message), shell=True)
+				elif self.speaking == None or self.speaking.poll() != None:
+					self.speaking_priority = 1
+					self.speaking = subprocess.Popen('espeak -v%s+%s -s120 "%s" 2>/dev/null' % ('en-us', 'f3', message), shell=True)
+			except Exception as e:
+				print(str(e))
+				pass	
 		elif priority == 2:
 			try:
 				if self.speaking_priority > 2:
-					self.speaking.terminate()
-			except Exception:
+					self.speaking.send_signal(signal.SIGINT)
+					self.speaking = None
+					self.speaking_priority = 2
+					self.speaking = subprocess.Popen('espeak -v%s+%s "%s" 2>/dev/null' % ('en-us', 'f3', message), shell=True)
+				elif self.speaking == None or self.speaking.poll() != None:
+					self.speaking_priority = 2
+					self.speaking = subprocess.Popen('espeak -v%s+%s "%s" 2>/dev/null' % ('en-us', 'f3', message), shell=True)
+			except Exception as e:
+				print(str(e))
 				pass
-			self.speaking_priority = 2
-			self.speaking = subprocess.Popen('espeak -v%s+%s "%s" 2>/dev/null' % ('en-us', 'f3', message), shell=True) 
 		else:
-			self.speaking_priority = 3
-			self.speaking = subprocess.Popen('espeak -v%s+%s "%s" 2>/dev/null' % ('en-us', 'f3', message), shell=True) 
+			if self.speaking == None or self.speaking.poll() != None:
+				self.speaking_priority = 3
+				self.speaking = subprocess.Popen('espeak -v%s+%s "%s" 2>/dev/null' % ('en-us', 'f3', message), shell=True) 
+		
+
     		
