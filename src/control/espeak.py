@@ -57,7 +57,7 @@ class Espeak():
 					self.speaking = None
 					self.speaking_priority = 1
 					self.speaking = subprocess.Popen('espeak -v%s+%s -s120 "%s" 2>/dev/null' % ('en-us', 'f3', message), shell=True)
-				elif self.speaking.poll() != None:
+				elif self.speaking == None or self.speaking.poll() != None:
 					self.speaking_priority = 1
 					self.speaking = subprocess.Popen('espeak -v%s+%s -s120 "%s" 2>/dev/null' % ('en-us', 'f3', message), shell=True)
 			except Exception as e:
@@ -70,7 +70,7 @@ class Espeak():
 					self.speaking = None
 					self.speaking_priority = 2
 					self.speaking = subprocess.Popen('espeak -v%s+%s "%s" 2>/dev/null' % ('en-us', 'f3', message), shell=True)
-				elif self.speaking.poll() != None:
+				elif self.speaking == None or self.speaking.poll() != None:
 					self.speaking_priority = 2
 					self.speaking = subprocess.Popen('espeak -v%s+%s "%s" 2>/dev/null' % ('en-us', 'f3', message), shell=True)
 			except Exception as e:
