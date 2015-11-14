@@ -236,9 +236,9 @@ class Simulation():
       elif (self.current_building == 1 or self.current_building == '1') and (self.current_level == 2 or self.current_level == '2') and self.current_graph.get_vertex(self.path[i]).id == 4:
         self.orient.setNorthAt(303)
         print("NorthAt: " + str(self.orient.getNorthAt()))
-      elif (self.current_building == 1 or self.current_building == '1') and (self.current_level == 2 or self.current_level == '2') and self.current_graph.get_vertex(self.path[i]).id == 5:   
-        self.orient.setNorthAt(303)
-        print("NorthAt: " + str(self.orient.getNorthAt()))
+      # elif (self.current_building == 1 or self.current_building == '1') and (self.current_level == 2 or self.current_level == '2') and self.current_graph.get_vertex(self.path[i]).id == 5:   
+      #   self.orient.setNorthAt(303)
+      #   print("NorthAt: " + str(self.orient.getNorthAt()))
       elif (self.current_building == 1 or self.current_building == '1') and (self.current_level == 2 or self.current_level == '2') and self.current_graph.get_vertex(self.path[i]).id == 8:
         self.orient.setNorthAt(303)
         print("NorthAt: " + str(self.orient.getNorthAt()))
