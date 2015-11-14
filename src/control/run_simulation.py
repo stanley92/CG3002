@@ -187,9 +187,10 @@ class Simulation():
   # Tells the User to turn L/R before walking
   ################################################
   def navigate(self):
+    ## ignore
     if self.x!=None and self.y!= None:
       self.walk(-1)
-      
+    ## endignore  
     print('start navigate')
     length = (len(self.path)) - 1
     
@@ -200,52 +201,53 @@ class Simulation():
         # if match
           # setNorthAt(currentNorthAt +-?15)
 
-      if (self.current_building == 1 or self.current_building == '1') and (self.current_level == 2 or self.current_level == '2') and self.current_graph.get_vertex(self.path[i]).id == 10:
+      if (self.current_building == 1 or self.current_building == '1') and (self.current_level == 2 or self.current_level == '2') and self.path[i] == 10:
         self.orient.setNorthAt(305)
         print("NorthAt: " + str(self.orient.getNorthAt()))
-      elif (self.current_building == 1 or self.current_building == '1') and (self.current_level == 2 or self.current_level == '2') and self.current_graph.get_vertex(self.path[i]).id == 11:
+      elif (self.current_building == 1 or self.current_building == '1') and (self.current_level == 2 or self.current_level == '2') and self.path[i] == 11:
         self.orient.setNorthAt(305)
         print("NorthAt: " + str(self.orient.getNorthAt()))
-      elif (self.current_building == 1 or self.current_building == '1') and (self.current_level == 2 or self.current_level == '2') and self.current_graph.get_vertex(self.path[i]).id == 14:
+      elif (self.current_building == 1 or self.current_building == '1') and (self.current_level == 2 or self.current_level == '2') and self.path[i] == 14:
         self.orient.setNorthAt(305)
         print("NorthAt: " + str(self.orient.getNorthAt()))
-      elif (self.current_building == 1 or self.current_building == '1') and (self.current_level == 2 or self.current_level == '2') and self.current_graph.get_vertex(self.path[i]).id == 37:
+      elif (self.current_building == 1 or self.current_building == '1') and (self.current_level == 2 or self.current_level == '2') and self.path[i] == 37:
         self.orient.setNorthAt(305)
         print("NorthAt: " + str(self.orient.getNorthAt()))
-      elif (self.current_building == 1 or self.current_building == '1') and (self.current_level == 2 or self.current_level == '2') and self.current_graph.get_vertex(self.path[i]).id == 16:
+      elif (self.current_building == 1 or self.current_building == '1') and (self.current_level == 2 or self.current_level == '2') and self.path[i] == 16:
         self.orient.setNorthAt(303)
         print("NorthAt: " + str(self.orient.getNorthAt()))
-      elif (self.current_building == 1 or self.current_building == '1') and (self.current_level == 2 or self.current_level == '2') and self.current_graph.get_vertex(self.path[i]).id == 18:
+      elif (self.current_building == 1 or self.current_building == '1') and (self.current_level == 2 or self.current_level == '2') and self.path[i] == 18:
         self.orient.setNorthAt(303)
         print("NorthAt: " + str(self.orient.getNorthAt()))
-      elif (self.current_building == 1 or self.current_building == '1') and (self.current_level == 2 or self.current_level == '2') and self.current_graph.get_vertex(self.path[i]).id == 22:
+      elif (self.current_building == 1 or self.current_building == '1') and (self.current_level == 2 or self.current_level == '2') and self.path[i] == 22:
         self.orient.setNorthAt(303)
         print("NorthAt: " + str(self.orient.getNorthAt()))
-      elif (self.current_building == 1 or self.current_building == '1') and (self.current_level == 2 or self.current_level == '2') and self.current_graph.get_vertex(self.path[i]).id == 34:
+      elif (self.current_building == 1 or self.current_building == '1') and (self.current_level == 2 or self.current_level == '2') and self.path[i] == 34:
         self.orient.setNorthAt(300)
         print("NorthAt: " + str(self.orient.getNorthAt()))
-      elif (self.current_building == 1 or self.current_building == '1') and (self.current_level == 2 or self.current_level == '2') and self.current_graph.get_vertex(self.path[i]).id == 24:
+      elif (self.current_building == 1 or self.current_building == '1') and (self.current_level == 2 or self.current_level == '2') and self.path[i] == 24:
         self.orient.setNorthAt(320)
         print("NorthAt: " + str(self.orient.getNorthAt()))
-      elif (self.current_building == 1 or self.current_building == '1') and (self.current_level == 2 or self.current_level == '2') and self.current_graph.get_vertex(self.path[i]).id == 1:
+      elif (self.current_building == 1 or self.current_building == '1') and (self.current_level == 2 or self.current_level == '2') and self.path[i] == 1:
         self.orient.setNorthAt(303)
         print("NorthAt: " + str(self.orient.getNorthAt()))
-      elif (self.current_building == 1 or self.current_building == '1') and (self.current_level == 2 or self.current_level == '2') and self.current_graph.get_vertex(self.path[i]).id == 2:
+      elif (self.current_building == 1 or self.current_building == '1') and (self.current_level == 2 or self.current_level == '2') and self.path[i] == 2:
         self.orient.setNorthAt(303)
         print("NorthAt: " + str(self.orient.getNorthAt()))
-      elif (self.current_building == 1 or self.current_building == '1') and (self.current_level == 2 or self.current_level == '2') and self.current_graph.get_vertex(self.path[i]).id == 4:
+      elif (self.current_building == 1 or self.current_building == '1') and (self.current_level == 2 or self.current_level == '2') and self.path[i] == 4:
         self.orient.setNorthAt(303)
         print("NorthAt: " + str(self.orient.getNorthAt()))
+
       # elif (self.current_building == 1 or self.current_building == '1') and (self.current_level == 2 or self.current_level == '2') and self.current_graph.get_vertex(self.path[i]).id == 5:   
       #   self.orient.setNorthAt(303)
       #   print("NorthAt: " + str(self.orient.getNorthAt()))
-      elif (self.current_building == 1 or self.current_building == '1') and (self.current_level == 2 or self.current_level == '2') and self.current_graph.get_vertex(self.path[i]).id == 8:
+      elif (self.current_building == 1 or self.current_building == '1') and (self.current_level == 2 or self.current_level == '2') and self.path[i] == 8:
         self.orient.setNorthAt(303)
         print("NorthAt: " + str(self.orient.getNorthAt()))
-      elif (self.current_building == 1 or self.current_building == '1') and (self.current_level == 2 or self.current_level == '2') and self.current_graph.get_vertex(self.path[i]).id == 10:
+      elif (self.current_building == 1 or self.current_building == '1') and (self.current_level == 2 or self.current_level == '2') and self.path[i] == 10:
         self.orient.setNorthAt(303)
         print("NorthAt: " + str(self.orient.getNorthAt()))
-      elif (self.current_building == 1 or self.current_building == '1') and (self.current_level == 2 or self.current_level == '2') and self.current_graph.get_vertex(self.path[i]).id == 15:
+      elif (self.current_building == 1 or self.current_building == '1') and (self.current_level == 2 or self.current_level == '2') and self.path[i] == 15:
         self.orient.setNorthAt(310)
         print("NorthAt: " + str(self.orient.getNorthAt()))
       elif (self.current_building == 1 or self.current_building == '1') and (self.current_level == 2 or self.current_level == '2'):
@@ -255,30 +257,22 @@ class Simulation():
         print("NorthAt: " + str(self.orient.getNorthAt()))
       try:
         if (self.current_building == 1 or self.current_building == '1') and (self.current_level == 2 or self.current_level == '2') \
-          and \
-          ( \
-              ( \
-              self.current_graph.get_vertex(self.path[i]).id == 21 \
-              and self.current_graph.get_vertex(self.path[i+1]).id == 24 \
-              ) \
-          or \
-              ( \
-              self.current_graph.get_vertex(self.path[i]).id == 37 \
-              and self.current_graph.get_vertex(self.path[i+1]).id == 16 \
-              ) \
+          and ( 
+            self.path[i] == 21 and self.path[i+1] == 24 \
+            or self.path[i] == 37 and self.path[i+1] == 16
           ):
           self.speak.add_speech(2, 'Wall in front of next node.')
         elif (self.current_building == 1 or self.current_building == '1') and (self.current_level == 2 or self.current_level == '2') \
-          and self.current_graph.get_vertex(self.path[i]).id == 11 \
-          and self.current_graph.get_vertex(self.path[i+1]).id == 14 :
+          and self.path[i] == 11 \
+          and self.path[i+1] == 14 :
             #student area to P14
           self.speak.add_speech(2, 'Locker in front. Walk till you feel obstacle.')
         elif (self.current_building == 2 or self.current_building == '2') and (self.current_level == 2 or self.current_level == '2') \
           and \
           ( \
               ( \
-              self.current_graph.get_vertex(self.path[i]).id == 13 \
-              and self.current_graph.get_vertex(self.path[i+1]).id == 14 \
+              self.path[i] == 13 \
+              and self.path[i+1] == 14 \
               ) \
           ):
           self.speak.add_speech(2, 'Wall in front of next node. Walk until you feel obstacle. Stair on the left')

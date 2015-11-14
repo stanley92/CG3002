@@ -65,6 +65,7 @@ class ObstacleDetector():
 				if self.sensors.sensor_front < 20:
 					self.espeak.add_speech(3, 'Obstacle in front')
 				# 	print ("Obsatcle on the front.")
+				
 		else: 
 			if self.collision_front:
 				self.collision_front = False
